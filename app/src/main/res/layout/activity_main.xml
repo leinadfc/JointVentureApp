@@ -8,12 +8,27 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="20dp"
     android:paddingBottom="16dp"
+    android:paddingTop="20dp"
     tools:context="MainActivity"
     android:orientation="vertical"
     android:background="@color/MainBlue"
-    android:gravity="center">
+    android:gravity="center_horizontal">
+
+    <!-- App title -->
+    <TextView
+        android:layout_width="252dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"
+
+        android:padding="15dp"
+        android:text="@string/AppName"
+        android:textColor="@color/White"
+        android:textSize="40sp"
+        app:fontFamily="@font/bolditalic"/>
 
     <!-- Username+Password+Icons container -->
     <LinearLayout
@@ -21,8 +36,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/login_user"
 
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
+
+        android:layout_marginBottom="30dp"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
 
@@ -35,8 +50,8 @@
             android:gravity="center"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:orientation="horizontal"
             >
 
@@ -44,13 +59,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingTop="15dp"
+                android:paddingTop="13dp"
                 android:paddingLeft="15dp"
+                android:layout_marginRight="5dp"
 
                 android:text="&#xf007;"
                 android:textSize="18sp"
                 app:fontFamily="@font/fontawesome"
-                android:textColor="@color/LightGrey"/>
+                android:textColor="@color/White"/>
 
             <!-- Username EditText -->
             <EditText
@@ -60,12 +76,11 @@
                 android:cursorVisible="true"
                 android:ems="10"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/MainBlue"
-                android:textColorHint="@color/LightGrey"
-                android:backgroundTint="@color/White"
-                android:gravity="center"
+                android:textColor="@color/White"
+                android:textColorHint="@color/White"
+                android:backgroundTint="@color/MainBlue"
+                android:gravity="left"
                 android:hint="@string/user_text"
-                android:paddingRight="25dp"
                 />
         </LinearLayout>
 
@@ -73,7 +88,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/LightGrey"/>
+            android:background="@color/White"
+            android:layout_marginTop="-15dp"
+            />
 
         <!-- Password container -->
         <LinearLayout
@@ -81,21 +98,22 @@
             android:layout_height="wrap_content"
             android:gravity="center"
 
-            android:paddingTop="20dp"
-            android:paddingBottom="20dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
             android:orientation="horizontal">
 
             <!-- Password icon -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingTop="15dp"
+                android:paddingTop="14dp"
                 android:paddingLeft="15dp"
 
                 android:text="&#xf023;"
                 android:textSize="18sp"
                 app:fontFamily="@font/fontawesome"
-                android:textColor="@color/LightGrey"/>
+                android:textColor="@color/White"
+                android:layout_marginRight="5dp"/>
 
             <!-- Password EditText-->
             <EditText
@@ -105,13 +123,18 @@
                 android:ems="10"
                 android:inputType="textPassword"
                 android:textColor="@color/MainBlue"
-                android:backgroundTint="@color/White"
+                android:backgroundTint="@color/MainBlue"
                 android:hint="@string/password_text"
-                android:textColorHint="@color/LightGrey"
-                android:gravity="center"
-                android:paddingRight="25dp"
+                android:textColorHint="@color/White"
+                android:gravity="left"
                 />
         </LinearLayout>
+        <!-- Separation Line between Username and Password -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/White"
+            android:layout_marginTop="-15dp"/>
 
     </LinearLayout>
 
@@ -169,8 +192,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginLeft="5dp">
+            android:gravity="center">
             <!-- Facebook icon -->
             <TextView
                 android:id="@+id/facebookicon"
@@ -199,7 +221,7 @@
                 android:id="@+id/aboutusicon"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="&#xf05a;"
+                android:text="&#xf129;"
                 android:textSize="35sp"
                 app:fontFamily="@font/fontawesome"
                 android:textColor="@color/White"

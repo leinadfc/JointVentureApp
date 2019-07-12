@@ -110,6 +110,44 @@ public class RegisterPage extends AppCompatActivity {
 
             }
         });
+
+        /// Instagram Facebook About us buttons
+        TextView facebookreg = (TextView) findViewById(R.id.facebookiconreg);
+        TextView aboutusreg = (TextView) findViewById(R.id.aboutusiconreg);
+        TextView instagramreg = (TextView) findViewById(R.id.instagramiconreg);
+
+        /// Facebook button listener
+        facebookreg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Uri uriUrl = Uri.parse("https://www.facebook.com/JointVenture2019/?ref=br_rs");
+                Intent launchbrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+                startActivity(launchbrowser);*/
+                Intent i = newFacebookIntent(getPackageManager(), "https://www.facebook.com/JointVenture2019/?ref=br_rs");
+                startActivity(i);
+            }
+        });
+
+        /// About us button listener
+        aboutusreg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(RegisterPage.this, AboutUs.class);
+                // set the new task and clear flags
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(i);
+            }
+        });
+
+        instagramreg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = newInstagramProfileIntent(getPackageManager(), "https://instagram.com/jointventure2019?igshid=6ijub1dzxhou");
+                startActivity(in);
+            }
+        });
+
+
     }
 
     /// When I press back on register I want to go to login
@@ -119,6 +157,39 @@ public class RegisterPage extends AppCompatActivity {
         // set the new task and clear flags
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(i);
+    }
+
+
+    public static Intent newFacebookIntent(PackageManager pm, String url) {
+        Uri uri = Uri.parse(url);
+        try {
+            ApplicationInfo applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0);
+            if (applicationInfo.enabled) {
+                // http://stackoverflow.com/a/24547437/1048340
+                uri = Uri.parse("fb://facewebmodal/f?href=" + url);
+            }
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        return new Intent(Intent.ACTION_VIEW, uri);
+    }
+
+    public static Intent newInstagramProfileIntent(PackageManager pm, String url) {
+        final Intent intent = new Intent(Intent.ACTION_VIEW);
+        try {
+            if (pm.getPackageInfo("com.instagram.android", 0) != null) {
+                if (url.endsWith("/")) {
+                    url = url.substring(0, url.length() - 1);
+                }
+                final String username = url.substring(url.lastIndexOf("/") + 1);
+                // http://stackoverflow.com/questions/21505941/intent-to-open-instagram-user-profile-on-android
+                intent.setData(Uri.parse("http://instagram.com/_u/" + username));
+                intent.setPackage("com.instagram.android");
+                return intent;
+            }
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        intent.setData(Uri.parse(url));
+        return intent;
     }
 }
 

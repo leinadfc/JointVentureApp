@@ -9,4 +9,6 @@
     <string name="CreatePassword">Create password</string>
     <string name="RepeatPassword">Repeat password</string>
     <string name="SignUp">Sign Up</string>
+    <string name="AppName">App Name</string>
+    <string name="UserIcon">&amp;#xf007;</string>
 </resources>
