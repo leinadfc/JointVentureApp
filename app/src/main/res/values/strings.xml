@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">App Name</string>
+    <string name="button_text">Login</string>
+    <string name="register_text"><u>Sign Up here</u></string>
+    <string name="user_text">Username</string>
+    <string name="password_text">Password</string>
+    <string name="Name">Name</string>
+    <string name="CreateUsername">Create username</string>
+    <string name="CreatePassword">Create password</string>
+    <string name="RepeatPassword">Repeat password</string>
+    <string name="SignUp">Sign Up</string>
+</resources>

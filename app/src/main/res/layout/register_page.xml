@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Main container, background color defined here -->
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/register_page"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="16dp"
+    tools:context=".RegisterPage"
+    android:orientation="vertical"
+    android:background="@color/MainBlue">
+
+    <!-- Username+Password+Icons container -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_user"
+
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="25dp"
+
+        android:orientation="vertical"
+        >
+
+        <!-- Name Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:orientation="horizontal"
+            >
+
+            <!-- User Icon -->
+            <TextView
+                android:id="@+id/NameRegisterIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+
+                android:text="&#xf14b;"
+                android:textSize="18sp"
+                app:fontFamily="@font/fontawesome"
+                android:textColor="@color/LightGrey"/>
+
+            <!-- Username EditText -->
+            <EditText
+                android:id="@+id/NameRegisterText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="true"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/MainBlue"
+                android:textColorHint="@color/LightGrey"
+                android:backgroundTint="@color/White"
+                android:gravity="center"
+                android:hint="@string/Name"
+                android:paddingRight="25dp"
+                />
+        </LinearLayout>
+
+        <!-- Separation Line between Username and Password -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/LightGrey"/>
+
+        <!-- Username container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:orientation="horizontal"
+            >
+
+            <!-- User Icon -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+
+                android:text="&#xf007;"
+                android:textSize="18sp"
+                app:fontFamily="@font/fontawesome"
+                android:textColor="@color/LightGrey"/>
+
+            <!-- Username EditText -->
+            <EditText
+                android:id="@+id/LoginTextRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:cursorVisible="true"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/MainBlue"
+                android:textColorHint="@color/LightGrey"
+                android:backgroundTint="@color/White"
+                android:gravity="center"
+                android:hint="@string/CreateUsername"
+                android:paddingRight="25dp"
+                />
+        </LinearLayout>
+
+        <!-- Separation Line between Username and Password -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/LightGrey"/>
+
+        <!-- Password container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:orientation="horizontal">
+
+            <!-- Password icon -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+
+                android:text="&#xf023;"
+                android:textSize="18sp"
+                app:fontFamily="@font/fontawesome"
+                android:textColor="@color/LightGrey"/>
+
+            <!-- Password EditText-->
+            <EditText
+                android:id="@+id/PasswordTextRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:textColor="@color/MainBlue"
+                android:backgroundTint="@color/White"
+                android:hint="@string/CreatePassword"
+                android:textColorHint="@color/LightGrey"
+                android:gravity="center"
+                android:paddingRight="25dp"
+                />
+        </LinearLayout>
+
+        <!-- Separation Line between Username and Password -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/LightGrey"/>
+        <!-- Repeat Password -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:orientation="horizontal">
+
+            <!-- Password icon -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="15dp"
+                android:paddingLeft="15dp"
+
+                android:text="&#xf023;"
+                android:textSize="18sp"
+                app:fontFamily="@font/fontawesome"
+                android:textColor="@color/LightGrey"/>
+
+            <!-- Password EditText-->
+            <EditText
+                android:id="@+id/RepeatPasswordTextRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPassword"
+                android:textColor="@color/MainBlue"
+                android:backgroundTint="@color/White"
+                android:hint="@string/RepeatPassword"
+                android:textColorHint="@color/LightGrey"
+                android:gravity="center"
+                android:paddingRight="25dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <!-- Login Button + Container -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="10dp">
+
+        <Button
+            android:id="@+id/SignupButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_functionality"
+            android:gravity="center"
+            android:text="@string/SignUp"
+            android:textColor="@color/MainBlue"
+            android:textColorHint="@color/MainBlue"
+
+            />
+
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
