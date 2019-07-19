@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Main container, background color defined here -->
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/add_activity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+
+    android:paddingBottom="16dp"
+    tools:context=".Activities.AddActivity"
+    android:orientation="vertical"
+    android:background="@color/White"
+    android:gravity="center_horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/latothin"
+            android:text="@string/x"
+            android:textSize="50sp"
+            android:clickable="true"/>
+    </RelativeLayout>
+
+
+    <!-- Date container-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="55dp"
+
+        >
+
+        <!-- Day Container -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/daytext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="DAY"
+                android:textAlignment="center"
+                android:textSize="100sp"
+                android:textColor="@color/MainBlue"
+                />
+
+        </RelativeLayout>
+
+        <!-- Month and year  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginLeft="10dp">
+
+            <!-- Month -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="1dp">
+
+                <TextView
+                    android:id="@+id/monthtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Month"
+                    android:textSize="25sp"/>
+            </RelativeLayout>
+
+            <!-- Year -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="1dp">
+
+                <TextView
+                    android:id="@+id/yeartext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Year"
+                    android:textSize="25sp"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <!-- Month and year  -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+
+        >
+
+        <!-- Month -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/Concentration"
+                android:textSize="20sp"/>
+        </RelativeLayout>
+
+        <!-- Year -->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+          >
+
+            <EditText
+                android:id="@+id/concentrationtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/TypeConcentration"
+                android:textSize="20sp"
+                android:inputType="textEmailAddress"
+                android:backgroundTint="@color/MainBlue"
+                android:textColor="@color/MainBlue"
+                android:cursorVisible="false"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="-12dp" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="30dp">
+        <Button
+            android:id="@+id/AddButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/add_button_functionality"
+            android:gravity="center"
+            android:text="@string/Add"
+            android:textColor="@color/MainBlue"
+            android:textColorHint="@color/MainBlue"
+            />
+    </RelativeLayout>
+
+</LinearLayout>
+
+
+
+
+
+
+

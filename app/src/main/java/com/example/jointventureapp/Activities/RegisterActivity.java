@@ -1,57 +1,53 @@
-package com.example.jointventureapp;
+package com.example.jointventureapp.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.Activity;
-import android.content.Intent;
-
 import android.net.Uri;
-import android.os.Bundle;
-import android.view.View;
 
-
-import com.github.nkzawa.socketio.client.IO;
+import com.example.jointventureapp.Application.AnaApplication;
+import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.github.nkzawa.socketio.client.Socket;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONString;
-import org.w3c.dom.Text;
 
-import java.net.URISyntaxException;
 
-public class RegisterPage extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     /// Initialising Socket
     private Socket mSocket;
-    {
-        try {
-            mSocket = IO.socket("http://1c033cd3.ngrok.io");
-        } catch (URISyntaxException e) { throw new RuntimeException(e);}
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_page);
-        mSocket.connect();
+        AnaApplication app = (AnaApplication) getApplication();
+        mSocket = app.getSocket();
 
         /// Defining objects
-        final Button signup = (Button) findViewById(R.id.SignupButton);
-        final EditText name = (EditText) findViewById(R.id.NameRegisterText);
-        final EditText rusername = (EditText) findViewById(R.id.LoginTextRegister);
-        final EditText password1 = (EditText) findViewById(R.id.PasswordTextRegister);
-        final EditText password2 = (EditText) findViewById(R.id.RepeatPasswordTextRegister);
+        final Button signup = findViewById(R.id.SignupButton);
+        final EditText name = findViewById(R.id.NameRegisterText);
+        final EditText rusername = findViewById(R.id.LoginTextRegister);
+        final EditText password1 = findViewById(R.id.PasswordTextRegister);
+        final EditText password2 = findViewById(R.id.RepeatPasswordTextRegister);
 
 
         /// Signup button OnClick
@@ -91,30 +87,28 @@ public class RegisterPage extends AppCompatActivity {
                 try {
                     JSONObject signupinfo = new JSONObject();
                     signupinfo.put("name", vname);
-                    signupinfo.put("username", vuser);
+                    signupinfo.put("email", vuser);
                     signupinfo.put("password", passw1);
-
+                    PreferenceUtils.saveEmail(vuser, getApplicationContext());
+                    PreferenceUtils.savePassword(passw1, getApplicationContext());
                     mSocket.emit("json", signupinfo);
+
+                    /// Page navigation
+                    Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(i);
+                    overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
+
                 } catch (JSONException e) {
                     Log.e("MYAPP", "unexpected JSON exception", e);
                     throw new RuntimeException(e);
                 }
-
-
-
-                /// Page navigation
-                Intent i = new Intent(RegisterPage.this, MainPage.class);
-                // set the new task and clear flags
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(i);
-
             }
         });
 
         /// Instagram Facebook About us buttons
-        TextView facebookreg = (TextView) findViewById(R.id.facebookiconreg);
-        TextView aboutusreg = (TextView) findViewById(R.id.aboutusiconreg);
-        TextView instagramreg = (TextView) findViewById(R.id.instagramiconreg);
+        TextView facebookreg = findViewById(R.id.facebookiconreg);
+        TextView aboutusreg = findViewById(R.id.aboutusiconreg);
+        TextView instagramreg = findViewById(R.id.instagramiconreg);
 
         /// Facebook button listener
         facebookreg.setOnClickListener(new View.OnClickListener() {
@@ -132,13 +126,11 @@ public class RegisterPage extends AppCompatActivity {
         aboutusreg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(RegisterPage.this, AboutUs.class);
-                // set the new task and clear flags
-                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                Intent i = new Intent(RegisterActivity.this, AboutUs.class);
                 startActivity(i);
             }
         });
-
+        /// Instagram button listener
         instagramreg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,18 +140,21 @@ public class RegisterPage extends AppCompatActivity {
         });
 
 
+        /// Status bar transparent
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow();
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
     }
 
     /// When I press back on register I want to go to login
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(RegisterPage.this, MainActivity.class);
-        // set the new task and clear flags
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
+        finish();
+        overridePendingTransition(R.anim.slideindown, R.anim.slideoutdown);
     }
 
-
+    /// Facebook intent ///
     public static Intent newFacebookIntent(PackageManager pm, String url) {
         Uri uri = Uri.parse(url);
         try {
@@ -173,6 +168,7 @@ public class RegisterPage extends AppCompatActivity {
         return new Intent(Intent.ACTION_VIEW, uri);
     }
 
+    /// Instagram intent ///
     public static Intent newInstagramProfileIntent(PackageManager pm, String url) {
         final Intent intent = new Intent(Intent.ACTION_VIEW);
         try {
@@ -191,5 +187,29 @@ public class RegisterPage extends AppCompatActivity {
         intent.setData(Uri.parse(url));
         return intent;
     }
-}
 
+    /// Clicking outside edit text removes focus from edit text ///
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if ( v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    Log.d("focus", "touchevent");
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        //mSocket.disconnect();
+    }
+}

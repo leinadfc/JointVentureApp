@@ -13,36 +13,51 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning"
+        android:name="com.example.jointventureapp.Application.AnaApplication">
+
+
+        <!-- Main Page activity -->
+        <activity
+            android:name=".Activities.MainActivity"
+            android:label="@string/app_name">
+        </activity>
+
 
         <!-- Login activity -->
-        <activity android:name=".MainActivity" android:noHistory="false">
+        <activity android:name=".Activities.LoginActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
 
-        <!-- Main Page activity -->
-        <activity
-            android:name=".MainPage"
-            android:label="@string/app_name">
-        </activity>
+
 
         <!-- Register Page Activity -->
         <activity
-            android:name=".RegisterPage"
-            android:label="@string/app_name"
-            android:noHistory="true">
+            android:name=".Activities.RegisterActivity"
+            android:label="@string/app_name">
         </activity>
 
         <!-- About us Activity -->
         <activity
-            android:name=".AboutUs"
-            android:label="@string/app_name"
-            android:noHistory="true">
+            android:name=".Activities.AboutUs"
+            android:label="@string/app_name">
+        </activity>
+
+        <!-- Add Page Activity -->
+        <activity
+            android:name=".Activities.AddActivity"
+            android:label="@string/app_name">
+        </activity>
+
+        <!-- Calendar Activity -->
+        <activity
+            android:name=".Activities.CalendarActivity"
+            android:label="@string/app_name">
         </activity>
 
     </application>

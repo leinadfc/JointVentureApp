@@ -1,234 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Main container, background color defined here -->
 <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_main"
+    android:id="@+id/main_page"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingBottom="16dp"
     android:paddingTop="20dp"
-    tools:context="MainActivity"
+    android:paddingBottom="16dp"
+    tools:context=".Activities.MainActivity"
     android:orientation="vertical"
     android:background="@color/MainBlue"
     android:gravity="center_horizontal">
 
-    <!-- App title -->
-    <TextView
-        android:layout_width="252dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
 
-        android:padding="15dp"
-        android:text="@string/AppName"
-        android:textColor="@color/White"
-        android:textSize="40sp"
-        app:fontFamily="@font/bolditalic"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="50dp">
 
-    <!-- Username+Password+Icons container -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logo1"/>
+    </RelativeLayout>
+
+    <!-- 4 Buttons container-->
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/login_user"
-
-
-        android:layout_marginBottom="30dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
-
         android:orientation="vertical"
-        >
-        <!-- Username container -->
+        android:layout_marginBottom="80dp">
+
+        <!-- First row of buttons -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="horizontal"
-            >
-
-            <!-- User Icon -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingTop="13dp"
-                android:paddingLeft="15dp"
-                android:layout_marginRight="5dp"
-
-                android:text="&#xf007;"
-                android:textSize="18sp"
-                app:fontFamily="@font/fontawesome"
-                android:textColor="@color/White"/>
-
-            <!-- Username EditText -->
-            <EditText
-                android:id="@+id/Logintext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:cursorVisible="true"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/White"
-                android:textColorHint="@color/White"
-                android:backgroundTint="@color/MainBlue"
-                android:gravity="left"
-                android:hint="@string/user_text"
-                />
-        </LinearLayout>
-
-        <!-- Separation Line between Username and Password -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/White"
-            android:layout_marginTop="-15dp"
-            />
-
-        <!-- Password container -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="horizontal">
-
-            <!-- Password icon -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingTop="14dp"
-                android:paddingLeft="15dp"
-
-                android:text="&#xf023;"
-                android:textSize="18sp"
-                app:fontFamily="@font/fontawesome"
-                android:textColor="@color/White"
-                android:layout_marginRight="5dp"/>
-
-            <!-- Password EditText-->
-            <EditText
-                android:id="@+id/Passwordtext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:textColor="@color/MainBlue"
-                android:backgroundTint="@color/MainBlue"
-                android:hint="@string/password_text"
-                android:textColorHint="@color/White"
-                android:gravity="left"
-                />
-        </LinearLayout>
-        <!-- Separation Line between Username and Password -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/White"
-            android:layout_marginTop="-15dp"/>
-
-    </LinearLayout>
-
-
-    <!-- Login Button + Container -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/LoginButton"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_functionality"
-            android:gravity="center"
-            android:text="@string/button_text"
-            android:textColor="@color/MainBlue"
-            android:textColorHint="@color/MainBlue"
-
-            />
-
-
-    </RelativeLayout>
-
-    <!-- Register Text Button + Container -->
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
-        android:paddingBottom="80dp">
-
-        <TextView
-            android:id="@+id/RegisterButton"
-            style="@style/Widget.AppCompat.TextView.SpinnerItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="@string/register_text"
-            android:textColor="@color/White"
-            android:textColorHighlight="@color/White"
-            android:textColorHint="@color/White"
-            android:textColorLink="@color/White"
-            android:textSize="16sp"
-            />
-    </RelativeLayout>
-
-
-        <!-- Istagram facebook about us -->
-        <LinearLayout
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
-            <!-- Facebook icon -->
-            <TextView
-                android:id="@+id/facebookicon"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="&#xf09a;"
-                android:textSize="35sp"
-                app:fontFamily="@font/fontawesome"
-                android:textColor="@color/White"
-                android:layout_marginRight="25dp"/>
 
-            <!-- Instagram Icon -->
-            <TextView
-                android:id="@+id/instagramicon"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="&#xf16d;"
-                android:textSize="35sp"
-                app:fontFamily="@font/fontawesome"
-                android:textColor="@color/White"
-                android:layout_marginRight="25dp"
-                />
+            <!-- First button -->
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="5dp"
+                >
 
-            <!-- Information Icon -->
-            <TextView
-                android:id="@+id/aboutusicon"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="&#xf129;"
-                android:textSize="35sp"
-                app:fontFamily="@font/fontawesome"
-                android:textColor="@color/White"
+                <Button
+                    android:id="@+id/addconcentration"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/buttonfunctionality2"
+                    android:gravity="center"
+                    android:text="@string/PlusSign"
 
-                />
+                    android:fontFamily="@font/fontawesome"
+                    android:textSize="60sp"
+                    android:textColor="@color/White"/>
+
+
+
+
+            </RelativeLayout>
+
+            <!-- Second button -->
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="5dp"
+                >
+
+                <Button
+                    android:id="@+id/calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/buttonfunctionality2"
+                    android:gravity="center"
+                    android:text="&#xf073;"
+                    android:fontFamily="@font/fontawesome"
+                    android:textSize="60sp"
+                    android:textColor="@color/White"
+                    android:textColorHint="@color/MainBlue"
+                    />
+
+
+            </RelativeLayout>
+
         </LinearLayout>
+
+        <!-- Second row of buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <!-- First button -->
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="5dp"
+                >
+
+                <Button
+                    android:id="@+id/addsymptoms"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/buttonfunctionality2"
+                    android:gravity="center"
+                    android:text="&#xf0f1;"
+                    android:textSize="60sp"
+                    android:fontFamily="@font/fontawesome"
+                    android:textColor="@color/White"
+                    android:textColorHint="@color/MainBlue"
+                    />
+
+
+            </RelativeLayout>
+
+            <!-- Second button -->
+            <RelativeLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:padding="5dp">
+
+                <Button
+                    android:id="@+id/graphs"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/buttonfunctionality2"
+                    android:gravity="center"
+                    android:textColor="@color/White"
+                    android:textColorHint="@color/MainBlue"
+                    android:text="&#xf080;"
+                    android:textSize="60sp"
+                    android:fontFamily="@font/fontawesome"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+
+    <!-- Istagram facebook about us -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="35dp">
+        <!-- Facebook icon -->
+        <TextView
+            android:id="@+id/facebookiconmain"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="&#xf09a;"
+            android:textSize="35sp"
+            app:fontFamily="@font/fontawesome"
+            android:textColor="@color/White"
+            android:layout_marginRight="25dp"/>
+
+        <!-- Instagram Icon -->
+        <TextView
+            android:id="@+id/instagramiconmain"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="&#xf16d;"
+            android:textSize="35sp"
+            app:fontFamily="@font/fontawesome"
+            android:textColor="@color/White"
+            android:layout_marginRight="25dp"
+            />
+
+        <!-- Information Icon -->
+        <TextView
+            android:id="@+id/aboutusiconmain"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="&#xf129;"
+            android:textSize="35sp"
+            app:fontFamily="@font/fontawesome"
+            android:textColor="@color/White"
+
+            />
+    </LinearLayout>
 
 
 </LinearLayout>
-

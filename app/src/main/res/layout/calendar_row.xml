@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingRight="20dp">
+
+
+        <TextView
+            android:id="@+id/dayitem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="19"
+            android:layout_gravity="left"
+            android:textSize="50sp"
+            android:textColor="@color/MainBlue"/>
+
+        <!-- Month and year  -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left">
+
+            <!-- Month -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left">
+
+                <TextView
+                    android:id="@+id/monthitem"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:hint="July"
+                    android:textSize="15sp"/>
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/concentrationitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20%"
+        android:textSize="30sp"
+        android:layout_gravity="center" />
+
+
+</LinearLayout>

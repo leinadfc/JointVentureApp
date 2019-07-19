@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Main container, background color defined here -->
 <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/register_page"
+    android:id="@+id/activity_main"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="20dp"
     android:paddingBottom="16dp"
-    tools:context=".Activities.RegisterActivity"
+    android:paddingTop="20dp"
+    tools:context=".Activities.LoginActivity"
     android:orientation="vertical"
     android:background="@drawable/background"
     android:gravity="center_horizontal">
-
-
-
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -30,70 +27,29 @@
             android:background="@drawable/logo1"/>
     </RelativeLayout>
 
+
+
     <!-- Username+Password+Icons container -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
 
+
+        android:layout_marginBottom="10dp"
         android:layout_marginRight="25dp"
         android:layout_marginLeft="25dp"
-        android:orientation="vertical"
         android:layout_marginTop="20dp"
-        >
 
-        <!-- Name Container -->
+        android:orientation="vertical"
+        >
+        <!-- Username container -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="horizontal">
-
-            <!-- Name Icon -->
-            <TextView
-                android:id="@+id/NameRegisterIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingTop="13dp"
-                android:paddingLeft="12dp"
-                android:layout_marginRight="5dp"
-
-                android:text="&#xf14b;"
-                android:textSize="18sp"
-                app:fontFamily="@font/fontawesome"
-                android:textColor="@color/White"/>
-
-            <!-- Username EditText -->
-            <EditText
-                android:id="@+id/NameRegisterText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textEmailAddress"
-                android:textColor="@color/White"
-                android:textColorHint="@color/White"
-                android:backgroundTint="@android:color/transparent"
-                android:gravity="left"
-                android:hint="@string/Name"
-                />
-        </LinearLayout>
-
-        <!-- Separation Line between Username and Password -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/White"
-            android:layout_marginTop="-15dp"/>
-
-        <!-- Username container -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
             android:orientation="horizontal"
@@ -105,7 +61,8 @@
                 android:layout_height="match_parent"
                 android:paddingTop="13dp"
                 android:paddingLeft="12dp"
-                android:layout_marginRight="6dp"
+                android:layout_marginRight="5dp"
+
                 android:text="&#xf0e0;"
                 android:textSize="16sp"
                 app:fontFamily="@font/fontawesome"
@@ -113,16 +70,17 @@
 
             <!-- Username EditText -->
             <EditText
-                android:id="@+id/LoginTextRegister"
+                android:id="@+id/Logintext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:cursorVisible="true"
                 android:ems="10"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/White"
                 android:textColorHint="@color/White"
                 android:backgroundTint="@android:color/transparent"
                 android:gravity="left"
-                android:hint="@string/CreateUsername"
+                android:hint="@string/user_text"
                 />
         </LinearLayout>
 
@@ -131,7 +89,8 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/White"
-            android:layout_marginTop="-15dp"/>
+            android:layout_marginTop="-15dp"
+            />
 
         <!-- Password container -->
         <LinearLayout
@@ -147,108 +106,85 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingTop="13dp"
+                android:paddingTop="14dp"
                 android:paddingLeft="15dp"
-                android:layout_marginRight="6dp"
 
                 android:text="&#xf023;"
                 android:textSize="18sp"
                 app:fontFamily="@font/fontawesome"
-                android:textColor="@color/White"/>
+                android:textColor="@color/White"
+                android:layout_marginRight="6dp"/>
 
             <!-- Password EditText-->
             <EditText
-                android:id="@+id/PasswordTextRegister"
+                android:id="@+id/Passwordtext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPassword"
                 android:textColor="@color/White"
                 android:backgroundTint="@android:color/transparent"
-                android:hint="@string/CreatePassword"
-                android:textColorHint="@color/White"
-                android:gravity="left"/>
-        </LinearLayout>
-
-        <!-- Separation Line between Username and Password -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/White"
-            android:layout_marginTop="-15dp"/>
-
-        <!-- Repeat Password -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:orientation="horizontal">
-
-            <!-- Password icon -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingTop="13dp"
-                android:paddingLeft="15dp"
-                android:layout_marginRight="6dp"
-
-                android:text="&#xf023;"
-                android:textSize="18sp"
-                app:fontFamily="@font/fontawesome"
-                android:textColor="@color/White"/>
-
-            <!-- Password EditText-->
-            <EditText
-                android:id="@+id/RepeatPasswordTextRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:textColor="@color/White"
-                android:backgroundTint="@android:color/transparent"
-                android:hint="@string/RepeatPassword"
+                android:hint="@string/password_text"
                 android:textColorHint="@color/White"
                 android:gravity="left"
-
                 />
         </LinearLayout>
-
         <!-- Separation Line between Username and Password -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/White"
             android:layout_marginTop="-15dp"/>
-
-        <!-- Login Button + Container -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="35dp">
-
-            <Button
-                android:id="@+id/SignupButton"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_functionality"
-                android:gravity="center"
-                android:text="@string/SignUp"
-                android:textColor="@color/White"
-                android:textColorHint="@color/MainBlue"
-                />
-
-
-        </RelativeLayout>
 
     </LinearLayout>
 
 
+    <!-- Login Button + Container -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/LoginButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_functionality"
+            android:gravity="center"
+            android:text="@string/button_text"
+            android:textColor="@color/White"
+            android:textColorHint="@color/MainBlue"
+
+            />
 
 
+    </RelativeLayout>
+
+    <!-- Register Text Button + Container -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:paddingBottom="120dp">
+
+        <TextView
+            android:id="@+id/RegisterButton"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/register_text"
+            android:textColor="@color/White"
+            android:textColorHighlight="@color/White"
+            android:textColorHint="@color/White"
+            android:textColorLink="@color/White"
+            android:textSize="16sp"
+            />
+    </RelativeLayout>
 
 
     <!-- Istagram facebook about us -->
@@ -256,11 +192,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="35dp">
+        android:gravity="center">
         <!-- Facebook icon -->
         <TextView
-            android:id="@+id/facebookiconreg"
+            android:id="@+id/facebookicon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="&#xf09a;"
@@ -271,7 +206,7 @@
 
         <!-- Instagram Icon -->
         <TextView
-            android:id="@+id/instagramiconreg"
+            android:id="@+id/instagramicon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="&#xf16d;"
@@ -283,7 +218,7 @@
 
         <!-- Information Icon -->
         <TextView
-            android:id="@+id/aboutusiconreg"
+            android:id="@+id/aboutusicon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="&#xf129;"
