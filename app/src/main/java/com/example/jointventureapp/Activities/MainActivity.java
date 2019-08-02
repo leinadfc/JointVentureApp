@@ -76,12 +76,25 @@ public class MainActivity extends AppCompatActivity {
 
 
         /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
+        }*/
 
         Button addbtn = findViewById(R.id.addconcentration);
+        addbtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getActionMasked()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.setPressed(true);
+                        break;
+                    }
+                }
+                return false; //we return false so that the click listener will process the event
+            }
+        });
+
         addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button graphbtn = findViewById(R.id.graphs);
-        calbtn.setOnClickListener(new View.OnClickListener() {
+        graphbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent in = new Intent(MainActivity.this, GraphsActivity.class);

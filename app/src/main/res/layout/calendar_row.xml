@@ -4,15 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:weightSum="40">
 
 
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="10"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingRight="20dp">
+        android:layout_gravity="center"
+        android:background="@drawable/layoutcal"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_marginRight="20dp">
 
 
         <TextView
@@ -20,44 +27,147 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="19"
-            android:layout_gravity="left"
-            android:textSize="50sp"
-            android:textColor="@color/MainBlue"/>
+            android:layout_gravity="center"
+            android:textSize="40sp"
+            android:textColor="@color/Black"
+            android:gravity="center"/>
 
-        <!-- Month and year  -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="left">
 
             <!-- Month -->
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left">
+                android:gravity="center">
 
                 <TextView
                     android:id="@+id/monthitem"
-                    android:layout_width="130dp"
+                    android:layout_width="80dp"
                     android:layout_height="wrap_content"
-                    android:hint="July"
-                    android:textSize="15sp"/>
+                    android:hint="JUL"
+                    android:textSize="15sp"
+                    android:gravity="center"
+                    android:textColor="@color/Darkgrey"/>
             </RelativeLayout>
 
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="30"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="10"
+        android:gravity="top">
+
+        <TextView
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_gravity="top"
+            android:layout_weight="10"
+            android:text="Symptom1"
+            android:textAlignment="center"
+            android:gravity="center"/>
+
+        <TextView
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_gravity="top"
+            android:layout_weight="10"
+            android:text="Symptom2"
+            android:gravity="center"/>
+
+        <TextView
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="70dp"
+            android:layout_height="0dp"
+            android:layout_gravity="top"
+            android:layout_weight="10"
+            android:text="Symptom3"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="30"
+        android:layout_weight="10"
+        android:layout_marginLeft="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:layout_gravity="top"
+            android:gravity="center">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:id="@+id/progress_bar_1"
+                android:max="5"
+                android:progress="2"
+                android:progressDrawable="@drawable/custom_progress" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:id="@+id/progress_bar_2"
+                android:max="5"
+                android:progress="2"
+                android:progressDrawable="@drawable/custom_progress" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:gravity="center">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:id="@+id/progress_bar_3"
+                android:max="5"
+                android:progress="2"
+                android:progressDrawable="@drawable/custom_progress" />
+
+        </RelativeLayout>
+
+
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/concentrationitem"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="20%"
+        android:text="20"
+        android:layout_weight="10"
+        android:layout_gravity="center"
+        android:layout_marginLeft="20dp"
         android:textSize="30sp"
-        android:layout_gravity="center" />
-
+        android:id="@+id/concentrationitem"
+        android:gravity="center"/>
 
 </LinearLayout>

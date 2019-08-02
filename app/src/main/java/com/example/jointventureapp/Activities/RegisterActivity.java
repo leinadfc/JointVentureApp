@@ -24,6 +24,7 @@ import android.net.Uri;
 import com.example.jointventureapp.Application.AnaApplication;
 import com.example.jointventureapp.R;
 import com.example.jointventureapp.Utils.PreferenceUtils;
+import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +34,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     /// Initialising Socket
     private Socket mSocket;
+    Button signup;
+    EditText name;
+    EditText rusername;
+    EditText password1;
+    EditText password2;
 
 
     @Override
@@ -41,13 +47,14 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.register_page);
         AnaApplication app = (AnaApplication) getApplication();
         mSocket = app.getSocket();
+        mSocket.on("auth_signup", onNewBoolean2);
 
         /// Defining objects
-        final Button signup = findViewById(R.id.SignupButton);
-        final EditText name = findViewById(R.id.NameRegisterText);
-        final EditText rusername = findViewById(R.id.LoginTextRegister);
-        final EditText password1 = findViewById(R.id.PasswordTextRegister);
-        final EditText password2 = findViewById(R.id.RepeatPasswordTextRegister);
+        signup = findViewById(R.id.SignupButton);
+        name = findViewById(R.id.NameRegisterText);
+        rusername = findViewById(R.id.LoginTextRegister);
+        password1 = findViewById(R.id.PasswordTextRegister);
+        password2 = findViewById(R.id.RepeatPasswordTextRegister);
 
 
         /// Signup button OnClick
@@ -77,10 +84,7 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                rusername.setText("");
-                password1.setText("");
-                password2.setText("");
-                name.setText("");
+
 
 
                 /// Converting the strings into JsonObject and sending it through socket
@@ -94,9 +98,9 @@ public class RegisterActivity extends AppCompatActivity {
                     mSocket.emit("json", signupinfo);
 
                     /// Page navigation
-                    Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                   /* Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(i);
-                    overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
+                    overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);*/
 
                 } catch (JSONException e) {
                     Log.e("MYAPP", "unexpected JSON exception", e);
@@ -210,6 +214,70 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        mSocket.off("auth_signup", onNewBoolean2);
         //mSocket.disconnect();
     }
+
+    Emitter.Listener onNewBoolean2 = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject data = (JSONObject) args[0];
+                    Integer auth;
+                    try {
+                        auth = data.getInt("error_signup");
+
+                        /// Checking the value of the boolean
+                        if (auth == 00){
+                            rusername.setText("");
+                            password1.setText("");
+                            password2.setText("");
+                            name.setText("");
+                            /// Page navigation
+                            Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                            startActivity(i);
+                            overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
+
+                        }
+
+                        else if (auth == 01) {
+                            rusername.setText("");
+                            password1.setText("");
+                            password2.setText("");
+                            name.setText("");
+                            Toast wrong = Toast.makeText(getApplicationContext(), "This email is already registered", Toast.LENGTH_LONG);
+                            wrong.show();
+                        }
+
+                        else if (auth == 05) {
+                            rusername.setText("");
+                            password1.setText("");
+                            password2.setText("");
+                            name.setText("");
+                            Toast wrong = Toast.makeText(getApplicationContext(), "The email is is not valid", Toast.LENGTH_LONG);
+                            wrong.show();
+                        }
+
+                        else if (auth == 04) {
+                            rusername.setText("");
+                            password1.setText("");
+                            password2.setText("");
+                            name.setText("");
+                            Toast wrong = Toast.makeText(getApplicationContext(), "Server error, try again", Toast.LENGTH_LONG);
+                            wrong.show();
+                        }
+
+
+
+                    } catch (JSONException e) {
+                        Toast noserver = Toast.makeText(getApplicationContext(), "No server connection", Toast.LENGTH_LONG);
+                        noserver.show();
+                    }
+
+                }
+            });
+        }
+    };
 }

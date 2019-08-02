@@ -7,9 +7,13 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -18,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.jointventureapp.R;
@@ -31,6 +36,10 @@ public class AddActivity extends AppCompatActivity {
     private TextView mDisplayMonth;
     private TextView mDisplayYear;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+
+
+    BottomNavigationView botNavView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +48,30 @@ public class AddActivity extends AppCompatActivity {
         mDisplayDay = findViewById(R.id.daytext);
         mDisplayMonth = findViewById(R.id.monthtext);
         mDisplayYear = findViewById(R.id.yeartext);
+
+        botNavView = findViewById(R.id.bottomNavAdd);
+        Menu menu = botNavView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
+        botNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.addpg:
+                        break;
+                    case R.id.calpg:
+                        Intent i = new Intent(AddActivity.this, CalendarActivity.class);
+                        startActivity(i);
+                        break;
+
+                    case R.id.graphpg:
+                        Intent ii = new Intent(AddActivity.this, GraphsActivity.class);
+                        startActivity(ii);
+                        break;
+                }
+                return false;
+            }
+        });
 
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
@@ -89,22 +122,14 @@ public class AddActivity extends AppCompatActivity {
 
 
 
+
         /// Status bar transparent
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
 
-        /// x button taking to calendar page
-        TextView closebtn = findViewById(R.id.close);
-        closebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(AddActivity.this, CalendarActivity.class);
-                startActivity(i);
-                overridePendingTransition(R.anim.slideindown, R.anim.slideoutdown);
-            }
-        });
+
 
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -118,6 +143,9 @@ public class AddActivity extends AppCompatActivity {
             }
         };
 
+
+
+
         Button adbtn = findViewById(R.id.AddButton);
         adbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,14 +157,7 @@ public class AddActivity extends AppCompatActivity {
         });
     }
 
-    /// When I press back on register I want to go to login
-    @Override
-    public void onBackPressed() {
-        Intent i = new Intent(AddActivity.this, MainActivity.class);
-        startActivity(i);
-        overridePendingTransition(R.anim.slideindown, R.anim.slideoutdown);
 
-    }
 
     /// Clicking outside edit text removes focus from edit text ///
     @Override
@@ -187,4 +208,5 @@ public class AddActivity extends AppCompatActivity {
             tmonth = "";
         return tmonth;
     }
+
 }

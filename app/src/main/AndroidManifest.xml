@@ -55,9 +55,23 @@
         </activity>
 
         <!-- Calendar Activity -->
+        <activity android:name=".Activities.CalendarActivity"
+            android:label="@string/AppName">
+
+        </activity>
+
+        <!-- Graph Activity -->
         <activity
-            android:name=".Activities.CalendarActivity"
+            android:name=".Activities.GraphsActivity"
             android:label="@string/app_name">
+
+        </activity>
+
+        <!-- Trial Activity -->
+        <activity
+            android:name=".Activities.Trial"
+            android:label="@string/app_name">
+
         </activity>
 
     </application>

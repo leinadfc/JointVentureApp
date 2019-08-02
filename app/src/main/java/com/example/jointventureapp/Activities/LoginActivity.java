@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         ////////////////////////////////////////////////////////////////
         if (PreferenceUtils.getEmail(getApplicationContext()) != null && PreferenceUtils.getEmail(getApplicationContext()) != ""){
             if (PreferenceUtils.getPassword(getApplicationContext()) != null && PreferenceUtils.getPassword(getApplicationContext()) != ""){
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                Intent i = new Intent(LoginActivity.this, CalendarActivity.class);
                 startActivity(i);
 
 
@@ -200,12 +200,12 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     JSONObject data = (JSONObject) args[0];
-                    Boolean auth;
+                    Integer auth;
                     try {
-                        auth = data.getBoolean("auth_boolean");
+                        auth = data.getInt("auth_boolean");
 
                         /// Checking the value of the boolean
-                        if (auth){
+                        if (auth == 00){
                             PreferenceUtils.saveEmail(username.getText().toString().trim(), getApplicationContext());
                             PreferenceUtils.savePassword(password.getText().toString().trim(), getApplicationContext());
                             username.setText("");
@@ -217,7 +217,9 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
 
-                        else {
+                        else if (auth == 02) {
+                            username.setText("");
+                            password.setText("");
                             Toast wrong = Toast.makeText(getApplicationContext(), "Wrong email or password", Toast.LENGTH_LONG);
                             wrong.show();
                         }

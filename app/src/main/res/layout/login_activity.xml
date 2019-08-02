@@ -12,7 +12,7 @@
     android:paddingTop="20dp"
     tools:context=".Activities.LoginActivity"
     android:orientation="vertical"
-    android:background="@drawable/background"
+    android:background="@color/MainBlue"
     android:gravity="center_horizontal">
 
     <RelativeLayout

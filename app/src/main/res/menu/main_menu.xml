@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/addpg"
+        android:icon="@drawable/ic_plussign"
+        android:title="Add"/>
+    <item
+        android:id="@+id/calpg"
+        android:icon="@drawable/ic_cal"
+        android:title="Calendar"/>
+    <!--<item
+        android:id="@+id/checkpg"
+        android:icon="@drawable/ic_stethoscope"
+        android:title="Symptom Select"/>-->
+    <item
+        android:id="@+id/graphpg"
+        android:icon="@drawable/ic_barchart"
+        android:title="Graphs"/>
+
+
+</menu>
