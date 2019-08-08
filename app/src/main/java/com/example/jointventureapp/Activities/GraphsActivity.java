@@ -1,13 +1,13 @@
 package com.example.jointventureapp.Activities;
 
-import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -20,13 +20,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
+import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
+import com.example.jointventureapp.Adapters.DaysRecyclerAdapter;
+import com.example.jointventureapp.Models.CalendarRow;
+import com.example.jointventureapp.Models.MyBarDataSet;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.persistence.DayRepository;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -34,13 +38,10 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import static android.graphics.Color.BLUE;
+import java.util.List;
 
 public class GraphsActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -53,6 +54,10 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
     private Spinner yearSpinner;
     private Spinner monthSpinner;
     BottomNavigationView botNavView;
+
+    private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
+    private DayRepository mDayRepository;
+
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -526,5 +531,66 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
         DialogPage dialogPage = new DialogPage();
         dialogPage.show(getSupportFragmentManager(), "Symptoms");
     }
+
+    private void retrieveDays(String month, String year){
+        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow>>() {
+            @Override
+            public void onChanged(@Nullable List<CalendarRow> calendarRows) {
+                if (mCalendarRows.size()>0){
+                    mCalendarRows.clear();
+                }
+                if (calendarRows != null){
+                    mCalendarRows.addAll(calendarRows);
+                }
+            }
+        });
+    }
+
+    private ArrayList<BarEntry> getConcentrationEntries (ArrayList<CalendarRow> calendarRows){
+        ArrayList<BarEntry> concentrations = new ArrayList<>();
+        for (int i = 0; i<calendarRows.size(); i++){
+            CalendarRow calendarRow = calendarRows.get(i);
+            int day = Integer.parseInt(calendarRow.getDay());
+            float concentration = Float.parseFloat(calendarRow.getConcentration());
+            concentrations.add(new BarEntry(day, concentration));
+        }
+
+        return concentrations;
+    }
+
+    private ArrayList<BarEntry> getSymptom1Entries (ArrayList<CalendarRow> calendarRows){
+        ArrayList<BarEntry> symptoms1 = new ArrayList<>();
+        for (int i = 0; i<calendarRows.size(); i++){
+            CalendarRow calendarRow = calendarRows.get(i);
+            int day = Integer.parseInt(calendarRow.getDay());
+            symptoms1.add(new BarEntry(day, calendarRow.getProgress1()));
+        }
+
+        return symptoms1;
+    }
+
+    private ArrayList<BarEntry> getSymptom2Entries (ArrayList<CalendarRow> calendarRows){
+        ArrayList<BarEntry> symptoms2 = new ArrayList<>();
+        for (int i = 0; i<calendarRows.size(); i++){
+            CalendarRow calendarRow = calendarRows.get(i);
+            int day = Integer.parseInt(calendarRow.getDay());
+            symptoms2.add(new BarEntry(day, calendarRow.getProgress2()));
+        }
+
+        return symptoms2;
+    }
+
+    private ArrayList<BarEntry> getSymptom3Entries (ArrayList<CalendarRow> calendarRows){
+        ArrayList<BarEntry> symptoms3 = new ArrayList<>();
+        for (int i = 0; i<calendarRows.size(); i++){
+            CalendarRow calendarRow = calendarRows.get(i);
+            int day = Integer.parseInt(calendarRow.getDay());
+            symptoms3.add(new BarEntry(day, calendarRow.getProgress3()));
+        }
+
+        return symptoms3;
+    }
+
+
 
 }

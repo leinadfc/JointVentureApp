@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             if (PreferenceUtils.getPassword(getApplicationContext()) != null && PreferenceUtils.getPassword(getApplicationContext()) != ""){
                 Intent i = new Intent(LoginActivity.this, CalendarActivity.class);
                 startActivity(i);
+                finish();
 
 
                 /*Toast wrong = Toast.makeText(getApplicationContext(), "It would login automatically" , Toast.LENGTH_LONG);
@@ -214,6 +215,8 @@ public class LoginActivity extends AppCompatActivity {
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(i);
                             overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
+                            finish();
+
 
                         }
 

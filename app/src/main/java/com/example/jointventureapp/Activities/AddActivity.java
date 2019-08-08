@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -22,10 +23,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.jointventureapp.Models.CalendarRow;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.persistence.DayRepository;
 
 import java.security.PrivateKey;
 import java.util.Calendar;
@@ -39,6 +44,13 @@ public class AddActivity extends AppCompatActivity {
 
 
     BottomNavigationView botNavView;
+    EditText concText;
+    SeekBar seekBar1;
+    SeekBar seekBar2;
+    SeekBar seekBar3;
+
+    private DayRepository mDayRepository;
+    private CalendarRow mCalendarRow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +60,15 @@ public class AddActivity extends AppCompatActivity {
         mDisplayDay = findViewById(R.id.daytext);
         mDisplayMonth = findViewById(R.id.monthtext);
         mDisplayYear = findViewById(R.id.yeartext);
+        mCalendarRow = new CalendarRow();
+
+        concText = findViewById(R.id.concentrationtext);
+        seekBar1 = findViewById(R.id.seekbar_1);
+        seekBar2 = findViewById(R.id.seekbar_2);
+        seekBar3 = findViewById(R.id.seekbar_3);
+
+
+        mDayRepository = new DayRepository(this);
 
         botNavView = findViewById(R.id.bottomNavAdd);
         Menu menu = botNavView.getMenu();
@@ -76,7 +97,7 @@ public class AddActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
-        String tmonth = getmonthtext(month);
+        final String tmonth = getmonthtext(month);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
         mDisplayDay.setText(Integer.toString(day));
@@ -150,11 +171,32 @@ public class AddActivity extends AppCompatActivity {
         adbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mCalendarRow.setProgress1(seekBar1.getProgress());
+                mCalendarRow.setProgress2(seekBar2.getProgress());
+                mCalendarRow.setProgress3(seekBar3.getProgress());
+                //mCalendarRow.setProgress1(1);
+                //mCalendarRow.setProgress2(2);
+                //mCalendarRow.setProgress3(3);
+                mCalendarRow.setProgress4(0);
+                mCalendarRow.setProgress5(0);
+                mCalendarRow.setSymptomText1("Symptom 1");
+                mCalendarRow.setSymptomText2("Symptom 2");
+                mCalendarRow.setSymptomText3("Symptom 3");
+                mCalendarRow.setSymptomText4("Symptom 4");
+                mCalendarRow.setSymptomText5("Symptom 5");
+                mCalendarRow.setMonth(mDisplayMonth.getText().toString());
+                Log.d("month", mDisplayMonth.getText().toString());
+                mCalendarRow.setYear(mDisplayYear.getText().toString());
+                Log.d("YEAR", mDisplayYear.getText().toString());
+                mCalendarRow.setDay(mDisplayDay.getText().toString().trim());
+                mCalendarRow.setConcentration(concText.getText().toString().trim());
+                mDayRepository.insertDayTask(mCalendarRow);
                 Intent i = new Intent(AddActivity.this, CalendarActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
+
     }
 
 

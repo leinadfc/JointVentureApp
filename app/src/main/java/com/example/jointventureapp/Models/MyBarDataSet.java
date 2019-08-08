@@ -1,4 +1,4 @@
-package com.example.jointventureapp.Activities;
+package com.example.jointventureapp.Models;
 
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;

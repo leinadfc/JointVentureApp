@@ -6,7 +6,6 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.widget.TextView;
-
 import org.w3c.dom.Text;
 
 public class VerticalTextView extends android.support.v7.widget.AppCompatTextView {

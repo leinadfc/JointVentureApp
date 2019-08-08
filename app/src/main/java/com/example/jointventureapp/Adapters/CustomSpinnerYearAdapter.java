@@ -1,4 +1,4 @@
-package com.example.jointventureapp.Activities;
+package com.example.jointventureapp.Adapters;
 
 import android.content.Context;
 import android.media.Image;
@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.jointventureapp.Activities.CustomSpinnerItems;
 import com.example.jointventureapp.R;
 
 import java.util.ArrayList;

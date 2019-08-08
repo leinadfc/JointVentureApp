@@ -28,10 +28,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@drawable/layoutbw"
                 android:orientation="vertical"
-                android:paddingBottom="20dp"
+
                 android:paddingTop="40dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -98,30 +98,17 @@
                 </LinearLayout>
 
                 <!-- Concentration  -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center">
-
-                    <!-- Text -->
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:paddingRight="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/Concentration"
-                            android:textSize="20sp"/>
-                    </RelativeLayout>
-
-                    <!-- Edittext -->
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:gravity="center"
+                        android:layout_gravity="center">
 
                         <EditText
                             android:id="@+id/concentrationtext"
@@ -132,10 +119,34 @@
                             android:inputType="number"
                             android:backgroundTint="@color/MainBlue"
                             android:textColor="@color/MainBlue"
-                            android:cursorVisible="false"/>
+                            android:cursorVisible="false"
+                            android:textAlignment="center" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="bottom">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:hint="μg/mL"
+                            android:textSize="16sp"
+                            android:textColor="@color/colorGrey"
+                            android:textAlignment="center"
+                            android:paddingBottom="10dp"
+                            android:layout_marginLeft="10dp"/>
                     </RelativeLayout>
 
                 </LinearLayout>
+
+
+                        <!-- Edittext -->
+
+
+
 
                 <!-- Symptom Spinners -->
                 <RelativeLayout
@@ -155,132 +166,23 @@
                         android:textColor="@color/MainBlue"/>
                 </RelativeLayout>
 
-                <LinearLayout
+
+                <SeekBar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp"
-                    android:weightSum="100"
-                    android:layout_marginTop="10dp">
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="5">
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-
-
-                    </RadioGroup>
-                </LinearLayout>
+                    android:thumb="@drawable/thumb"
+                    android:progressDrawable="@drawable/seekbar_progress"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:max="4"
+                    android:progress="0"
+                    android:id="@+id/seekbar_1" />
 
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="5"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="1"
-                        android:gravity="center"/>
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="2"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="3"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="4"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="5"
-                        android:gravity="center"/>
-
-                </LinearLayout>
 
                 <!-- Symptom Spinners -->
                 <RelativeLayout
@@ -300,132 +202,17 @@
                         android:textColor="@color/MainBlue"/>
                 </RelativeLayout>
 
-                <LinearLayout
+                <SeekBar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp"
-                    android:weightSum="100"
-                    android:layout_marginTop="10dp">
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="5">
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-
-
-                    </RadioGroup>
-                </LinearLayout>
-
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="5"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="1"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="2"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="3"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="4"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="5"
-                        android:gravity="center"/>
-
-                </LinearLayout>
+                    android:thumb="@drawable/thumb"
+                    android:progressDrawable="@drawable/seekbar_progress"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:max="4"
+                    android:progress="0"
+                    android:id="@+id/seekbar_2" />
 
                 <!-- Symptom Spinners -->
                 <RelativeLayout
@@ -445,156 +232,42 @@
                         android:textColor="@color/MainBlue"/>
                 </RelativeLayout>
 
-                <LinearLayout
+                <SeekBar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp"
-                    android:weightSum="100"
-                    android:layout_marginTop="10dp">
+                    android:thumb="@drawable/thumb"
+                    android:progressDrawable="@drawable/seekbar_progress"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:max="4"
+                    android:progress="0"
+                    android:id="@+id/seekbar_3" />
 
-                    <RadioGroup
+
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="5">
-                        <RelativeLayout
-                            android:layout_width="0dp"
+                        android:layout_marginTop="60dp"
+                        android:layout_marginRight="-2dp"
+                        android:layout_marginLeft="-2dp">
+                        <Button
+                            android:id="@+id/AddButton"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center">
-                            <RadioButton
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:checked="false"
-                                android:tag="1"
-                                android:textSize="0sp"/>
-                        </RelativeLayout>
-
-
-                    </RadioGroup>
-                </LinearLayout>
+                            android:background="@drawable/big_addbtn"
+                            android:gravity="center"
+                            android:text="@string/Add"
+                            android:textColorHint="@color/MainBlue"
+                            android:textColor="@color/MainBlue" />
+                    </RelativeLayout>
 
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="5"
-                    android:paddingRight="30dp"
-                    android:paddingLeft="30dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="1"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="2"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="3"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="4"
-                        android:gravity="center"/>
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="5"
-                        android:gravity="center"/>
 
                 </LinearLayout>
 
-
-
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="-2dp"
-                    android:layout_marginRight="-2dp">
-                    <Button
-                        android:id="@+id/AddButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/big_addbtn"
-                        android:gravity="center"
-                        android:text="@string/Add"
-                        android:textColorHint="@color/MainBlue"
-                        android:textColor="@color/MainBlue"/>
-                </RelativeLayout>
-
-            </LinearLayout>
 
         </RelativeLayout>
 
