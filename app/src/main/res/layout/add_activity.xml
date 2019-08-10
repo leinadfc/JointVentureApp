@@ -18,258 +18,204 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/botRelAdd"
             android:id="@+id/midRelAdd">
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/layoutbw"
-                android:orientation="vertical"
+                android:focusableInTouchMode="true">
 
-                android:paddingTop="40dp">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="30dp">
-
-                    <!-- Day Container -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/daytext"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="DAY"
-                            android:textAlignment="center"
-                            android:textSize="70sp"
-                            android:textColor="@color/MainBlue"/>
-
-                    </RelativeLayout>
-
-                    <!-- Month and year  -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center">
-
-                        <!-- Month -->
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="right"
-                            android:paddingRight="1dp">
-
-                            <TextView
-                                android:id="@+id/monthtext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="Month"
-                                android:textSize="25sp"/>
-                        </RelativeLayout>
-
-                        <!-- Year -->
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="1dp">
-
-                            <TextView
-                                android:id="@+id/yeartext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:hint="Year"
-                                android:textSize="25sp"/>
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
-
-                <!-- Concentration  -->
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center">
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_gravity="center">
-
-                        <EditText
-                            android:id="@+id/concentrationtext"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/TypeConcentration"
-                            android:textSize="20sp"
-                            android:inputType="number"
-                            android:backgroundTint="@color/MainBlue"
-                            android:textColor="@color/MainBlue"
-                            android:cursorVisible="false"
-                            android:textAlignment="center" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:layout_gravity="bottom">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:hint="μg/mL"
-                            android:textSize="16sp"
-                            android:textColor="@color/colorGrey"
-                            android:textAlignment="center"
-                            android:paddingBottom="10dp"
-                            android:layout_marginLeft="10dp"/>
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-
-                        <!-- Edittext -->
-
-
-
-
-                <!-- Symptom Spinners -->
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/daytext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="1dp"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="16dp"
-                    android:layout_marginTop="20dp">
-                    <TextView
-                        android:id="@+id/symptom1text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Symptom 1"
-                        android:textSize="20sp"
-                        android:textColor="@color/MainBlue"/>
-                </RelativeLayout>
+                    android:layout_marginTop="30dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/MainBlue"
+                    android:textSize="70sp"
+                    app:layout_constraintBottom_toTopOf="@id/monthtext"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    android:hint="DAY"/>
 
-
-                <SeekBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:thumb="@drawable/thumb"
-                    android:progressDrawable="@drawable/seekbar_progress"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:max="4"
-                    android:progress="0"
-                    android:id="@+id/seekbar_1" />
-
-
-
-
-
-
-                <!-- Symptom Spinners -->
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/monthtext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="1dp"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="16dp"
-                    android:layout_marginTop="20dp">
-                    <TextView
-                        android:id="@+id/symptom2text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Symptom 2"
-                        android:textSize="20sp"
-                        android:textColor="@color/MainBlue"/>
-                </RelativeLayout>
+                    android:layout_marginTop="5dp"
+                    android:hint="MONTH"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toTopOf="@id/concentrationtext"
+                    app:layout_constraintEnd_toStartOf="@+id/yeartext"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/daytext"
+                    android:layout_marginRight="5dp"/>
 
-                <SeekBar
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:thumb="@drawable/thumb"
-                    android:progressDrawable="@drawable/seekbar_progress"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
-                    android:max="4"
-                    android:progress="0"
-                    android:id="@+id/seekbar_2" />
-
-                <!-- Symptom Spinners -->
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/yeartext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="1dp"
-                    android:layout_gravity="left"
-                    android:layout_marginLeft="10dp"
-                    android:paddingLeft="16dp"
-                    android:layout_marginTop="20dp">
-                    <TextView
-                        android:id="@+id/symptom3text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Symptom 3"
-                        android:textSize="20sp"
-                        android:textColor="@color/MainBlue"/>
-                </RelativeLayout>
+                    android:layout_marginTop="5dp"
+                    android:hint="YEAR"
+                    android:textSize="25sp"
+                    app:layout_constraintBottom_toTopOf="@id/concentrationtext"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/monthtext"
+                    app:layout_constraintTop_toBottomOf="@id/daytext"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+                <EditText
+                    android:id="@+id/concentrationtext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:backgroundTint="@color/MainBlue"
+                    android:cursorVisible="true"
+                    android:hint="@string/TypeConcentration"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/MainBlue"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@id/symptom1text"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/units"
+                    app:layout_constraintTop_toBottomOf="@id/monthtext" />
+
+                <TextView
+                    android:id="@+id/units"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:hint="@string/Unit"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorGrey"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@id/symptom1text"
+                    app:layout_constraintLeft_toRightOf="@id/concentrationtext"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/yeartext"
+                    app:layout_constraintVertical_bias="0.25" />
+
+                <TextView
+                    android:id="@+id/symptom1text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Symptom1"
+                    android:textColor="@color/MainBlue"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@id/seekbar_1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/concentrationtext"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    android:layout_marginTop="30dp" />
 
                 <SeekBar
+                    android:id="@+id/seekbar_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:thumb="@drawable/thumb"
-                    android:progressDrawable="@drawable/seekbar_progress"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
                     android:max="4"
                     android:progress="0"
-                    android:id="@+id/seekbar_3" />
+                    android:progressDrawable="@drawable/seekbar_progress"
+                    android:thumb="@drawable/thumb"
+                    app:layout_constraintBottom_toTopOf="@id/symptom2text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/symptom1text" />
+
+                <TextView
+                    android:id="@+id/symptom2text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/Symptom2"
+                    android:textColor="@color/MainBlue"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@id/seekbar_2"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/seekbar_1" />
+
+                <SeekBar
+                    android:id="@+id/seekbar_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:max="4"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/seekbar_progress"
+                    android:thumb="@drawable/thumb"
+                    app:layout_constraintBottom_toTopOf="@id/symptom3text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/symptom2text" />
+
+                <TextView
+                    android:id="@+id/symptom3text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/Symptom3"
+                    android:textColor="@color/MainBlue"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toTopOf="@id/seekbar_3"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/seekbar_2" />
+
+                <SeekBar
+                    android:id="@+id/seekbar_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:max="4"
+                    android:progress="0"
+                    android:progressDrawable="@drawable/seekbar_progress"
+                    android:thumb="@drawable/thumb"
+                    app:layout_constraintBottom_toTopOf="@id/AddButton"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/symptom3text" />
+
+                <Button
+                    android:id="@+id/AddButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/big_addbtn"
+                    android:gravity="center"
+                    android:text="@string/Add"
+                    android:textColor="@color/MainBlue"
+                    android:textColorHint="@color/MainBlue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/seekbar_3" />
 
 
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="60dp"
-                        android:layout_marginRight="-2dp"
-                        android:layout_marginLeft="-2dp">
-                        <Button
-                            android:id="@+id/AddButton"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/big_addbtn"
-                            android:gravity="center"
-                            android:text="@string/Add"
-                            android:textColorHint="@color/MainBlue"
-                            android:textColor="@color/MainBlue" />
-                    </RelativeLayout>
+            </android.support.constraint.ConstraintLayout>
 
 
-
-
-                </LinearLayout>
-
-
-        </RelativeLayout>
+        </ScrollView>
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -58,6 +58,10 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
     private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
     private DayRepository mDayRepository;
 
+    private ArrayList<BarEntry> concentrations = new ArrayList<>();
+    private ArrayList<BarEntry> symptoms1 = new ArrayList<>();
+    private ArrayList<BarEntry> symptoms2 = new ArrayList<>();
+    private ArrayList<BarEntry> symptoms3 = new ArrayList<>();
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -66,6 +70,8 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
 
         monthSpinner = findViewById(R.id.graphsMonthSpinner);
         yearSpinner = findViewById(R.id.graphsYearSpinner);
+
+        mDayRepository = new DayRepository(this);
 
         botNavView = findViewById(R.id.bottomNavGraph);
         Menu menu = botNavView.getMenu();
@@ -128,8 +134,7 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
         int iyear = getYear(year);
 
 
-        monthSpinner.setSelection(month);
-        yearSpinner.setSelection(iyear);
+
 
         concBarchart = findViewById(R.id.concchart);
         sym1BarChart = findViewById(R.id.symptom1chart);
@@ -189,164 +194,114 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
         sym3BarChart.getAxisLeft().setAxisMinimum(0);
         sym2BarChart.getAxisLeft().setAxisMinimum(0);
         sym1BarChart.getAxisLeft().setAxisMinimum(0);
+        concBarchart.getAxisLeft().setAxisMinimum(0);
 
         sym3BarChart.getAxisLeft().setAxisMaximum(5);
         sym2BarChart.getAxisLeft().setAxisMaximum(5);
         sym1BarChart.getAxisLeft().setAxisMaximum(5);
 
 
-        ArrayList<BarEntry> barEntries = new ArrayList<>();
-        ArrayList<BarEntry> sym1Entries = new ArrayList<>();
-        ArrayList<BarEntry> sym2Entries = new ArrayList<>();
-        ArrayList<BarEntry> sym3Entries = new ArrayList<>();
 
-        /// Barchart data
-        barEntries.add(new BarEntry(0, 400f));
-        barEntries.add(new BarEntry(1, 450f));
-        barEntries.add(new BarEntry(2, 300f));
-        barEntries.add(new BarEntry(3, 350f));
-        barEntries.add(new BarEntry(4, 400f));
-        barEntries.add(new BarEntry(5, 300f));
-        barEntries.add(new BarEntry(6, 400f));
-        barEntries.add(new BarEntry(7, 450f));
-        barEntries.add(new BarEntry(8, 300f));
-        barEntries.add(new BarEntry(9, 350f));
-        barEntries.add(new BarEntry(10, 400f));
-        barEntries.add(new BarEntry(11, 300f));
-        barEntries.add(new BarEntry(12, 400f));
-        barEntries.add(new BarEntry(13, 450f));
-        barEntries.add(new BarEntry(14, 300f));
-        barEntries.add(new BarEntry(15, 350f));
-        barEntries.add(new BarEntry(16, 400f));
-        barEntries.add(new BarEntry(17, 300f));
-        barEntries.add(new BarEntry(18, 400f));
-        barEntries.add(new BarEntry(19, 450f));
-        barEntries.add(new BarEntry(20, 300f));
-        barEntries.add(new BarEntry(21, 350f));
-        barEntries.add(new BarEntry(22, 400f));
-        barEntries.add(new BarEntry(23, 300f));
-        barEntries.add(new BarEntry(24, 400f));
-        barEntries.add(new BarEntry(25, 450f));
-        barEntries.add(new BarEntry(26, 300f));
-        barEntries.add(new BarEntry(27, 350f));
-        barEntries.add(new BarEntry(28, 400f));
-        barEntries.add(new BarEntry(29, 300f));
+        monthSpinner.setSelection(month);
+        yearSpinner.setSelection(iyear);
 
-        sym1Entries.add(new BarEntry(0, 1));
-        sym1Entries.add(new BarEntry(1, 2));
-        sym1Entries.add(new BarEntry(2, 3));
-        sym1Entries.add(new BarEntry(3, 3));
-        sym1Entries.add(new BarEntry(4, 4));
-        sym1Entries.add(new BarEntry(5, 5));
-        sym1Entries.add(new BarEntry(6, 5));
-        sym1Entries.add(new BarEntry(7, 1));
-        sym1Entries.add(new BarEntry(8, 2));
-        sym1Entries.add(new BarEntry(9, 2));
-        sym1Entries.add(new BarEntry(10, 3));
-        sym1Entries.add(new BarEntry(11, 4));
-        sym1Entries.add(new BarEntry(12, 5));
-        sym1Entries.add(new BarEntry(13, 4));
-        sym1Entries.add(new BarEntry(14, 2));
-        sym1Entries.add(new BarEntry(15, 1));
-        sym1Entries.add(new BarEntry(16, 2));
-        sym1Entries.add(new BarEntry(17, 2));
-        sym1Entries.add(new BarEntry(18, 3));
-        sym1Entries.add(new BarEntry(19, 5));
-        sym1Entries.add(new BarEntry(20,1));
-        sym1Entries.add(new BarEntry(21, 1));
-        sym1Entries.add(new BarEntry(22, 4));
-        sym1Entries.add(new BarEntry(23, 3));
-        sym1Entries.add(new BarEntry(24, 4));
-        sym1Entries.add(new BarEntry(25, 5));
-        sym1Entries.add(new BarEntry(26, 5));
-        sym1Entries.add(new BarEntry(27, 1));
-        sym1Entries.add(new BarEntry(28, 2));
-        sym1Entries.add(new BarEntry(29, 3));
 
-        sym2Entries.add(new BarEntry(0, 3));
-        sym2Entries.add(new BarEntry(1, 3));
-        sym2Entries.add(new BarEntry(2, 5));
-        sym2Entries.add(new BarEntry(3, 1));
-        sym2Entries.add(new BarEntry(4, 4));
-        sym2Entries.add(new BarEntry(5, 2));
-        sym2Entries.add(new BarEntry(6, 2));
-        sym2Entries.add(new BarEntry(7, 3));
-        sym2Entries.add(new BarEntry(8, 4));
-        sym2Entries.add(new BarEntry(9, 5));
-        sym2Entries.add(new BarEntry(10, 1));
-        sym2Entries.add(new BarEntry(11, 1));
-        sym2Entries.add(new BarEntry(12, 3));
-        sym2Entries.add(new BarEntry(13, 2));
-        sym2Entries.add(new BarEntry(14, 5));
-        sym2Entries.add(new BarEntry(15, 1));
-        sym2Entries.add(new BarEntry(16, 2));
-        sym2Entries.add(new BarEntry(17, 5));
-        sym2Entries.add(new BarEntry(18, 3));
-        sym2Entries.add(new BarEntry(19, 3));
-        sym2Entries.add(new BarEntry(20,3));
-        sym2Entries.add(new BarEntry(21, 2));
-        sym2Entries.add(new BarEntry(22, 1));
-        sym2Entries.add(new BarEntry(23, 2));
-        sym2Entries.add(new BarEntry(24, 1));
-        sym2Entries.add(new BarEntry(25, 2));
-        sym2Entries.add(new BarEntry(26, 2));
-        sym2Entries.add(new BarEntry(27, 5));
-        sym2Entries.add(new BarEntry(28, 4));
-        sym2Entries.add(new BarEntry(29, 4));
 
-        sym3Entries.add(new BarEntry(0, 4));
-        sym3Entries.add(new BarEntry(1, 4));
-        sym3Entries.add(new BarEntry(2, 1));
-        sym3Entries.add(new BarEntry(3, 2));
-        sym3Entries.add(new BarEntry(4, 5));
-        sym3Entries.add(new BarEntry(5, 3));
-        sym3Entries.add(new BarEntry(6, 3));
-        sym3Entries.add(new BarEntry(7, 4));
-        sym3Entries.add(new BarEntry(8, 1));
-        sym3Entries.add(new BarEntry(9, 1));
-        sym3Entries.add(new BarEntry(10, 1));
-        sym3Entries.add(new BarEntry(11, 2));
-        sym3Entries.add(new BarEntry(12, 5));
-        sym3Entries.add(new BarEntry(13, 4));
-        sym3Entries.add(new BarEntry(14, 5));
-        sym3Entries.add(new BarEntry(15, 5));
-        sym3Entries.add(new BarEntry(16, 4));
-        sym3Entries.add(new BarEntry(17, 2));
-        sym3Entries.add(new BarEntry(18, 3));
-        sym3Entries.add(new BarEntry(19, 1));
-        sym3Entries.add(new BarEntry(20,1));
-        sym3Entries.add(new BarEntry(21, 4));
-        sym3Entries.add(new BarEntry(22, 4));
-        sym3Entries.add(new BarEntry(23, 3));
-        sym3Entries.add(new BarEntry(24, 5));
-        sym3Entries.add(new BarEntry(25, 5));
-        sym3Entries.add(new BarEntry(26, 1));
-        sym3Entries.add(new BarEntry(27, 2));
-        sym3Entries.add(new BarEntry(28, 2));
-        sym3Entries.add(new BarEntry(29, 3));
+        monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        BarDataSet barDataSet = new BarDataSet(barEntries, "ADL Concentration");
-        MyBarDataSet sym1DataSet = new MyBarDataSet(sym1Entries, "");
-        MyBarDataSet sym2DataSet = new MyBarDataSet(sym2Entries, "");
-        MyBarDataSet sym3DataSet = new MyBarDataSet(sym3Entries, "");
+                String queryMonth =  getSpinnerMonth(monthSpinner.getSelectedItemPosition());
+                String queryYear = getSpinnerYear (yearSpinner.getSelectedItemPosition());
+                retrieveDays(queryMonth, queryYear);
+                Log.d("MONTITEM SELECTED MONTH", queryMonth);
+                Log.d("MONTHITEM SELECTED YEAR", queryYear);
+
+               //makeChart();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+
+
+                String queryMonth =  getSpinnerMonth(monthSpinner.getSelectedItemPosition());
+                String queryYear = getSpinnerYear (yearSpinner.getSelectedItemPosition());
+                retrieveDays(queryMonth, queryYear);
+
+                //makeChart();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+        /// Status bar transparent
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow();
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
+        dialogbtn2 = findViewById(R.id.graphSymptombtn);
+        dialogbtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openDialog2();
+            }
+        });
+
+    }
+
+
+    private void makeChart() {
+
+        concentrations = getConcentrationEntries();
+        symptoms1 = getSymptom1Entries();
+        symptoms2 = getSymptom2Entries();
+        symptoms3 = getSymptom3Entries();
+
+        Log.d("CONCENTRATIONS Y", Integer.toString(concentrations.size()));
+        Log.d("SYMPTOMS1 Y", Integer.toString(symptoms1.size()));
+        Log.d("SYMPTOMS2 Y", Integer.toString(symptoms2.size()));
+        Log.d("SYMPTOMS3 Y", Integer.toString(symptoms3.size()));
+
+
+        BarDataSet barDataSet = new BarDataSet(concentrations, "ADL Concentration");
+        MyBarDataSet sym1DataSet = new MyBarDataSet(symptoms1, "");
+        MyBarDataSet sym2DataSet = new MyBarDataSet(symptoms2, "");
+        MyBarDataSet sym3DataSet = new MyBarDataSet(symptoms3, "");
         /// might change
-        barDataSet.setColors(0xB2182D57);
+        barDataSet.setColors(0xFF182D57);
         // for now this color look video to change
         //sym1DataSet.setColors(0xFF182D57);
-        sym1DataSet.setColors(new int[]{ContextCompat.getColor(this, R.color.Blue40),
-                ContextCompat.getColor(this, R.color.Blue60),
-                ContextCompat.getColor(this, R.color.Blue80), ContextCompat.getColor(this,
-                R.color.MainBlue), ContextCompat.getColor(this, R.color.Blue20)});
+        sym1DataSet.setColors(new int[]{ContextCompat.getColor(getApplicationContext(), R.color.Blue40),
+                ContextCompat.getColor(getApplicationContext(), R.color.Blue60),
+                ContextCompat.getColor(getApplicationContext(), R.color.Blue80), ContextCompat.getColor(getApplicationContext(),
+                R.color.MainBlue), ContextCompat.getColor(getApplicationContext(), R.color.Blue20)});
 
-        sym2DataSet.setColors(new int[]{ContextCompat.getColor(this, R.color.Blue40),
-                ContextCompat.getColor(this, R.color.Blue60),
-                ContextCompat.getColor(this, R.color.Blue80), ContextCompat.getColor(this,
-                R.color.MainBlue), ContextCompat.getColor(this, R.color.Blue20)});
+        sym2DataSet.setColors(new int[]{ContextCompat.getColor(getApplicationContext(), R.color.Blue40),
+                ContextCompat.getColor(getApplicationContext(), R.color.Blue60),
+                ContextCompat.getColor(getApplicationContext(), R.color.Blue80), ContextCompat.getColor(getApplicationContext(),
+                R.color.MainBlue), ContextCompat.getColor(getApplicationContext(), R.color.Blue20)});
 
-        sym3DataSet.setColors(new int[]{ContextCompat.getColor(this, R.color.Blue40),
-                ContextCompat.getColor(this, R.color.Blue60),
-                ContextCompat.getColor(this, R.color.Blue80), ContextCompat.getColor(this,
-                R.color.MainBlue), ContextCompat.getColor(this, R.color.Blue20)});
+        sym3DataSet.setColors(new int[]{ContextCompat.getColor(getApplicationContext(), R.color.Blue40),
+                ContextCompat.getColor(getApplicationContext(), R.color.Blue60),
+                ContextCompat.getColor(getApplicationContext(), R.color.Blue80), ContextCompat.getColor(getApplicationContext(),
+                R.color.MainBlue), ContextCompat.getColor(getApplicationContext(), R.color.Blue20)});
 
 
         BarData data = new BarData(barDataSet);
@@ -365,18 +320,23 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
         sym3data.setDrawValues(false);
 
         sym1BarChart.setData(sym1data);
+
+
         sym2BarChart.setData(sym2data);
+
+
         concBarchart.setData(data);
+
+
         sym3BarChart.setData(sym3data);
 
-        sym1BarChart.setFitBars(true);
-        sym1BarChart.invalidate();
-        sym2BarChart.setFitBars(true);
-        sym2BarChart.invalidate();
-        sym3BarChart.setFitBars(true);
-        sym3BarChart.invalidate();
 
-        CustomBarChartRender barChartRender = new CustomBarChartRender(concBarchart,concBarchart.getAnimator(), concBarchart.getViewPortHandler());
+        sym1BarChart.setFitBars(true);
+        sym2BarChart.setFitBars(true);
+        sym3BarChart.setFitBars(true);
+
+        CustomBarChartRender barChartRender = new CustomBarChartRender(concBarchart,
+                concBarchart.getAnimator(), concBarchart.getViewPortHandler());
         CustomBarChartRender sym1BarChartRender = new CustomBarChartRender(sym1BarChart,
                 sym1BarChart.getAnimator(), sym1BarChart.getViewPortHandler());
         CustomBarChartRender sym2BarChartRender = new CustomBarChartRender(sym2BarChart,
@@ -407,17 +367,19 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
         sym2BarChart.setRenderer(sym2BarChartRender);
         sym3BarChart.setRenderer(sym3BarChartRender);
 
+        concBarchart.invalidate();
+
         String[] days = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
-        "23", "24", "25", "26", "27", "28", "29", "30" };
+                "23", "24", "25", "26", "27", "28", "29", "30" };
 
         XAxis sym1XAxis = sym1BarChart.getXAxis();
         XAxis sym2XAxis = sym2BarChart.getXAxis();
         XAxis xAxis = concBarchart.getXAxis();
         XAxis sym3XAxis = sym3BarChart.getXAxis();
 
-        xAxis.setValueFormatter(new MyXaxisValueFormatter(days));
+        //xAxis.setValueFormatter(new MyXaxisValueFormatter(days));
         sym1XAxis.setValueFormatter(new MyXaxisValueFormatter2(days));
-        sym3XAxis.setValueFormatter(new MyXaxisValueFormatter(days));
+        //sym3XAxis.setValueFormatter(new MyXaxisValueFormatter(days));
         sym2XAxis.setValueFormatter(new MyXaxisValueFormatter2(days));
 
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -429,25 +391,7 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
         sym1XAxis.setGranularity(1);
         sym3XAxis.setGranularity(1);
         sym2XAxis.setGranularity(1);
-
-        /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-
-        dialogbtn2 = findViewById(R.id.graphSymptombtn);
-        dialogbtn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                openDialog2();
-            }
-        });
-
     }
-
-
 
 
     /// When I press back on register I want to go to login
@@ -533,64 +477,146 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     private void retrieveDays(String month, String year){
+        Log.d("QUERY NOT ENTERED", "NOT ENTERED");
         mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow>>() {
             @Override
             public void onChanged(@Nullable List<CalendarRow> calendarRows) {
+                Log.d("QUERY ENTERED", "ENTERED");
                 if (mCalendarRows.size()>0){
                     mCalendarRows.clear();
                 }
                 if (calendarRows != null){
                     mCalendarRows.addAll(calendarRows);
                 }
+                concBarchart.notifyDataSetChanged();
+                concBarchart.invalidate();
+
+                sym1BarChart.notifyDataSetChanged();
+                sym1BarChart.invalidate();
+
+                sym2BarChart.notifyDataSetChanged();
+                sym2BarChart.invalidate();
+
+                sym3BarChart.notifyDataSetChanged();
+                sym3BarChart.invalidate();
+
+                makeChart();
             }
         });
     }
 
-    private ArrayList<BarEntry> getConcentrationEntries (ArrayList<CalendarRow> calendarRows){
-        ArrayList<BarEntry> concentrations = new ArrayList<>();
-        for (int i = 0; i<calendarRows.size(); i++){
-            CalendarRow calendarRow = calendarRows.get(i);
-            int day = Integer.parseInt(calendarRow.getDay());
-            float concentration = Float.parseFloat(calendarRow.getConcentration());
-            concentrations.add(new BarEntry(day, concentration));
+    private ArrayList<BarEntry> getConcentrationEntries (){
+        concentrations.clear();
+        float concentration;
+        for (int j = 1; j<32; j++) {
+            for (int i = 0; i < mCalendarRows.size(); i++) {
+                if (Integer.parseInt(mCalendarRows.get(i).getDay()) == j){
+                    if (mCalendarRows.get(i).getConcentration().equals("")) {
+                        concentration = 0f;
+                    }
+                    else {
+                        concentration = Float.parseFloat(mCalendarRows.get(i).getConcentration());
+                    }
+                    concentrations.add(new BarEntry(j, concentration));
+                }
+                else {
+                    concentrations.add(new BarEntry(j, 0f));
+                }
+            }
         }
 
         return concentrations;
     }
-
-    private ArrayList<BarEntry> getSymptom1Entries (ArrayList<CalendarRow> calendarRows){
-        ArrayList<BarEntry> symptoms1 = new ArrayList<>();
-        for (int i = 0; i<calendarRows.size(); i++){
-            CalendarRow calendarRow = calendarRows.get(i);
-            int day = Integer.parseInt(calendarRow.getDay());
-            symptoms1.add(new BarEntry(day, calendarRow.getProgress1()));
+    private ArrayList<BarEntry> getSymptom1Entries (){
+        symptoms1.clear();
+        for (int j = 1; j<32; j++) {
+            for (int i = 0; i < mCalendarRows.size(); i++) {
+                if (Integer.parseInt(mCalendarRows.get(i).getDay()) == j){
+                    symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress1()));
+                }
+                else {
+                    symptoms1.add(new BarEntry(j, 0));
+                }
+            }
         }
 
         return symptoms1;
     }
 
-    private ArrayList<BarEntry> getSymptom2Entries (ArrayList<CalendarRow> calendarRows){
-        ArrayList<BarEntry> symptoms2 = new ArrayList<>();
-        for (int i = 0; i<calendarRows.size(); i++){
-            CalendarRow calendarRow = calendarRows.get(i);
-            int day = Integer.parseInt(calendarRow.getDay());
-            symptoms2.add(new BarEntry(day, calendarRow.getProgress2()));
+    private ArrayList<BarEntry> getSymptom2Entries (){
+        symptoms2.clear();
+        for (int j = 1; j<32; j++) {
+            for (int i = 0; i < mCalendarRows.size(); i++) {
+                if (Integer.parseInt(mCalendarRows.get(i).getDay()) == j){
+                    symptoms2.add(new BarEntry(j, mCalendarRows.get(i).getProgress2()));
+                }
+                else {
+                    symptoms2.add(new BarEntry(j, 0));
+                }
+            }
         }
 
         return symptoms2;
     }
 
-    private ArrayList<BarEntry> getSymptom3Entries (ArrayList<CalendarRow> calendarRows){
-        ArrayList<BarEntry> symptoms3 = new ArrayList<>();
-        for (int i = 0; i<calendarRows.size(); i++){
-            CalendarRow calendarRow = calendarRows.get(i);
-            int day = Integer.parseInt(calendarRow.getDay());
-            symptoms3.add(new BarEntry(day, calendarRow.getProgress3()));
+    private ArrayList<BarEntry> getSymptom3Entries (){
+        symptoms3.clear();
+        for (int j = 1; j<32; j++) {
+            for (int i = 0; i < mCalendarRows.size(); i++) {
+                if (Integer.parseInt(mCalendarRows.get(i).getDay()) == j){
+                    symptoms3.add(new BarEntry(j, mCalendarRows.get(i).getProgress3()));
+                }
+                else {
+                    symptoms3.add(new BarEntry(j, 0));
+                }
+            }
         }
 
         return symptoms3;
     }
+    private String getSpinnerMonth (int month){
+        String spinnerMonth;
+        if (month == 0)
+            spinnerMonth = "January";
+        else if (month == 10)
+            spinnerMonth = "November";
+        else if (month == 1)
+            spinnerMonth = "February";
+        else if (month == 2)
+            spinnerMonth = "March";
+        else if (month == 3)
+            spinnerMonth = "April";
+        else if (month == 4)
+            spinnerMonth = "May";
+        else if (month == 5)
+            spinnerMonth = "June";
+        else if (month == 6)
+            spinnerMonth = "July";
+        else if (month == 7)
+            spinnerMonth = "August";
+        else if (month == 8)
+            spinnerMonth = "September";
+        else if (month == 9)
+            spinnerMonth = "October";
+        else
+            spinnerMonth = "December";
 
+        return spinnerMonth;
+    }
+
+    private String getSpinnerYear (int year){
+        String spinnerYear;
+        if (year == 0)
+            spinnerYear = "2018";
+
+        else if (year == 1)
+            spinnerYear = "2019";
+
+        else
+            spinnerYear = "2020";
+
+        return spinnerYear;
+    }
 
 
 }

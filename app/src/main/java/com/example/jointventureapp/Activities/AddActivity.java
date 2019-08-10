@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +34,41 @@ import com.example.jointventureapp.R;
 import com.example.jointventureapp.persistence.DayRepository;
 
 import java.security.PrivateKey;
+import java.util.Calendar;
+
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Rect;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
+import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
+import com.example.jointventureapp.R;
+
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddActivity extends AppCompatActivity {
@@ -66,6 +102,8 @@ public class AddActivity extends AppCompatActivity {
         seekBar1 = findViewById(R.id.seekbar_1);
         seekBar2 = findViewById(R.id.seekbar_2);
         seekBar3 = findViewById(R.id.seekbar_3);
+
+        concText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
 
         mDayRepository = new DayRepository(this);
@@ -189,7 +227,12 @@ public class AddActivity extends AppCompatActivity {
                 mCalendarRow.setYear(mDisplayYear.getText().toString());
                 Log.d("YEAR", mDisplayYear.getText().toString());
                 mCalendarRow.setDay(mDisplayDay.getText().toString().trim());
-                mCalendarRow.setConcentration(concText.getText().toString().trim());
+                if (concText.getText().toString().isEmpty()){
+                    mCalendarRow.setConcentration("0");
+                }
+                else{
+                    mCalendarRow.setConcentration(concText.getText().toString().trim());
+                }
                 mDayRepository.insertDayTask(mCalendarRow);
                 Intent i = new Intent(AddActivity.this, CalendarActivity.class);
                 startActivity(i);

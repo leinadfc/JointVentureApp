@@ -40,6 +40,7 @@ public class CustomBarChartRender extends BarChartRenderer {
         mShadowPaint.setColor(dataSet.getBarShadowColor());
         boolean drawBorder = dataSet.getBarBorderWidth() > 0f;
 
+        initBuffers();
         float phaseX = mAnimator.getPhaseX();
         float phaseY = mAnimator.getPhaseY();
 

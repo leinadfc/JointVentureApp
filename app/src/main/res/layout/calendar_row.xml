@@ -7,7 +7,7 @@
     android:paddingTop="20dp"
     android:paddingBottom="20dp"
     android:weightSum="40"
-    android:background="@color/White">
+    android:background="@color/Blue5">
 
 
 

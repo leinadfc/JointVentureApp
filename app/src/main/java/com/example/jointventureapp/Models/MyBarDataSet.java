@@ -20,16 +20,12 @@ public class MyBarDataSet extends BarDataSet {
         } else if (getEntryForIndex(index).getY() == 3) {
             return mColors.get(1);
         }
-        else if (getEntryForIndex(index).getY() == 5) {
+        else if (getEntryForIndex(index).getY() == 4){
             return mColors.get(3);
         }
 
-        else if (getEntryForIndex(index).getY() == 4){
-            return mColors.get(2);
-        }
-
         else {// greater or equal than 100 red
-            return mColors.get(4);
+            return mColors.get(3);
         }
     }
 }

@@ -17,4 +17,8 @@
     <string name="Add">Add</string>
     <string name="x">x</string>
     <string name="TypeConcentration">Type concentration</string>
+    <string name="Unit">μg/mL</string>
+    <string name="Symptom1">Symptom 1</string>
+    <string name="Symptom2">Symptom 2</string>
+    <string name="Symptom3">Symptom 3</string>
 </resources>

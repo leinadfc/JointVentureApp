@@ -292,9 +292,11 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
             @Override
             public void onChanged(@Nullable List<CalendarRow> calendarRows) {
                 if (mCalendarRows.size()>0){
+                    Log.d("BYEEEEEEEEEE", "HEEEEEEY ");
                     mCalendarRows.clear();
                 }
                 if (calendarRows != null){
+                    Log.d("BYEEEEEEEEEE", "BYEEEEEEEEEE ");
                     mCalendarRows.addAll(calendarRows);
                 }
                 mDaysRecyclerAdapter.notifyDataSetChanged();
