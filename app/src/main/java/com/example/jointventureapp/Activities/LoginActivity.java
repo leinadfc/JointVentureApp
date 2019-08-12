@@ -212,12 +212,17 @@ public class LoginActivity extends AppCompatActivity {
                             username.setText("");
                             password.setText("");
                             /// Page navigation
+                            PreferenceUtils.saveSymptom1(true , getApplicationContext());
+                            PreferenceUtils.saveSymptom2(true , getApplicationContext());
+                            PreferenceUtils.saveSymptom3(true , getApplicationContext());
+                            PreferenceUtils.saveSymptom4(true , getApplicationContext());
+                            PreferenceUtils.saveSymptom5(true , getApplicationContext());
+                            PreferenceUtils.saveFirstTime(true, getApplicationContext());
+
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(i);
                             overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
                             finish();
-
-
                         }
 
                         else if (auth == 02) {

@@ -98,9 +98,16 @@ public class RegisterActivity extends AppCompatActivity {
                     mSocket.emit("json", signupinfo);
 
                     /// Page navigation
-                   /* Intent i = new Intent(RegisterActivity.this, MainActivity.class);
+                    PreferenceUtils.saveSymptom1(true , getApplicationContext());
+                    PreferenceUtils.saveSymptom2(true , getApplicationContext());
+                    PreferenceUtils.saveSymptom3(true , getApplicationContext());
+                    PreferenceUtils.saveSymptom4(true , getApplicationContext());
+                    PreferenceUtils.saveSymptom5(true , getApplicationContext());
+                    PreferenceUtils.saveFirstTime(true, getApplicationContext());
+                    Intent i = new Intent(RegisterActivity.this, CalendarActivity.class);
                     startActivity(i);
-                    overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);*/
+
+                    overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
 
                 } catch (JSONException e) {
                     Log.e("MYAPP", "unexpected JSON exception", e);

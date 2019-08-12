@@ -113,27 +113,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100"
-            android:focusableInTouchMode="true">
 
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="95"
-                android:hint="Type a symptom"
-                android:textSize="18sp"
-                android:cursorVisible="true" />
-
-            <android.support.v7.widget.AppCompatCheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/custom_symptom"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

@@ -33,4 +33,83 @@ public class PreferenceUtils {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(Constants.KEY_PASSWORD, null);
     }
+
+    public static boolean saveSymptom1 (boolean symptom1, Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putBoolean(Constants.SYMPTOM_1, symptom1);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static boolean getSymptom1 (Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(Constants.SYMPTOM_1, true);
+    }
+
+    public static boolean saveSymptom2 (boolean symptom2, Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putBoolean(Constants.SYMPTOM_2, symptom2);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static boolean getSymptom2 (Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(Constants.SYMPTOM_2, true);
+    }
+
+    public static boolean saveSymptom3 (boolean symptom3, Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putBoolean(Constants.SYMPTOM_3, symptom3);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static boolean getSymptom3 (Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(Constants.SYMPTOM_3, true);
+    }
+
+    public static boolean saveSymptom4 (boolean symptom4, Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putBoolean(Constants.SYMPTOM_4, symptom4);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static boolean getSymptom4 (Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(Constants.SYMPTOM_4, true);
+    }
+
+    public static boolean saveSymptom5 (boolean symptom5, Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putBoolean(Constants.SYMPTOM_5, symptom5);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static boolean getSymptom5 (Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(Constants.SYMPTOM_5, true);
+    }
+
+    public static boolean saveFirstTime (boolean firstTime, Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putBoolean(Constants.FIRST_TIME, firstTime);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static boolean getFirstTime (Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getBoolean(Constants.FIRST_TIME, true);
+    }
+
 }

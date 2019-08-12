@@ -3,6 +3,7 @@ package com.example.jointventureapp.Activities;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -30,6 +31,7 @@ import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
 import com.example.jointventureapp.Adapters.DaysRecyclerAdapter;
 import com.example.jointventureapp.Models.CalendarRow;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
 
 import java.util.ArrayList;
@@ -58,6 +60,11 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
         yearSpinner = findViewById(R.id.yspinner);
 
         mDayRepository = new DayRepository(this);
+
+        if (PreferenceUtils.getFirstTime(getApplicationContext())){
+            openDialog();
+            PreferenceUtils.saveFirstTime(false, getApplicationContext());
+        }
 
         /// Bottom Navigation View section
         botNavView = findViewById(R.id.bottomNavCal);

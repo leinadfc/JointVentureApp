@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 
 public class DialogPage extends DialogFragment {
 
@@ -33,6 +35,43 @@ public class DialogPage extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.symptoms_dialog, null);
 
+        jointPain = view.findViewById(R.id.joint_pain);
+        movementJoints = view.findViewById(R.id.restricted_movement);
+        inflammation = view.findViewById(R.id.inflammation);
+        weakness = view.findViewById(R.id.weakness);
+        fatigue = view.findViewById(R.id.fatigue);
+
+        if (PreferenceUtils.getSymptom1(getContext())){
+            jointPain.setChecked(true);
+        }
+        else {
+            jointPain.setChecked(false);
+        }
+        if (PreferenceUtils.getSymptom2(getContext())){
+            movementJoints.setChecked(true);
+        }
+        else {
+            movementJoints.setChecked(false);
+        }
+        if (PreferenceUtils.getSymptom3(getContext())){
+            inflammation.setChecked(true);
+        }
+        else {
+            inflammation.setChecked(false);
+        }
+        if (PreferenceUtils.getSymptom4(getContext())){
+            weakness.setChecked(true);
+        }
+        else {
+            weakness.setChecked(false);
+        }
+        if (PreferenceUtils.getSymptom5(getContext())){
+            fatigue.setChecked(true);
+        }
+        else {
+            fatigue.setChecked(false);
+        }
+
         builder.setView(view).setTitle("Customise your symptoms").setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -42,16 +81,13 @@ public class DialogPage extends DialogFragment {
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        PreferenceUtils.saveSymptom1(jointPain.isChecked(), getContext());
+                        PreferenceUtils.saveSymptom2(movementJoints.isChecked(), getContext());
+                        PreferenceUtils.saveSymptom3(inflammation.isChecked(), getContext());
+                        PreferenceUtils.saveSymptom4(weakness.isChecked(), getContext());
+                        PreferenceUtils.saveSymptom5(fatigue.isChecked(), getContext());
                     }
                 });
-
-        jointPain = view.findViewById(R.id.joint_pain);
-        movementJoints = view.findViewById(R.id.restricted_movement);
-        inflammation = view.findViewById(R.id.inflammation);
-        weakness = view.findViewById(R.id.weakness);
-        fatigue = view.findViewById(R.id.fatigue);
-
 
         return builder.create();
     }

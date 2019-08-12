@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/graphs_activity"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activities.GraphsActivity"
+    android:background="@color/White"
+    android:gravity="center_horizontal">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/midGraphRel"
+            android:layout_above="@id/botGraphRel">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/dtrial2"
+                    android:paddingLeft="10dp">
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/graphsMonthSpinner">
+
+                    </Spinner>
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/graphsYearSpinner"
+                        android:layout_gravity="top"
+                        android:gravity="top">
+
+                    </Spinner>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_cogwheel_outline"
+                            android:id="@+id/graphSymptombtn"/>
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/VLightGrey">
+
+
+                    <com.example.jointventureapp.Activities.VerticalTextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:text="ADL Concentration"
+                        android:layout_gravity="center"
+                        android:gravity="bottom"
+                        android:textSize="12sp"
+                        android:layout_marginLeft="10dp"/>
+
+                        <com.github.mikephil.charting.charts.BarChart
+                            android:layout_width="0dp"
+                            android:layout_weight="95"
+                            android:layout_height="200dp"
+                            android:id="@+id/concchart">
+                        </com.github.mikephil.charting.charts.BarChart>
+
+                </LinearLayout>
+
+                    </LinearLayout>
+                    </ScrollView>
+
+                </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/botGraphRel"
+            android:layout_alignParentBottom="true">
+
+            <android.support.design.widget.BottomNavigationView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/bottomNavGraph"
+                android:background="@drawable/dtrial"
+                app:menu="@menu/main_menu"
+                app:labelVisibilityMode="unlabeled">
+            </android.support.design.widget.BottomNavigationView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+
+</android.support.design.widget.CoordinatorLayout>
