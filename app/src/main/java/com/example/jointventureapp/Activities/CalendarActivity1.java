@@ -3,14 +3,13 @@ package com.example.jointventureapp.Activities;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,17 +27,16 @@ import android.widget.Spinner;
 
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
 import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
-import com.example.jointventureapp.Adapters.DaysRecyclerAdapter;
-import com.example.jointventureapp.Models.CalendarRow;
+import com.example.jointventureapp.Adapters.DaysRecyclerAdapter1;
+import com.example.jointventureapp.Models.CalendarRow1;
 import com.example.jointventureapp.R;
-import com.example.jointventureapp.Utils.PreferenceUtils;
-import com.example.jointventureapp.persistence.DayRepository;
+import com.example.jointventureapp.persistence.DayRepository1;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class CalendarActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DaysRecyclerAdapter.OnDayListener {
+public class CalendarActivity1 extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DaysRecyclerAdapter1.OnDayListener {
 
     private RecyclerView recyclerView;
     private Spinner yearSpinner;
@@ -46,9 +44,9 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
     private BottomNavigationView botNavView;
     private ImageView dialogbtn;
 
-    private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
-    private DaysRecyclerAdapter mDaysRecyclerAdapter;
-    private DayRepository mDayRepository;
+    private ArrayList<CalendarRow1> mCalendarRows = new ArrayList<>();
+    private DaysRecyclerAdapter1 mDaysRecyclerAdapter1;
+    private DayRepository1 mDayRepository1;
 
 
     @Override
@@ -59,12 +57,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
         monthSpinner = findViewById(R.id.mspinner);
         yearSpinner = findViewById(R.id.yspinner);
 
-        mDayRepository = new DayRepository(this);
-
-        if (PreferenceUtils.getFirstTime(getApplicationContext())){
-            openDialog();
-            PreferenceUtils.saveFirstTime(false, getApplicationContext());
-        }
+        mDayRepository1 = new DayRepository1(this);
 
         /// Bottom Navigation View section
         botNavView = findViewById(R.id.bottomNavCal);
@@ -76,7 +69,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.addpg:
-                        Intent i = new Intent(CalendarActivity.this, AddActivity.class);
+                        Intent i = new Intent(CalendarActivity1.this, AddActivity.class);
                         startActivity(i);
                         break;
                     case R.id.calpg:
@@ -84,7 +77,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
 
 
                     case R.id.graphpg:
-                        Intent ii = new Intent(CalendarActivity.this, GraphsActivity.class);
+                        Intent ii = new Intent(CalendarActivity1.this, GraphsActivity.class);
                         startActivity(ii);
                         break;
                 }
@@ -134,7 +127,6 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
 
 
         monthSpinner.setSelection(month);
-        //monthSpinner.setSelection(1);
         yearSpinner.setSelection(iyear);
         /// call here
         /// add listener here and call every time it changes
@@ -158,8 +150,6 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
             }
         });
 
-        //insertFakeRows();
-
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -167,7 +157,6 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
                 String queryMonth =  getSpinnerMonth(monthSpinner.getSelectedItemPosition());
                 String queryYear = getSpinnerYear (yearSpinner.getSelectedItemPosition());
                 retrieveDays(queryMonth, queryYear);
-
                 Log.d("HELLO", queryYear);
             }
 
@@ -184,7 +173,6 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
                 String queryMonth =  getSpinnerMonth(monthSpinner.getSelectedItemPosition());
                 String queryYear = getSpinnerYear (yearSpinner.getSelectedItemPosition());
                 retrieveDays(queryMonth, queryYear);
-
                 Log.d("HELLO", queryYear);
             }
 
@@ -256,39 +244,8 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
         recyclerView.setLayoutManager(linearLayoutManager);
         //VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
         //recyclerView.addItemDecoration(itemDecorator);
-        mDaysRecyclerAdapter = new DaysRecyclerAdapter(mCalendarRows, this);
-        recyclerView.setAdapter(mDaysRecyclerAdapter);
-    }
-
-    private void insertFakeRows(){
-        /// Just dummy data for the RecyclerView///
-        String mDay[] = {"19", "20", "21", "22", "23", "24", "24", "24", "24", "24", "24", "24", "24", "24"};
-        String mMonth[] = {"JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC"};
-        String mConc[] = {"20", "30", "40", "50", "60", "70", "70", "70", "70", "70", "70", "70", "70", "70"};
-        String mSym1[] = {"Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1"};
-        int mProg1[] = {0, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3 };
-        int mProg2[] = {5, 1, 2, 3, 0, 2, 1, 2, 3, 4, 5, 1, 2, 3};
-        int mProg3[] = {5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3 };
-        int mProg4[] = {1, 3, 5, 1, 2, 4, 1, 0, 2, 5, 3, 2, 1, 5 };
-        for (int i = 0; i<mDay.length; i++) {
-            CalendarRow calendarRow = new CalendarRow();
-            calendarRow.setDay(mDay[i]);
-            calendarRow.setMonth(mMonth[i]);
-            calendarRow.setConcentration(mConc[i]);
-            calendarRow.setSymptomText1("Joint pain");
-            calendarRow.setSymptomText2("Restricted joint movement");
-            calendarRow.setSymptomText3("Inflammation");
-            calendarRow.setProgress1(mProg1[i]);
-            calendarRow.setProgress2(mProg1[i]);
-            calendarRow.setProgress3(mProg1[i]);
-            calendarRow.setProgress4(mProg4[i]);
-            calendarRow.setProgress5(mProg4[i]);
-            calendarRow.setSymptomText4("Weakness");
-            calendarRow.setSymptomText5("Fatigue");
-            calendarRow.setYear("2019");
-            mCalendarRows.add(calendarRow);
-        }
-        mDaysRecyclerAdapter.notifyDataSetChanged();
+        mDaysRecyclerAdapter1 = new DaysRecyclerAdapter1(mCalendarRows, this);
+        recyclerView.setAdapter(mDaysRecyclerAdapter1);
     }
 
     @Override
@@ -298,16 +255,18 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
 
     // need to get month and year from spinners
     private void retrieveDays(String month, String year){
-        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow>>() {
+        mDayRepository1.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow1>>() {
             @Override
-            public void onChanged(@Nullable List<CalendarRow> calendarRows) {
+            public void onChanged(@Nullable List<CalendarRow1> calendarRows) {
                 if (mCalendarRows.size()>0){
+                    Log.d("BYEEEEEEEEEE", "HEEEEEEY ");
                     mCalendarRows.clear();
                 }
                 if (calendarRows != null){
+                    Log.d("BYEEEEEEEEEE", "BYEEEEEEEEEE ");
                     mCalendarRows.addAll(calendarRows);
                 }
-                mDaysRecyclerAdapter.notifyDataSetChanged();
+                mDaysRecyclerAdapter1.notifyDataSetChanged();
             }
         });
     }

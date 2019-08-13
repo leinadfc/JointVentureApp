@@ -1,6 +1,7 @@
 package com.example.jointventureapp.Models;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -54,6 +55,7 @@ public class CalendarRow3 implements Parcelable
         this.progress3 = progress3;
     }
 
+    @Ignore
     public CalendarRow3() {
     }
 
@@ -125,6 +127,18 @@ public class CalendarRow3 implements Parcelable
 
     public String getSymptomText2() {
         return symptomText2;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public static Creator<CalendarRow3> getCREATOR() {
+        return CREATOR;
     }
 
     public void setSymptomText2(String symptomText2) {

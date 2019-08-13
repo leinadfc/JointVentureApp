@@ -3,16 +3,14 @@ package com.example.jointventureapp.Activities;
 import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Rect;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,72 +26,72 @@ import android.widget.Spinner;
 
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
 import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
-import com.example.jointventureapp.Adapters.DaysRecyclerAdapter;
 import com.example.jointventureapp.Models.CalendarRow;
+import com.example.jointventureapp.Models.CalendarRow0;
+import com.example.jointventureapp.Models.MyBarDataSet;
 import com.example.jointventureapp.R;
-import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
+import com.example.jointventureapp.persistence.DayRepository0;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class CalendarActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DaysRecyclerAdapter.OnDayListener {
+public class GraphsActivity0 extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private RecyclerView recyclerView;
+    private BarChart concBarchart;
+    private ImageView dialogbtn2;
+
     private Spinner yearSpinner;
     private Spinner monthSpinner;
-    private BottomNavigationView botNavView;
-    private ImageView dialogbtn;
+    BottomNavigationView botNavView;
 
-    private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
-    private DaysRecyclerAdapter mDaysRecyclerAdapter;
-    private DayRepository mDayRepository;
+    private ArrayList<CalendarRow0> mCalendarRows = new ArrayList<>();
+    private DayRepository0 mDayRepository;
 
+    private ArrayList<BarEntry> concentrations = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calendar_activity);
+        setContentView(R.layout.graphs_activity_0);
 
-        monthSpinner = findViewById(R.id.mspinner);
-        yearSpinner = findViewById(R.id.yspinner);
+        monthSpinner = findViewById(R.id.graphsMonthSpinner);
+        yearSpinner = findViewById(R.id.graphsYearSpinner);
 
-        mDayRepository = new DayRepository(this);
+        mDayRepository = new DayRepository0(this);
 
-        if (PreferenceUtils.getFirstTime(getApplicationContext())){
-            openDialog();
-            PreferenceUtils.saveFirstTime(false, getApplicationContext());
-        }
-
-        /// Bottom Navigation View section
-        botNavView = findViewById(R.id.bottomNavCal);
+        botNavView = findViewById(R.id.bottomNavGraph);
         Menu menu = botNavView.getMenu();
-        MenuItem menuItem = menu.getItem(1);
+        MenuItem menuItem = menu.getItem(2);
         menuItem.setChecked(true);
         botNavView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.addpg:
-                        Intent i = new Intent(CalendarActivity.this, AddActivity.class);
+                        Intent i = new Intent(GraphsActivity0.this, AddActivity.class);
                         startActivity(i);
                         break;
                     case R.id.calpg:
+                        Intent ii = new Intent(GraphsActivity0.this, CalendarActivity.class);
+                        startActivity(ii);
                         break;
 
-
                     case R.id.graphpg:
-                        Intent ii = new Intent(CalendarActivity.this, GraphsActivity.class);
-                        startActivity(ii);
                         break;
                 }
                 return false;
             }
         });
 
-
-        /// Putting data inside a list for the spinners
         ArrayList<CustomSpinnerItems> customMonthList = new ArrayList<>();
         customMonthList.add(new CustomSpinnerItems("January"));
         customMonthList.add(new CustomSpinnerItems("February"));
@@ -109,6 +107,9 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
         customMonthList.add(new CustomSpinnerItems("December"));
 
         ArrayList<CustomSpinnerItems> customYearList = new ArrayList<>();
+        ///////////////////////////////////////////////
+        /// Replace at the end by just current year ///
+        ///////////////////////////////////////////////
         customYearList.add(new CustomSpinnerItems("2018"));
         customYearList.add(new CustomSpinnerItems("2019"));
         customYearList.add(new CustomSpinnerItems("2020"));
@@ -125,50 +126,70 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
             yearSpinner.setAdapter(customSpinnerYearAdapter);
             yearSpinner.setOnItemSelectedListener(this);
         }
-
-        /// Getting current date and setting it as default in spinners
         Calendar calendar = Calendar.getInstance();
         final int year = calendar.get(Calendar.YEAR);
         final int month = calendar.get(Calendar.MONTH);
         int iyear = getYear(year);
 
 
+
+
+        concBarchart = findViewById(R.id.concchart);
+
+
+        concBarchart.setDrawBarShadow(false);
+
+
+        concBarchart.setDrawValueAboveBar(false);
+
+        ///Remember to change this accordingly
+
+        concBarchart.setMaxVisibleValueCount(50);
+
+
+
+        concBarchart.setPinchZoom(false);
+
+
+        concBarchart.setDrawGridBackground(false);
+
+
+
+        concBarchart.getAxisRight().setEnabled(false);
+
+
+        concBarchart.getAxisLeft().setDrawGridLines(true);
+
+
+        concBarchart.getAxisLeft().setDrawGridLines(false);
+
+
+        concBarchart.getXAxis().setDrawGridLines(true);
+
+        concBarchart.getXAxis().setEnabled(true);
+
+        concBarchart.getAxisLeft().setAxisMinimum(0);
+
         monthSpinner.setSelection(month);
         //monthSpinner.setSelection(1);
         yearSpinner.setSelection(iyear);
-        /// call here
-        /// add listener here and call every time it changes
-
-        recyclerView = findViewById(R.id.calendarlist);
 
 
-
-        /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
-
-        dialogbtn = findViewById(R.id.symptombtn);
-        dialogbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                openDialog();
-            }
-        });
-
-        //insertFakeRows();
 
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                initRecyclerView();
+
                 String queryMonth =  getSpinnerMonth(monthSpinner.getSelectedItemPosition());
                 String queryYear = getSpinnerYear (yearSpinner.getSelectedItemPosition());
+
                 retrieveDays(queryMonth, queryYear);
 
-                Log.d("HELLO", queryYear);
+                Log.d("MONTITEM SELECTED MONTH", queryMonth);
+                Log.d("MONTHITEM SELECTED YEAR", queryYear);
+
+               //makeChart();
+
             }
 
             @Override
@@ -180,12 +201,17 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                initRecyclerView();
+
+
+
                 String queryMonth =  getSpinnerMonth(monthSpinner.getSelectedItemPosition());
                 String queryYear = getSpinnerYear (yearSpinner.getSelectedItemPosition());
+
                 retrieveDays(queryMonth, queryYear);
 
-                Log.d("HELLO", queryYear);
+
+                //makeChart();
+
             }
 
             @Override
@@ -193,8 +219,88 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
 
             }
         });
+
+
+
+        /// Status bar transparent
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window w = getWindow();
+            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
+        dialogbtn2 = findViewById(R.id.graphSymptombtn);
+        dialogbtn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openDialog2();
+            }
+        });
+
     }
 
+
+    private void makeChart() {
+
+        concentrations = getConcentrationEntries();
+
+
+        Log.d("CONCENTRATIONS Y", Integer.toString(concentrations.size()));
+
+
+
+        BarDataSet barDataSet = new BarDataSet(concentrations, "ADL Concentration");
+
+
+        barDataSet.setColors(0xFF182D57);
+
+
+
+        BarData data = new BarData(barDataSet);
+
+        /// might change
+        data.setBarWidth(0.8f);
+
+
+        data.setDrawValues(false);
+
+        concBarchart.setData(data);
+
+
+
+        CustomBarChartRender barChartRender = new CustomBarChartRender(concBarchart,
+                concBarchart.getAnimator(), concBarchart.getViewPortHandler());
+
+        barChartRender.setRadius(20);
+
+
+
+        concBarchart.getDescription().setEnabled(false);
+
+        concBarchart.getLegend().setEnabled(false);
+
+        concBarchart.setRenderer(barChartRender);
+
+        concBarchart.invalidate();
+
+        String[] days = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
+                "23", "24", "25", "26", "27", "28", "29", "30" };
+
+        XAxis xAxis = concBarchart.getXAxis();
+
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+
+        xAxis.setGranularity(1);
+
+    }
+
+
+    /// When I press back on register I want to go to login
+    @Override
+    public void onBackPressed() {
+        finish();
+        overridePendingTransition(R.anim.slideindown, R.anim.slideoutdown);
+    }
 
     /// Clicking outside edit text removes focus from edit text ///
     @Override
@@ -224,6 +330,9 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
     public void onNothingSelected(AdapterView<?> adapterView) {
     }
 
+
+
+
     public int getYear (int year) {
         int ryear = 0;
         if (year == 2018){
@@ -238,80 +347,53 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
         return ryear;
     }
 
-    public void openDialog(){
+    public void openDialog2(){
         DialogPage dialogPage = new DialogPage();
         dialogPage.show(getSupportFragmentManager(), "Symptoms");
     }
 
-    public void openDialogList(int position){
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("selected_day", mCalendarRows.get(position));
-        DialogList dialogList = new DialogList();
-        dialogList.setArguments(bundle);
-        dialogList.show(getSupportFragmentManager(), "Extended list item");
-    }
-
-    private void initRecyclerView (){
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(linearLayoutManager);
-        //VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
-        //recyclerView.addItemDecoration(itemDecorator);
-        mDaysRecyclerAdapter = new DaysRecyclerAdapter(mCalendarRows, this);
-        recyclerView.setAdapter(mDaysRecyclerAdapter);
-    }
-
-    private void insertFakeRows(){
-        /// Just dummy data for the RecyclerView///
-        String mDay[] = {"19", "20", "21", "22", "23", "24", "24", "24", "24", "24", "24", "24", "24", "24"};
-        String mMonth[] = {"JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC"};
-        String mConc[] = {"20", "30", "40", "50", "60", "70", "70", "70", "70", "70", "70", "70", "70", "70"};
-        String mSym1[] = {"Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1"};
-        int mProg1[] = {0, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3 };
-        int mProg2[] = {5, 1, 2, 3, 0, 2, 1, 2, 3, 4, 5, 1, 2, 3};
-        int mProg3[] = {5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3 };
-        int mProg4[] = {1, 3, 5, 1, 2, 4, 1, 0, 2, 5, 3, 2, 1, 5 };
-        for (int i = 0; i<mDay.length; i++) {
-            CalendarRow calendarRow = new CalendarRow();
-            calendarRow.setDay(mDay[i]);
-            calendarRow.setMonth(mMonth[i]);
-            calendarRow.setConcentration(mConc[i]);
-            calendarRow.setSymptomText1("Joint pain");
-            calendarRow.setSymptomText2("Restricted joint movement");
-            calendarRow.setSymptomText3("Inflammation");
-            calendarRow.setProgress1(mProg1[i]);
-            calendarRow.setProgress2(mProg1[i]);
-            calendarRow.setProgress3(mProg1[i]);
-            calendarRow.setProgress4(mProg4[i]);
-            calendarRow.setProgress5(mProg4[i]);
-            calendarRow.setSymptomText4("Weakness");
-            calendarRow.setSymptomText5("Fatigue");
-            calendarRow.setYear("2019");
-            mCalendarRows.add(calendarRow);
-        }
-        mDaysRecyclerAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onDayClick(int position) {
-        openDialogList(position);
-    }
-
-    // need to get month and year from spinners
     private void retrieveDays(String month, String year){
-        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow>>() {
+        Log.d("QUERY NOT ENTERED", "NOT ENTERED");
+        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow0>>() {
             @Override
-            public void onChanged(@Nullable List<CalendarRow> calendarRows) {
+            public void onChanged(@Nullable List<CalendarRow0> calendarRows) {
+                Log.d("QUERY ENTERED", "ENTERED");
                 if (mCalendarRows.size()>0){
                     mCalendarRows.clear();
                 }
                 if (calendarRows != null){
                     mCalendarRows.addAll(calendarRows);
                 }
-                mDaysRecyclerAdapter.notifyDataSetChanged();
+                concBarchart.notifyDataSetChanged();
+                concBarchart.invalidate();
+
+                makeChart();
             }
         });
     }
 
+    private ArrayList<BarEntry> getConcentrationEntries (){
+        concentrations.clear();
+        float concentration;
+        for (int j = 1; j<32; j++) {
+            for (int i = 0; i < mCalendarRows.size(); i++) {
+                if (Integer.parseInt(mCalendarRows.get(i).getDay()) == j){
+                    if (mCalendarRows.get(i).getConcentration().equals("")) {
+                        concentration = 0f;
+                    }
+                    else {
+                        concentration = Float.parseFloat(mCalendarRows.get(i).getConcentration());
+                    }
+                    concentrations.add(new BarEntry(j, concentration));
+                }
+                else {
+                    concentrations.add(new BarEntry(j, 0f));
+                }
+            }
+        }
+
+        return concentrations;
+    }
     private String getSpinnerMonth (int month){
         String spinnerMonth;
         if (month == 0)
@@ -355,4 +437,6 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
 
         return spinnerYear;
     }
+
+
 }

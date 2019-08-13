@@ -2,6 +2,7 @@ package com.example.jointventureapp.Models;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -33,6 +34,7 @@ public class CalendarRow0 implements Parcelable
         this.concentration = concentration;
     }
 
+    @Ignore
     public CalendarRow0() {
     }
 
@@ -108,6 +110,10 @@ public class CalendarRow0 implements Parcelable
 
     public void setConcentration(String concentration) {
         this.concentration = concentration;
+    }
+
+    public static Creator<CalendarRow0> getCREATOR() {
+        return CREATOR;
     }
 
     @Override

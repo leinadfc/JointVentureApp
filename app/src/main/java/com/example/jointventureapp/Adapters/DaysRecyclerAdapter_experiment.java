@@ -1,5 +1,6 @@
 package com.example.jointventureapp.Adapters;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,12 +14,12 @@ import com.example.jointventureapp.R;
 
 import java.util.ArrayList;
 
-public class DaysRecyclerAdapter extends RecyclerView.Adapter<DaysRecyclerAdapter.ViewHolder>  {
+public class DaysRecyclerAdapter_experiment extends RecyclerView.Adapter<DaysRecyclerAdapter_experiment.ViewHolder>  {
 
     private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
     private OnDayListener mOnDayListener;
 
-    public DaysRecyclerAdapter(ArrayList<CalendarRow> calendarRows, OnDayListener onDayListener) {
+    public DaysRecyclerAdapter_experiment(ArrayList<CalendarRow> calendarRows, OnDayListener onDayListener) {
         this.mCalendarRows = calendarRows;
         this.mOnDayListener = onDayListener;
     }
@@ -32,15 +33,36 @@ public class DaysRecyclerAdapter extends RecyclerView.Adapter<DaysRecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+
         viewHolder.day.setText(mCalendarRows.get(i).getDay());
-        viewHolder.month.setText(getMonth(mCalendarRows.get(i).getMonth()));
-        viewHolder.symptom1.setText(mCalendarRows.get(i).getSymptomText1());
-        viewHolder.symptom2.setText(mCalendarRows.get(i).getSymptomText2());
-        viewHolder.symptom3.setText(mCalendarRows.get(i).getSymptomText3());
-        viewHolder.symptomBar1.setProgress(mCalendarRows.get(i).getProgress1());
-        viewHolder.symptomBar2.setProgress(mCalendarRows.get(i).getProgress2());
-        viewHolder.symptomBar3.setProgress(mCalendarRows.get(i).getProgress3());
-        viewHolder.concentration.setText(mCalendarRows.get(i).getConcentration());
+        viewHolder.month.setText(mCalendarRows.get(i).getMonth());
+
+        if(mCalendarRows.get(i).getProgress1() != 0)
+        {
+            viewHolder.symptom1.setText(mCalendarRows.get(i).getSymptomText1());
+            viewHolder.symptomBar1.setProgress(mCalendarRows.get(i).getProgress1());
+        }
+        else {
+            viewHolder.symptom1.setText(mCalendarRows.get(i).getSymptomText1());
+            viewHolder.symptomBar1.setProgress(0);
+        }
+
+        if(mCalendarRows.get(i).getProgress2() != 0)
+        {
+            viewHolder.symptom2.setText(mCalendarRows.get(i).getSymptomText2());
+            viewHolder.symptomBar2.setProgress(mCalendarRows.get(i).getProgress2());
+        }
+
+        if(mCalendarRows.get(i).getProgress3() != 0)
+        {
+            viewHolder.symptom3.setText(mCalendarRows.get(i).getSymptomText3());
+            viewHolder.symptomBar3.setProgress(mCalendarRows.get(i).getProgress3());
+        }
+
+        if(mCalendarRows.get(i).getConcentration() != "")
+        {
+            viewHolder.concentration.setText(mCalendarRows.get(i).getConcentration());
+        }
 
     }
 
@@ -85,46 +107,5 @@ public class DaysRecyclerAdapter extends RecyclerView.Adapter<DaysRecyclerAdapte
     }
     public interface OnDayListener{
         void onDayClick(int position);
-    }
-
-    private String getMonth (String month){
-        String shortMonth = "";
-        if (month.equals("January")){
-            shortMonth = "JAN";
-        }
-        else if (month.equals("February")){
-            shortMonth = "FEB";
-        }
-        else if (month.equals("March")){
-            shortMonth = "MAR";
-        }
-        else if (month.equals("April")){
-            shortMonth = "Apr";
-        }
-        else if (month.equals("May")){
-            shortMonth = "MAY";
-        }
-        else if (month.equals("June")){
-            shortMonth = "JUN";
-        }
-        else if (month.equals("July")){
-            shortMonth = "JUL";
-        }
-        else if (month.equals("August")){
-            shortMonth = "AUG";
-        }
-        else if (month.equals("September")){
-            shortMonth = "SEP";
-        }
-        else if (month.equals("October")){
-            shortMonth = "OCT";
-        }
-        else if (month.equals("November")){
-            shortMonth = "NOV";
-        }
-        else if (month.equals("December")){
-            shortMonth = "DEC";
-        }
-        return shortMonth;
     }
 }

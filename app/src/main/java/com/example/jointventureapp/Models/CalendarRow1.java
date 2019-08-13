@@ -1,6 +1,7 @@
 package com.example.jointventureapp.Models;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -30,7 +31,7 @@ public class CalendarRow1 implements Parcelable
     @ColumnInfo (name = "progress1")
     private int progress1;
 
-    public CalendarRow1(String symptom1, String day, String month, String year, String concentration, String symptomText1, int progress1)
+    public CalendarRow1(String day, String month, String year, String concentration, String symptomText1, int progress1)
     {
         this.day = day;
         this.month = month;
@@ -40,8 +41,10 @@ public class CalendarRow1 implements Parcelable
         this.progress1 = progress1;
     }
 
+    @Ignore
     public CalendarRow1()
     {
+
     }
 
     protected CalendarRow1(Parcel in) {
@@ -123,6 +126,18 @@ public class CalendarRow1 implements Parcelable
                 ", symptomText1='" + symptomText1 + '\'' +
                 ", progress1=" + progress1 +
                 '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public static Creator<CalendarRow1> getCREATOR() {
+        return CREATOR;
     }
 
     @Override

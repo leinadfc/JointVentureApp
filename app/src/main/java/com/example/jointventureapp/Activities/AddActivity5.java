@@ -6,12 +6,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -24,56 +23,18 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.jointventureapp.Models.CalendarRow;
+import com.example.jointventureapp.Models.CalendarRow4;
 import com.example.jointventureapp.R;
 import com.example.jointventureapp.persistence.DayRepository;
+import com.example.jointventureapp.persistence.DayRepository4;
 
-import java.security.PrivateKey;
 import java.util.Calendar;
 
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Rect;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
-import android.widget.TextView;
-
-import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
-import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
-import com.example.jointventureapp.R;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.Calendar;
-
-public class AddActivity extends AppCompatActivity {
+public class AddActivity5 extends AppCompatActivity {
 
     private TextView mDisplayDay;
     private TextView mDisplayMonth;
@@ -86,12 +47,16 @@ public class AddActivity extends AppCompatActivity {
     private SeekBar seekBar1;
     private SeekBar seekBar2;
     private SeekBar seekBar3;
+    private SeekBar seekBar4;
+    private SeekBar seekBar5;
     ///////////////////////////////////////
     /// Add the functionality for these ///
     ///////////////////////////////////////
     private TextView symptom1;
     private TextView symptom2;
     private TextView symptom3;
+    private TextView symptom4;
+    private TextView symptom5;
 
     private DayRepository mDayRepository;
     private CalendarRow mCalendarRow;
@@ -110,6 +75,8 @@ public class AddActivity extends AppCompatActivity {
         seekBar1 = findViewById(R.id.seekbar_1);
         seekBar2 = findViewById(R.id.seekbar_2);
         seekBar3 = findViewById(R.id.seekbar_3);
+        seekBar4 = findViewById(R.id.seekbar_4);
+        seekBar5 = findViewById(R.id.seekbar_5);
 
         concText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
@@ -127,12 +94,12 @@ public class AddActivity extends AppCompatActivity {
                     case R.id.addpg:
                         break;
                     case R.id.calpg:
-                        Intent i = new Intent(AddActivity.this, CalendarActivity.class);
+                        Intent i = new Intent(AddActivity5.this, CalendarActivity.class);
                         startActivity(i);
                         break;
 
                     case R.id.graphpg:
-                        Intent ii = new Intent(AddActivity.this, GraphsActivity.class);
+                        Intent ii = new Intent(AddActivity5.this, GraphsActivity.class);
                         startActivity(ii);
                         break;
                 }
@@ -154,7 +121,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog dialog = new DatePickerDialog(
-                        AddActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        AddActivity5.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
@@ -167,7 +134,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog dialog = new DatePickerDialog(
-                        AddActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        AddActivity5.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
@@ -179,7 +146,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog dialog = new DatePickerDialog(
-                        AddActivity.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        AddActivity5.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
@@ -220,9 +187,10 @@ public class AddActivity extends AppCompatActivity {
                 mCalendarRow.setProgress1(seekBar1.getProgress());
                 mCalendarRow.setProgress2(seekBar2.getProgress());
                 mCalendarRow.setProgress3(seekBar3.getProgress());
+                mCalendarRow.setProgress4(seekBar4.getProgress());
+                mCalendarRow.setProgress5(seekBar5.getProgress());
 
                 mCalendarRow.setProgress4(0);
-                mCalendarRow.setProgress5(0);
                 mCalendarRow.setSymptomText1("Joint pain");
                 mCalendarRow.setSymptomText2("Fatigue");
                 mCalendarRow.setSymptomText3("Weakness");
@@ -240,7 +208,7 @@ public class AddActivity extends AppCompatActivity {
                     mCalendarRow.setConcentration(concText.getText().toString().trim());
                 }
                 mDayRepository.insertDayTask(mCalendarRow);
-                Intent i = new Intent(AddActivity.this, CalendarActivity.class);
+                Intent i = new Intent(AddActivity5.this, CalendarActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }

@@ -18,7 +18,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="95"
-                android:text="Joint Pain"
+                android:text="Joint pain"
                 android:textSize="18sp"
                 android:layout_marginLeft="5dp"/>
 

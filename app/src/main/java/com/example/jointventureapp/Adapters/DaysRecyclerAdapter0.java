@@ -48,12 +48,6 @@ public class DaysRecyclerAdapter0 extends RecyclerView.Adapter<DaysRecyclerAdapt
 
         TextView day;
         TextView month;
-        TextView symptom1;
-        TextView symptom2;
-        TextView symptom3;
-        ProgressBar symptomBar1;
-        ProgressBar symptomBar2;
-        ProgressBar symptomBar3;
         TextView concentration;
         OnDayListener onDayListener;
 
@@ -61,12 +55,6 @@ public class DaysRecyclerAdapter0 extends RecyclerView.Adapter<DaysRecyclerAdapt
             super(itemView);
             day = itemView.findViewById(R.id.dayitem);
             month = itemView.findViewById(R.id.monthitem);
-            symptom1 = itemView.findViewById(R.id.symptom1_item);
-            symptom2 = itemView.findViewById(R.id.symptom2_item);
-            symptom3 = itemView.findViewById(R.id.symptom3_item);
-            symptomBar1 = itemView.findViewById(R.id.progress_bar_1);
-            symptomBar2 = itemView.findViewById(R.id.progress_bar_2);
-            symptomBar3 = itemView.findViewById(R.id.progress_bar_3);
             concentration = itemView.findViewById(R.id.concentrationitem);
             this.onDayListener = onDayListener;
 
