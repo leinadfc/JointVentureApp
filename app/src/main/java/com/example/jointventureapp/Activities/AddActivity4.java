@@ -27,10 +27,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow4;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
-import com.example.jointventureapp.persistence.DayRepository4;
 
 import java.util.Calendar;
 
@@ -56,18 +55,18 @@ public class AddActivity4 extends AppCompatActivity {
     private TextView symptom3;
     private TextView symptom4;
 
-    private DayRepository4 mDayRepository;
-    private CalendarRow4 mCalendarRow;
+    private DayRepository mDayRepository;
+    private CalendarRow mCalendarRow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_activity);
+        setContentView(R.layout.add_activity_4_symptoms);
 
         mDisplayDay = findViewById(R.id.daytext);
         mDisplayMonth = findViewById(R.id.monthtext);
         mDisplayYear = findViewById(R.id.yeartext);
-        mCalendarRow = new CalendarRow4();
+        mCalendarRow = new CalendarRow();
 
         concText = findViewById(R.id.concentrationtext);
         seekBar1 = findViewById(R.id.seekbar_1);
@@ -78,7 +77,7 @@ public class AddActivity4 extends AppCompatActivity {
         concText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
 
-        mDayRepository = new DayRepository4(this);
+        mDayRepository = new DayRepository(this);
 
         botNavView = findViewById(R.id.bottomNavAdd);
         Menu menu = botNavView.getMenu();
@@ -91,13 +90,35 @@ public class AddActivity4 extends AppCompatActivity {
                     case R.id.addpg:
                         break;
                     case R.id.calpg:
-                        Intent i = new Intent(AddActivity4.this, CalendarActivity.class);
-                        startActivity(i);
+                        Intent ii = new Intent(AddActivity4.this, CalendarActivity.class);
+                        startActivity(ii);
                         break;
 
                     case R.id.graphpg:
-                        Intent ii = new Intent(AddActivity4.this, GraphsActivity.class);
-                        startActivity(ii);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(AddActivity4.this, GraphsActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(AddActivity4.this, GraphsActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(AddActivity4.this, GraphsActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(AddActivity4.this, GraphsActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(AddActivity4.this, GraphsActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(AddActivity4.this, GraphsActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                 }
                 return false;
@@ -185,12 +206,14 @@ public class AddActivity4 extends AppCompatActivity {
                 mCalendarRow.setProgress2(seekBar2.getProgress());
                 mCalendarRow.setProgress3(seekBar3.getProgress());
                 mCalendarRow.setProgress4(seekBar4.getProgress());
+                mCalendarRow.setProgress5(0);
 
-                mCalendarRow.setProgress4(0);
                 mCalendarRow.setSymptomText1("Joint pain");
                 mCalendarRow.setSymptomText2("Fatigue");
                 mCalendarRow.setSymptomText3("Weakness");
                 mCalendarRow.setSymptomText4("Symptom 4");
+                mCalendarRow.setSymptomText5("Symptom 5");
+
                 mCalendarRow.setMonth(mDisplayMonth.getText().toString());
                 Log.d("month", mDisplayMonth.getText().toString());
                 mCalendarRow.setYear(mDisplayYear.getText().toString());

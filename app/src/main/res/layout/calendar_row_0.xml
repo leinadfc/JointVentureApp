@@ -29,7 +29,7 @@
 
 
             <TextView
-                android:id="@+id/dayitem"
+                android:id="@+id/dayitem_0"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -46,7 +46,7 @@
                 android:gravity="center">
 
                 <TextView
-                    android:id="@+id/monthitem"
+                    android:id="@+id/monthitem_0"
                     android:layout_width="80dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -57,7 +57,7 @@
 
         </LinearLayout>
 
-        <view
+        <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
@@ -76,7 +76,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/concentrationitem"
+                android:id="@+id/concentrationitem_0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

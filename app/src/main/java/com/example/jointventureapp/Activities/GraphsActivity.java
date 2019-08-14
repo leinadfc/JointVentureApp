@@ -26,13 +26,11 @@ import android.widget.Spinner;
 
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
 import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
-import com.example.jointventureapp.Adapters.DaysRecyclerAdapter;
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow3;
 import com.example.jointventureapp.Models.MyBarDataSet;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
-import com.example.jointventureapp.persistence.DayRepository3;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -88,12 +86,48 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.addpg:
-                        Intent i = new Intent(GraphsActivity.this, AddActivity.class);
-                        startActivity(i);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(GraphsActivity.this, AddActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(GraphsActivity.this, AddActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(GraphsActivity.this, AddActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(GraphsActivity.this, AddActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(GraphsActivity.this, AddActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(GraphsActivity.this, AddActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                     case R.id.calpg:
-                        Intent ii = new Intent(GraphsActivity.this, CalendarActivity.class);
-                        startActivity(ii);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) > 2) {
+                            Intent i = new Intent(GraphsActivity.this, CalendarActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(GraphsActivity.this, CalendarActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(GraphsActivity.this, CalendarActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(GraphsActivity.this, CalendarActivity0.class);
+                            startActivity(i);
+                        }
                         break;
 
                     case R.id.graphpg:

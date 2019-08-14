@@ -27,11 +27,10 @@ import android.widget.Spinner;
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
 import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow4;
 import com.example.jointventureapp.Models.MyBarDataSet;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
-import com.example.jointventureapp.persistence.DayRepository4;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -88,12 +87,48 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.addpg:
-                        Intent i = new Intent(GraphsActivity5.this, AddActivity.class);
-                        startActivity(i);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(GraphsActivity5.this, AddActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(GraphsActivity5.this, AddActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(GraphsActivity5.this, AddActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(GraphsActivity5.this, AddActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(GraphsActivity5.this, AddActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(GraphsActivity5.this, AddActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                     case R.id.calpg:
-                        Intent ii = new Intent(GraphsActivity5.this, CalendarActivity.class);
-                        startActivity(ii);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) > 2) {
+                            Intent i = new Intent(GraphsActivity5.this, CalendarActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(GraphsActivity5.this, CalendarActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(GraphsActivity5.this, CalendarActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(GraphsActivity5.this, CalendarActivity0.class);
+                            startActivity(i);
+                        }
                         break;
 
                     case R.id.graphpg:
@@ -297,18 +332,12 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
 
     private void makeChart() {
 
-        concentrations = getConcentrationEntries();
-        symptoms1 = getSymptom1Entries();
-        symptoms2 = getSymptom2Entries();
-        symptoms3 = getSymptom3Entries();
-        symptoms4 = getSymptom4Entries();
-        symptoms5 = getSymptom5Entries();
-
-        Log.d("CONCENTRATIONS Y", Integer.toString(concentrations.size()));
-        Log.d("SYMPTOMS1 Y", Integer.toString(symptoms1.size()));
-        Log.d("SYMPTOMS2 Y", Integer.toString(symptoms2.size()));
-        Log.d("SYMPTOMS3 Y", Integer.toString(symptoms3.size()));
-
+        getConcentrationEntries();
+        getSymptom1Entries();
+        getSymptom2Entries();
+        getSymptom3Entries();
+        getSymptom4Entries();
+        getSymptom5Entries();
 
         BarDataSet barDataSet = new BarDataSet(concentrations, "ADL Concentration");
         MyBarDataSet sym1DataSet = new MyBarDataSet(symptoms1, "");
@@ -383,6 +412,7 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
 
         sym5Barchart.setData(sym5data);
 
+
         sym1BarChart.setFitBars(true);
         sym2BarChart.setFitBars(true);
         sym3BarChart.setFitBars(true);
@@ -431,10 +461,9 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
         sym1BarChart.setRenderer(sym1BarChartRender);
         sym2BarChart.setRenderer(sym2BarChartRender);
         sym3BarChart.setRenderer(sym3BarChartRender);
-        sym4BarChart.setRenderer(sym3BarChartRender);
-        sym5Barchart.setRenderer(sym3BarChartRender);
+        sym4BarChart.setRenderer(sym4BarChartRender);
+        sym5Barchart.setRenderer(sym5BarChartRender);
 
-        concBarchart.invalidate();
 
         String[] days = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
                 "23", "24", "25", "26", "27", "28", "29", "30" };
@@ -519,9 +548,7 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
 
     public int getYear (int year) {
         int ryear = 0;
-        if (year == 2018){
-            ryear = 0;
-        }
+
         if (year == 2019){
             ryear = 1;
         }
@@ -563,12 +590,15 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
                 sym4BarChart.notifyDataSetChanged();
                 sym4BarChart.invalidate();
 
+                sym5Barchart.notifyDataSetChanged();
+                sym5Barchart.invalidate();
+
                 makeChart();
             }
         });
     }
 
-    private ArrayList<BarEntry> getConcentrationEntries (){
+    private void getConcentrationEntries (){
         concentrations.clear();
         float concentration;
         for (int j = 1; j<32; j++) {
@@ -587,10 +617,9 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
                 }
             }
         }
-
-        return concentrations;
     }
-    private ArrayList<BarEntry> getSymptom1Entries (){
+
+    private void getSymptom1Entries (){
         symptoms1.clear();
         for (int j = 1; j<32; j++) {
             for (int i = 0; i < mCalendarRows.size(); i++) {
@@ -602,11 +631,9 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
                 }
             }
         }
-
-        return symptoms1;
     }
 
-    private ArrayList<BarEntry> getSymptom2Entries (){
+    private void getSymptom2Entries (){
         symptoms2.clear();
         for (int j = 1; j<32; j++) {
             for (int i = 0; i < mCalendarRows.size(); i++) {
@@ -618,11 +645,9 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
                 }
             }
         }
-
-        return symptoms2;
     }
 
-    private ArrayList<BarEntry> getSymptom3Entries (){
+    private void getSymptom3Entries (){
         symptoms3.clear();
         for (int j = 1; j<32; j++) {
             for (int i = 0; i < mCalendarRows.size(); i++) {
@@ -634,11 +659,9 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
                 }
             }
         }
-
-        return symptoms3;
     }
 
-    private ArrayList<BarEntry> getSymptom4Entries (){
+    private void getSymptom4Entries (){
         symptoms4.clear();
         for (int j = 1; j<32; j++) {
             for (int i = 0; i < mCalendarRows.size(); i++) {
@@ -650,15 +673,14 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
                 }
             }
         }
-
-        return symptoms4;
     }
 
-    private ArrayList<BarEntry> getSymptom5Entries (){
+    private void getSymptom5Entries (){
         symptoms5.clear();
         for (int j = 1; j<32; j++) {
             for (int i = 0; i < mCalendarRows.size(); i++) {
                 if (Integer.parseInt(mCalendarRows.get(i).getDay()) == j){
+                    Log.d("LOOOOOOOOOOLXDMAFIA",Integer.toString(mCalendarRows.get(i).getProgress5()));
                     symptoms5.add(new BarEntry(j, mCalendarRows.get(i).getProgress5()));
                 }
                 else {
@@ -666,8 +688,6 @@ public class GraphsActivity5 extends AppCompatActivity implements AdapterView.On
                 }
             }
         }
-
-        return symptoms5;
     }
 
     private String getSpinnerMonth (int month){

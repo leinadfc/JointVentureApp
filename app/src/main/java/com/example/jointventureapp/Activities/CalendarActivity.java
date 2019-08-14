@@ -76,16 +76,60 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.addpg:
-                        Intent i = new Intent(CalendarActivity.this, AddActivity.class);
-                        startActivity(i);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(CalendarActivity.this, AddActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(CalendarActivity.this, AddActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(CalendarActivity.this, AddActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(CalendarActivity.this, AddActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(CalendarActivity.this, AddActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(CalendarActivity.this, AddActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                     case R.id.calpg:
                         break;
 
 
                     case R.id.graphpg:
-                        Intent ii = new Intent(CalendarActivity.this, GraphsActivity.class);
-                        startActivity(ii);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(CalendarActivity.this, GraphsActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(CalendarActivity.this, GraphsActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(CalendarActivity.this, GraphsActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(CalendarActivity.this, GraphsActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(CalendarActivity.this, GraphsActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(CalendarActivity.this, GraphsActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                 }
                 return false;
@@ -246,9 +290,38 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
     public void openDialogList(int position){
         Bundle bundle = new Bundle();
         bundle.putParcelable("selected_day", mCalendarRows.get(position));
-        DialogList dialogList = new DialogList();
-        dialogList.setArguments(bundle);
-        dialogList.show(getSupportFragmentManager(), "Extended list item");
+        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5){
+            Log.d("SYMPTOOOOOM", "5");
+            DialogList dialogList = new DialogList();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+            DialogList4 dialogList = new DialogList4();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+            Log.d("SYMPTOOOOOM", "3");
+            DialogList3 dialogList = new DialogList3();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+            DialogList2 dialogList = new DialogList2();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+            DialogList1 dialogList = new DialogList1();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+            DialogList0 dialogList = new DialogList0();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
     }
 
     private void initRecyclerView (){

@@ -13,12 +13,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow3;
 import com.example.jointventureapp.R;
 
 public class DialogList3 extends DialogFragment {
 
-    private ProgressBar mProgressBar1;
+
     private ProgressBar mProgressBar2;
     private ProgressBar mProgressBar3;
 
@@ -27,18 +26,19 @@ public class DialogList3 extends DialogFragment {
     private TextView symptom3;
 
     private TextView concentration;
-    private CalendarRow3 calendarRow;
+    private CalendarRow calendarRow;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        ProgressBar ProgressBar1;
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.list_dialog, null);
+        View view = inflater.inflate(R.layout.list_dialog3, null);
 
 
 
-        mProgressBar1 = view.findViewById(R.id.progress_bar_1_dialog);
+        ProgressBar1 = view.findViewById(R.id.progress_bar_1_dialog);
         mProgressBar2 = view.findViewById(R.id.progress_bar_2_dialog);
         mProgressBar3 = view.findViewById(R.id.progress_bar_3_dialog);
 
@@ -57,7 +57,7 @@ public class DialogList3 extends DialogFragment {
         if (arguments !=  null && arguments.containsKey("selected_day")){
 
             calendarRow = getArguments().getParcelable("selected_day");
-            mProgressBar1.setProgress(calendarRow.getProgress1());
+            ProgressBar1.setProgress(calendarRow.getProgress1());
             mProgressBar2.setProgress(calendarRow.getProgress2());
             mProgressBar3.setProgress(calendarRow.getProgress3());
 

@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.example.jointventureapp.Models.CalendarRow;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
 
 import java.security.PrivateKey;
@@ -127,13 +128,35 @@ public class AddActivity extends AppCompatActivity {
                     case R.id.addpg:
                         break;
                     case R.id.calpg:
-                        Intent i = new Intent(AddActivity.this, CalendarActivity.class);
-                        startActivity(i);
+                        Intent ii = new Intent(AddActivity.this, CalendarActivity.class);
+                        startActivity(ii);
                         break;
 
                     case R.id.graphpg:
-                        Intent ii = new Intent(AddActivity.this, GraphsActivity.class);
-                        startActivity(ii);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(AddActivity.this, GraphsActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(AddActivity.this, GraphsActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(AddActivity.this, GraphsActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(AddActivity.this, GraphsActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(AddActivity.this, GraphsActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(AddActivity.this, GraphsActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                 }
                 return false;
@@ -220,18 +243,18 @@ public class AddActivity extends AppCompatActivity {
                 mCalendarRow.setProgress1(seekBar1.getProgress());
                 mCalendarRow.setProgress2(seekBar2.getProgress());
                 mCalendarRow.setProgress3(seekBar3.getProgress());
-
                 mCalendarRow.setProgress4(0);
                 mCalendarRow.setProgress5(0);
+
                 mCalendarRow.setSymptomText1("Joint pain");
                 mCalendarRow.setSymptomText2("Fatigue");
                 mCalendarRow.setSymptomText3("Weakness");
                 mCalendarRow.setSymptomText4("Symptom 4");
                 mCalendarRow.setSymptomText5("Symptom 5");
+
                 mCalendarRow.setMonth(mDisplayMonth.getText().toString());
-                Log.d("month", mDisplayMonth.getText().toString());
                 mCalendarRow.setYear(mDisplayYear.getText().toString());
-                Log.d("YEAR", mDisplayYear.getText().toString());
+
                 mCalendarRow.setDay(mDisplayDay.getText().toString().trim());
                 if (concText.getText().toString().isEmpty()){
                     mCalendarRow.setConcentration("0");

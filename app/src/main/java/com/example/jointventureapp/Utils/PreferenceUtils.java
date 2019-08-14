@@ -112,4 +112,17 @@ public class PreferenceUtils {
         return prefs.getBoolean(Constants.FIRST_TIME, true);
     }
 
+    public static boolean saveSymptomCount (int count , Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+        prefsEditor.putInt(Constants.SYMPTOM_COUNT, count);
+        prefsEditor.apply();
+        return true;
+    }
+
+    public static int getSymptomCount (Context context){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        return prefs.getInt(Constants.SYMPTOM_COUNT, 5);
+    }
+
 }

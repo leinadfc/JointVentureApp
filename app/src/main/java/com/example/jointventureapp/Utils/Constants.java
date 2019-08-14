@@ -10,4 +10,5 @@ public class Constants {
     public static final String SYMPTOM_4 = "symptom4";
     public static final String SYMPTOM_5 = "symptom5";
     public static final String FIRST_TIME = "firstTime";
+    public static final String SYMPTOM_COUNT = "symptomcount";
 }

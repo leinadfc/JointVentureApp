@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow1;
 import com.example.jointventureapp.R;
 
 public class DialogList1 extends DialogFragment {
@@ -23,7 +22,7 @@ public class DialogList1 extends DialogFragment {
     private TextView symptom1;
 
     private TextView concentration;
-    private CalendarRow1 calendarRow;
+    private CalendarRow calendarRow;
 
     @NonNull
     @Override

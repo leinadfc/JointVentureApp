@@ -57,8 +57,23 @@ public class LoginActivity extends AppCompatActivity {
         ////////////////////////////////////////////////////////////////
         if (PreferenceUtils.getEmail(getApplicationContext()) != null && PreferenceUtils.getEmail(getApplicationContext()) != ""){
             if (PreferenceUtils.getPassword(getApplicationContext()) != null && PreferenceUtils.getPassword(getApplicationContext()) != ""){
-                Intent i = new Intent(LoginActivity.this, CalendarActivity.class);
-                startActivity(i);
+                if (PreferenceUtils.getSymptomCount(getApplicationContext()) > 2) {
+                    Intent i = new Intent(LoginActivity.this, CalendarActivity.class);
+                    startActivity(i);
+                }
+                else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                    Intent i = new Intent(LoginActivity.this, CalendarActivity2.class);
+                    startActivity(i);
+                }
+                else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                    Intent i = new Intent(LoginActivity.this, CalendarActivity1.class);
+                    startActivity(i);
+                }
+                else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                    Intent i = new Intent(LoginActivity.this, CalendarActivity0.class);
+                    startActivity(i);
+                }
+
                 finish();
 
 
@@ -218,8 +233,8 @@ public class LoginActivity extends AppCompatActivity {
                             PreferenceUtils.saveSymptom4(true , getApplicationContext());
                             PreferenceUtils.saveSymptom5(true , getApplicationContext());
                             PreferenceUtils.saveFirstTime(true, getApplicationContext());
-
-                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            PreferenceUtils.saveSymptomCount(5, getApplicationContext());
+                            Intent i = new Intent(LoginActivity.this, CalendarActivity.class);
                             startActivity(i);
                             overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
                             finish();

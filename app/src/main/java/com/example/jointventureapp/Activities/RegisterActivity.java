@@ -104,6 +104,7 @@ public class RegisterActivity extends AppCompatActivity {
                     PreferenceUtils.saveSymptom4(true , getApplicationContext());
                     PreferenceUtils.saveSymptom5(true , getApplicationContext());
                     PreferenceUtils.saveFirstTime(true, getApplicationContext());
+                    PreferenceUtils.saveSymptomCount(5, getApplicationContext());
                     Intent i = new Intent(RegisterActivity.this, CalendarActivity.class);
                     startActivity(i);
 

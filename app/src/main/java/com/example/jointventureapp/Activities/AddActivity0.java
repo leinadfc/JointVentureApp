@@ -23,14 +23,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow0;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
-import com.example.jointventureapp.persistence.DayRepository0;
 
 import java.util.Calendar;
 
@@ -46,8 +44,8 @@ public class AddActivity0 extends AppCompatActivity {
 
 
 
-    private DayRepository0 mDayRepository;
-    private CalendarRow0 mCalendarRow;
+    private DayRepository mDayRepository;
+    private CalendarRow mCalendarRow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +55,7 @@ public class AddActivity0 extends AppCompatActivity {
         mDisplayDay = findViewById(R.id.daytext);
         mDisplayMonth = findViewById(R.id.monthtext);
         mDisplayYear = findViewById(R.id.yeartext);
-        mCalendarRow = new CalendarRow0();
+        mCalendarRow = new CalendarRow();
 
         concText = findViewById(R.id.concentrationtext);
 
@@ -65,7 +63,7 @@ public class AddActivity0 extends AppCompatActivity {
         concText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
 
-        mDayRepository = new DayRepository0(this);
+        mDayRepository = new DayRepository(this);
 
         botNavView = findViewById(R.id.bottomNavAdd);
         Menu menu = botNavView.getMenu();
@@ -78,13 +76,35 @@ public class AddActivity0 extends AppCompatActivity {
                     case R.id.addpg:
                         break;
                     case R.id.calpg:
-                        Intent i = new Intent(AddActivity0.this, CalendarActivity.class);
-                        startActivity(i);
+                        Intent ii = new Intent(AddActivity0.this, CalendarActivity0.class);
+                        startActivity(ii);
                         break;
 
                     case R.id.graphpg:
-                        Intent ii = new Intent(AddActivity0.this, GraphsActivity.class);
-                        startActivity(ii);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(AddActivity0.this, GraphsActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(AddActivity0.this, GraphsActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(AddActivity0.this, GraphsActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(AddActivity0.this, GraphsActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(AddActivity0.this, GraphsActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(AddActivity0.this, GraphsActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                 }
                 return false;
@@ -170,10 +190,22 @@ public class AddActivity0 extends AppCompatActivity {
             public void onClick(View v) {
 
                 mCalendarRow.setMonth(mDisplayMonth.getText().toString());
-                Log.d("month", mDisplayMonth.getText().toString());
                 mCalendarRow.setYear(mDisplayYear.getText().toString());
-                Log.d("YEAR", mDisplayYear.getText().toString());
                 mCalendarRow.setDay(mDisplayDay.getText().toString().trim());
+
+                mCalendarRow.setProgress1(0);
+                mCalendarRow.setProgress2(0);
+                mCalendarRow.setProgress3(0);
+                mCalendarRow.setProgress4(0);
+                mCalendarRow.setProgress5(0);
+
+                /// modify these
+                mCalendarRow.setSymptomText1("Symptom 1");
+                mCalendarRow.setSymptomText2("Symptom 2");
+                mCalendarRow.setSymptomText3("Symptom 3");
+                mCalendarRow.setSymptomText4("Symptom 4");
+                mCalendarRow.setSymptomText5("Symptom 5");
+
                 if (concText.getText().toString().isEmpty()){
                     mCalendarRow.setConcentration("0");
                 }
@@ -181,7 +213,7 @@ public class AddActivity0 extends AppCompatActivity {
                     mCalendarRow.setConcentration(concText.getText().toString().trim());
                 }
                 mDayRepository.insertDayTask(mCalendarRow);
-                Intent i = new Intent(AddActivity0.this, CalendarActivity.class);
+                Intent i = new Intent(AddActivity0.this, CalendarActivity0.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }

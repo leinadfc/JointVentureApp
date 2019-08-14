@@ -4,27 +4,21 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow0;
 import com.example.jointventureapp.R;
-
-import org.w3c.dom.Text;
 
 public class DialogList0 extends DialogFragment {
 
 
     private TextView concentration;
-    private CalendarRow0 calendarRow;
+    private CalendarRow calendarRow;
 
     @NonNull
     @Override

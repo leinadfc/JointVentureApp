@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -27,18 +26,14 @@ import android.widget.Spinner;
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
 import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow0;
-import com.example.jointventureapp.Models.MyBarDataSet;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
-import com.example.jointventureapp.persistence.DayRepository0;
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -53,8 +48,8 @@ public class GraphsActivity0 extends AppCompatActivity implements AdapterView.On
     private Spinner monthSpinner;
     BottomNavigationView botNavView;
 
-    private ArrayList<CalendarRow0> mCalendarRows = new ArrayList<>();
-    private DayRepository0 mDayRepository;
+    private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
+    private DayRepository mDayRepository;
 
     private ArrayList<BarEntry> concentrations = new ArrayList<>();
 
@@ -66,7 +61,7 @@ public class GraphsActivity0 extends AppCompatActivity implements AdapterView.On
         monthSpinner = findViewById(R.id.graphsMonthSpinner);
         yearSpinner = findViewById(R.id.graphsYearSpinner);
 
-        mDayRepository = new DayRepository0(this);
+        mDayRepository = new DayRepository(this);
 
         botNavView = findViewById(R.id.bottomNavGraph);
         Menu menu = botNavView.getMenu();
@@ -77,12 +72,48 @@ public class GraphsActivity0 extends AppCompatActivity implements AdapterView.On
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.addpg:
-                        Intent i = new Intent(GraphsActivity0.this, AddActivity.class);
-                        startActivity(i);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(GraphsActivity0.this, AddActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(GraphsActivity0.this, AddActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(GraphsActivity0.this, AddActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(GraphsActivity0.this, AddActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(GraphsActivity0.this, AddActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(GraphsActivity0.this, AddActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                     case R.id.calpg:
-                        Intent ii = new Intent(GraphsActivity0.this, CalendarActivity.class);
-                        startActivity(ii);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) > 2) {
+                            Intent i = new Intent(GraphsActivity0.this, CalendarActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(GraphsActivity0.this, CalendarActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(GraphsActivity0.this, CalendarActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(GraphsActivity0.this, CalendarActivity0.class);
+                            startActivity(i);
+                        }
                         break;
 
                     case R.id.graphpg:
@@ -185,8 +216,7 @@ public class GraphsActivity0 extends AppCompatActivity implements AdapterView.On
 
                 retrieveDays(queryMonth, queryYear);
 
-                Log.d("MONTITEM SELECTED MONTH", queryMonth);
-                Log.d("MONTHITEM SELECTED YEAR", queryYear);
+
 
                //makeChart();
 
@@ -354,9 +384,9 @@ public class GraphsActivity0 extends AppCompatActivity implements AdapterView.On
 
     private void retrieveDays(String month, String year){
         Log.d("QUERY NOT ENTERED", "NOT ENTERED");
-        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow0>>() {
+        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow>>() {
             @Override
-            public void onChanged(@Nullable List<CalendarRow0> calendarRows) {
+            public void onChanged(@Nullable List<CalendarRow> calendarRows) {
                 Log.d("QUERY ENTERED", "ENTERED");
                 if (mCalendarRows.size()>0){
                     mCalendarRows.clear();

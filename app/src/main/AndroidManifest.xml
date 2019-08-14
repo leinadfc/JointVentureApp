@@ -74,6 +74,71 @@
 
         </activity>
 
+        <activity
+            android:name=".Activities.GraphsActivity5"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.GraphsActivity4"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.GraphsActivity2"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.GraphsActivity1"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.GraphsActivity0"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.AddActivity0"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.AddActivity1"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.AddActivity2"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.AddActivity4"
+            android:label="@string/app_name">
+        </activity>
+        <activity
+            android:name=".Activities.AddActivity5"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.CalendarActivity0"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.CalendarActivity1"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.CalendarActivity2"
+            android:label="@string/app_name">
+        </activity>
+
+
     </application>
 
 </manifest>

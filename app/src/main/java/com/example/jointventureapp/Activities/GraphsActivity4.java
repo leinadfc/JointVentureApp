@@ -27,11 +27,10 @@ import android.widget.Spinner;
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
 import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow4;
 import com.example.jointventureapp.Models.MyBarDataSet;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
-import com.example.jointventureapp.persistence.DayRepository4;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -58,8 +57,8 @@ public class GraphsActivity4 extends AppCompatActivity implements AdapterView.On
     private Spinner monthSpinner;
     private BottomNavigationView botNavView;
 
-    private ArrayList<CalendarRow4> mCalendarRows = new ArrayList<>();
-    private DayRepository4 mDayRepository;
+    private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
+    private DayRepository mDayRepository;
 
     private ArrayList<BarEntry> concentrations = new ArrayList<>();
     private ArrayList<BarEntry> symptoms1 = new ArrayList<>();
@@ -76,7 +75,7 @@ public class GraphsActivity4 extends AppCompatActivity implements AdapterView.On
         monthSpinner = findViewById(R.id.graphsMonthSpinner);
         yearSpinner = findViewById(R.id.graphsYearSpinner);
 
-        mDayRepository = new DayRepository4(this);
+        mDayRepository = new DayRepository(this);
 
         botNavView = findViewById(R.id.bottomNavGraph);
         Menu menu = botNavView.getMenu();
@@ -87,12 +86,48 @@ public class GraphsActivity4 extends AppCompatActivity implements AdapterView.On
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.addpg:
-                        Intent i = new Intent(GraphsActivity4.this, AddActivity.class);
-                        startActivity(i);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(GraphsActivity4.this, AddActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(GraphsActivity4.this, AddActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(GraphsActivity4.this, AddActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(GraphsActivity4.this, AddActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(GraphsActivity4.this, AddActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(GraphsActivity4.this, AddActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                     case R.id.calpg:
-                        Intent ii = new Intent(GraphsActivity4.this, CalendarActivity.class);
-                        startActivity(ii);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) > 2) {
+                            Intent i = new Intent(GraphsActivity4.this, CalendarActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(GraphsActivity4.this, CalendarActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(GraphsActivity4.this, CalendarActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(GraphsActivity4.this, CalendarActivity0.class);
+                            startActivity(i);
+                        }
                         break;
 
                     case R.id.graphpg:
@@ -398,7 +433,7 @@ public class GraphsActivity4 extends AppCompatActivity implements AdapterView.On
         sym1BarChart.setRenderer(sym1BarChartRender);
         sym2BarChart.setRenderer(sym2BarChartRender);
         sym3BarChart.setRenderer(sym3BarChartRender);
-        sym4BarChart.setRenderer(sym3BarChartRender);
+        sym4BarChart.setRenderer(sym4BarChartRender);
 
         concBarchart.invalidate();
 
@@ -514,9 +549,9 @@ public class GraphsActivity4 extends AppCompatActivity implements AdapterView.On
 
     private void retrieveDays(String month, String year){
         Log.d("QUERY NOT ENTERED", "NOT ENTERED");
-        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow4>>() {
+        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow>>() {
             @Override
-            public void onChanged(@Nullable List<CalendarRow4> calendarRows) {
+            public void onChanged(@Nullable List<CalendarRow> calendarRows) {
                 Log.d("QUERY ENTERED", "ENTERED");
                 if (mCalendarRows.size()>0){
                     mCalendarRows.clear();

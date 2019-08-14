@@ -13,7 +13,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow2;
 import com.example.jointventureapp.R;
 
 public class DialogList2 extends DialogFragment {
@@ -25,14 +24,14 @@ public class DialogList2 extends DialogFragment {
     private TextView symptom2;
 
     private TextView concentration;
-    private CalendarRow2 calendarRow;
+    private CalendarRow calendarRow;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.list_dialog, null);
+        View view = inflater.inflate(R.layout.list_dialog2, null);
 
 
 

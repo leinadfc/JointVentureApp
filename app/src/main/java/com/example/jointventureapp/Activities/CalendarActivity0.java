@@ -30,11 +30,9 @@ import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
 import com.example.jointventureapp.Adapters.DaysRecyclerAdapter;
 import com.example.jointventureapp.Adapters.DaysRecyclerAdapter0;
 import com.example.jointventureapp.Models.CalendarRow;
-import com.example.jointventureapp.Models.CalendarRow0;
 import com.example.jointventureapp.R;
 import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
-import com.example.jointventureapp.persistence.DayRepository0;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -48,20 +46,20 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
     private BottomNavigationView botNavView;
     private ImageView dialogbtn;
 
-    private ArrayList<CalendarRow0> mCalendarRows = new ArrayList<>();
+    private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
     private DaysRecyclerAdapter0 mDaysRecyclerAdapter;
-    private DayRepository0 mDayRepository;
+    private DayRepository mDayRepository;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calendar_activity);
+        setContentView(R.layout.calendar_activity_0);
 
         monthSpinner = findViewById(R.id.mspinner);
         yearSpinner = findViewById(R.id.yspinner);
 
-        mDayRepository = new DayRepository0(this);
+        mDayRepository = new DayRepository(this);
 
         if (PreferenceUtils.getFirstTime(getApplicationContext())){
             openDialog();
@@ -78,16 +76,60 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.addpg:
-                        Intent i = new Intent(CalendarActivity0.this, AddActivity.class);
-                        startActivity(i);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(CalendarActivity0.this, AddActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(CalendarActivity0.this, AddActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(CalendarActivity0.this, AddActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(CalendarActivity0.this, AddActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(CalendarActivity0.this, AddActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(CalendarActivity0.this, AddActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                     case R.id.calpg:
                         break;
 
 
                     case R.id.graphpg:
-                        Intent ii = new Intent(CalendarActivity0.this, GraphsActivity.class);
-                        startActivity(ii);
+                        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
+                            Intent i = new Intent(CalendarActivity0.this, GraphsActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+                            Intent i = new Intent(CalendarActivity0.this, GraphsActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+                            Intent i = new Intent(CalendarActivity0.this, GraphsActivity.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                            Intent i = new Intent(CalendarActivity0.this, GraphsActivity2.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+                            Intent i = new Intent(CalendarActivity0.this, GraphsActivity1.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                            Intent i = new Intent(CalendarActivity0.this, GraphsActivity0.class);
+                            startActivity(i);
+                        }
                         break;
                 }
                 return false;
@@ -141,9 +183,7 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
         /// call here
         /// add listener here and call every time it changes
 
-        recyclerView = findViewById(R.id.calendarlist);
-
-
+        recyclerView = findViewById(R.id.calendarlist_0);
 
         /// Status bar transparent
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -165,12 +205,13 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("HELLO", "HEEEEEEEEEEEEEEEELO");
                 initRecyclerView();
                 String queryMonth =  getSpinnerMonth(monthSpinner.getSelectedItemPosition());
                 String queryYear = getSpinnerYear (yearSpinner.getSelectedItemPosition());
                 retrieveDays(queryMonth, queryYear);
 
-                Log.d("HELLO", queryYear);
+
             }
 
             @Override
@@ -182,12 +223,13 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
         yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("HELLO", "HEEEEEEEEEEEEEEEELO");
                 initRecyclerView();
                 String queryMonth =  getSpinnerMonth(monthSpinner.getSelectedItemPosition());
                 String queryYear = getSpinnerYear (yearSpinner.getSelectedItemPosition());
                 retrieveDays(queryMonth, queryYear);
 
-                Log.d("HELLO", queryYear);
+
             }
 
             @Override
@@ -248,9 +290,37 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
     public void openDialogList(int position){
         Bundle bundle = new Bundle();
         bundle.putParcelable("selected_day", mCalendarRows.get(position));
-        DialogList dialogList = new DialogList();
-        dialogList.setArguments(bundle);
-        dialogList.show(getSupportFragmentManager(), "Extended list item");
+        if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5){
+            DialogList dialogList = new DialogList();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
+            DialogList4 dialogList = new DialogList4();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
+            DialogList3 dialogList = new DialogList3();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+            DialogList2 dialogList = new DialogList2();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
+            DialogList1 dialogList = new DialogList1();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+        else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+            DialogList0 dialogList = new DialogList0();
+            dialogList.setArguments(bundle);
+            dialogList.show(getSupportFragmentManager(), "Extended list item");
+        }
+
     }
 
     private void initRecyclerView (){
@@ -269,9 +339,9 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
 
     // need to get month and year from spinners
     private void retrieveDays(String month, String year){
-        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow0>>() {
+        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow>>() {
             @Override
-            public void onChanged(@Nullable List<CalendarRow0> calendarRows) {
+            public void onChanged(@Nullable List<CalendarRow> calendarRows) {
                 if (mCalendarRows.size()>0){
                     mCalendarRows.clear();
                 }

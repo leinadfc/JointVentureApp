@@ -86,11 +86,31 @@ public class DialogPage extends DialogFragment {
                         PreferenceUtils.saveSymptom3(inflammation.isChecked(), getContext());
                         PreferenceUtils.saveSymptom4(weakness.isChecked(), getContext());
                         PreferenceUtils.saveSymptom5(fatigue.isChecked(), getContext());
+                        PreferenceUtils.saveSymptomCount(getCount(), getContext());
                     }
                 });
 
         return builder.create();
     }
 
-    /// Clicking outside edit text removes focus from edit text ///
+    private int getCount (){
+        int count = 0;
+        if (jointPain.isChecked()){
+            count++;
+        }
+        if (movementJoints.isChecked()){
+            count++;
+        }
+        if (fatigue.isChecked()){
+            count++;
+        }
+        if (weakness.isChecked()){
+            count++;
+        }
+        if (inflammation.isChecked()){
+            count++;
+        }
+
+        return count;
+    }
 }
