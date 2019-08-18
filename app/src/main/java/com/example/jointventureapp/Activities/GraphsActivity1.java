@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
 import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
@@ -60,13 +61,16 @@ public class GraphsActivity1 extends AppCompatActivity implements AdapterView.On
     private ArrayList<BarEntry> concentrations = new ArrayList<>();
     private ArrayList<BarEntry> symptoms1 = new ArrayList<>();
 
+    private TextView symptom1Text;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphs_activity_1);
 
 
-
+        symptom1Text = findViewById(R.id.symptom1_text);
+        symptom1Text.setText(getSymptom());
         monthSpinner = findViewById(R.id.graphsMonthSpinner);
         yearSpinner = findViewById(R.id.graphsYearSpinner);
 
@@ -338,7 +342,7 @@ public class GraphsActivity1 extends AppCompatActivity implements AdapterView.On
         XAxis xAxis = concBarchart.getXAxis();
 
         //xAxis.setValueFormatter(new MyXaxisValueFormatter(days));
-        sym1XAxis.setValueFormatter(new MyXaxisValueFormatter2(days));
+        //sym1XAxis.setValueFormatter(new MyXaxisValueFormatter2(days));
         //sym3XAxis.setValueFormatter(new MyXaxisValueFormatter(days));
 
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
@@ -414,7 +418,7 @@ public class GraphsActivity1 extends AppCompatActivity implements AdapterView.On
     }
 
     public void openDialog2(){
-        DialogPage dialogPage = new DialogPage();
+        DialogPageGraphs dialogPage = new DialogPageGraphs();
         dialogPage.show(getSupportFragmentManager(), "Symptoms");
     }
 
@@ -464,11 +468,26 @@ public class GraphsActivity1 extends AppCompatActivity implements AdapterView.On
         return concentrations;
     }
     private ArrayList<BarEntry> getSymptom1Entries (){
+        String symptom = getSymptom();
         symptoms1.clear();
         for (int j = 1; j<32; j++) {
             for (int i = 0; i < mCalendarRows.size(); i++) {
                 if (Integer.parseInt(mCalendarRows.get(i).getDay()) == j){
-                    symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress1()));
+                    if (symptom.equals(mCalendarRows.get(i).getSymptomText1())) {
+                        symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress1()));
+                    }
+                    if (symptom.equals(mCalendarRows.get(i).getSymptomText2())) {
+                        symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress2()));
+                    }
+                    if (symptom.equals(mCalendarRows.get(i).getSymptomText3())) {
+                        symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress3()));
+                    }
+                    if (symptom.equals(mCalendarRows.get(i).getSymptomText4())) {
+                        symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress4()));
+                    }
+                    if (symptom.equals(mCalendarRows.get(i).getSymptomText5())) {
+                        symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress5()));
+                    }
                 }
                 else {
                     symptoms1.add(new BarEntry(j, 0));
@@ -521,6 +540,26 @@ public class GraphsActivity1 extends AppCompatActivity implements AdapterView.On
             spinnerYear = "2020";
 
         return spinnerYear;
+    }
+
+    private String getSymptom () {
+        String symptom;
+        if (PreferenceUtils.getSymptom1(getApplicationContext())){
+            symptom = "Joint pain";
+        }
+        else if (PreferenceUtils.getSymptom2(getApplicationContext())){
+            symptom = "Restricted joint movement";
+        }
+        else if (PreferenceUtils.getSymptom3(getApplicationContext())){
+            symptom = "Inflammation";
+        }
+        else if (PreferenceUtils.getSymptom4(getApplicationContext())){
+            symptom = "Weakness";
+        }
+        else {
+            symptom = "Fatigue";
+        }
+        return symptom;
     }
 
 

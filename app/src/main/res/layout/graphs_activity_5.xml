@@ -117,7 +117,8 @@
                             android:text="Symptom1"
                             android:layout_gravity="center"
                             android:gravity="right"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:id="@+id/symptom_1_text"/>
 
 
                         <com.github.mikephil.charting.charts.BarChart
@@ -146,7 +147,8 @@
                             android:text="Symptom2"
                             android:layout_gravity="center"
                             android:gravity="right"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:id="@+id/symptom_2_text"/>
 
 
                         <com.github.mikephil.charting.charts.BarChart
@@ -173,7 +175,8 @@
                             android:text="Symptom3"
                             android:layout_gravity="center"
                             android:gravity="right"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:id="@+id/symptom_3_text"/>
 
 
                         <com.github.mikephil.charting.charts.BarChart
@@ -199,7 +202,8 @@
                                 android:text="Symptom4"
                                 android:layout_gravity="center"
                                 android:gravity="right"
-                                android:textSize="12sp"/>
+                                android:textSize="12sp"
+                                android:id="@+id/symptom_4_text"/>
 
 
                             <com.github.mikephil.charting.charts.BarChart
@@ -216,7 +220,8 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:weightSum="100"
-                            android:layout_marginTop="20dp">
+                            android:layout_marginTop="20dp"
+                            android:layout_marginBottom="30dp">
 
                             <TextView
                                 android:layout_width="0dp"
@@ -225,7 +230,8 @@
                                 android:text="Symptom5"
                                 android:layout_gravity="center"
                                 android:gravity="right"
-                                android:textSize="12sp"/>
+                                android:textSize="12sp"
+                                android:id="@+id/symptom_5_text"/>
 
 
                             <com.github.mikephil.charting.charts.BarChart

@@ -138,6 +138,36 @@
             android:label="@string/app_name">
         </activity>
 
+        <activity
+            android:name=".Activities.UpdateActivity0"
+            android:label="@string/app_name">
+        </activity>
+
+
+        <activity
+            android:name=".Activities.UpdateActivity1"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.UpdateActivity2"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.UpdateActivity3"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.UpdateActivity4"
+            android:label="@string/app_name">
+        </activity>
+
+        <activity
+            android:name=".Activities.UpdateActivity5"
+            android:label="@string/app_name">
+        </activity>
 
     </application>
 

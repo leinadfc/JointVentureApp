@@ -3,6 +3,7 @@ package com.example.jointventureapp.Activities;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 
 import com.example.jointventureapp.Models.CalendarRow;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
+
+import java.util.ArrayList;
 
 public class DialogList1 extends DialogFragment {
 
@@ -23,6 +27,8 @@ public class DialogList1 extends DialogFragment {
 
     private TextView concentration;
     private CalendarRow calendarRow;
+
+    private ArrayList<String> symptomNames = new ArrayList<>();
 
     @NonNull
     @Override
@@ -48,13 +54,35 @@ public class DialogList1 extends DialogFragment {
         if (arguments !=  null && arguments.containsKey("selected_day")){
 
             calendarRow = getArguments().getParcelable("selected_day");
-            mProgressBar1.setProgress(calendarRow.getProgress1());
-
-
-            symptom1.setText(calendarRow.getSymptomText1());
+            getSymptomTextArray();
 
 
             concentration.setText(calendarRow.getConcentration());
+
+            if (calendarRow.getSymptomText1().equals(symptomNames.get(0))){
+                symptom1.setText(symptomNames.get(0));
+                mProgressBar1.setProgress(calendarRow.getProgress1());
+            }
+            else if (calendarRow.getSymptomText2().equals(symptomNames.get(0))){
+                symptom1.setText(symptomNames.get(0));
+                mProgressBar1.setProgress(calendarRow.getProgress2());
+            }
+            else if (calendarRow.getSymptomText3().equals(symptomNames.get(0))){
+                symptom1.setText(symptomNames.get(0));
+                mProgressBar1.setProgress(calendarRow.getProgress3());
+            }
+            else if (calendarRow.getSymptomText4().equals(symptomNames.get(0))){
+                symptom1.setText(symptomNames.get(0));
+                mProgressBar1.setProgress(calendarRow.getProgress4());
+            }
+            else if (calendarRow.getSymptomText5().equals(symptomNames.get(0))){
+                symptom1.setText(symptomNames.get(0));
+                mProgressBar1.setProgress(calendarRow.getProgress5());
+            }
+            else {
+                symptom1.setText(symptomNames.get(0));
+                mProgressBar1.setProgress(0);
+            }
 
             day = calendarRow.getDay();
             month = calendarRow.getMonth();
@@ -78,9 +106,31 @@ public class DialogList1 extends DialogFragment {
         }).setNegativeButton("Edit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent (getActivity(), UpdateActivity1.class);
+                intent.putExtra("selected_day", calendarRow);
+                startActivity(intent);
             }
         });
 
         return builder.create();
+    }
+
+    private void getSymptomTextArray (){
+        symptomNames.clear();
+        if (PreferenceUtils.getSymptom1(getContext())){
+            symptomNames.add("Joint pain");
+        }
+        if (PreferenceUtils.getSymptom2(getContext())){
+            symptomNames.add("Restricted joint movement");
+        }
+        if (PreferenceUtils.getSymptom3(getContext())){
+            symptomNames.add("Inflammation");
+        }
+        if (PreferenceUtils.getSymptom4(getContext())){
+            symptomNames.add("Weakness");
+        }
+        if (PreferenceUtils.getSymptom5(getContext())){
+            symptomNames.add("Fatigue");
+        }
     }
 }

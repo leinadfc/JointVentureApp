@@ -1,5 +1,6 @@
 package com.example.jointventureapp.Adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.jointventureapp.Models.CalendarRow;
 import com.example.jointventureapp.R;
+import com.example.jointventureapp.Utils.PreferenceUtils;
 
 import java.util.ArrayList;
 
@@ -17,6 +19,8 @@ public class DaysRecyclerAdapter extends RecyclerView.Adapter<DaysRecyclerAdapte
 
     private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
     private OnDayListener mOnDayListener;
+
+    private ArrayList<String> symptomNames = new ArrayList<>();
 
     public DaysRecyclerAdapter(ArrayList<CalendarRow> calendarRows, OnDayListener onDayListener) {
         this.mCalendarRows = calendarRows;
@@ -27,19 +31,88 @@ public class DaysRecyclerAdapter extends RecyclerView.Adapter<DaysRecyclerAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.calendar_row, viewGroup, false);
+        getSymptomTextArray(viewGroup.getContext());
         return new ViewHolder(view, mOnDayListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.day.setText(mCalendarRows.get(i).getDay());
-        viewHolder.month.setText(getMonth(mCalendarRows.get(i).getMonth()));
-        viewHolder.symptom1.setText(mCalendarRows.get(i).getSymptomText1());
-        viewHolder.symptom2.setText(mCalendarRows.get(i).getSymptomText2());
-        viewHolder.symptom3.setText(mCalendarRows.get(i).getSymptomText3());
-        viewHolder.symptomBar1.setProgress(mCalendarRows.get(i).getProgress1());
-        viewHolder.symptomBar2.setProgress(mCalendarRows.get(i).getProgress2());
-        viewHolder.symptomBar3.setProgress(mCalendarRows.get(i).getProgress3());
+        viewHolder.month.setText(getMonthText(mCalendarRows.get(i).getMonth()));
+        if (mCalendarRows.get(i).getSymptomText1().equals(symptomNames.get(0))){
+            viewHolder.symptom1.setText(symptomNames.get(0));
+            viewHolder.symptomBar1.setProgress(mCalendarRows.get(i).getProgress1());
+        }
+        else if (mCalendarRows.get(i).getSymptomText2().equals(symptomNames.get(0))){
+            viewHolder.symptom1.setText(symptomNames.get(0));
+            viewHolder.symptomBar1.setProgress(mCalendarRows.get(i).getProgress2());
+        }
+        else if (mCalendarRows.get(i).getSymptomText3().equals(symptomNames.get(0))){
+            viewHolder.symptom1.setText(symptomNames.get(0));
+            viewHolder.symptomBar1.setProgress(mCalendarRows.get(i).getProgress3());
+        }
+        else if (mCalendarRows.get(i).getSymptomText4().equals(symptomNames.get(0))){
+            viewHolder.symptom1.setText(symptomNames.get(0));
+            viewHolder.symptomBar1.setProgress(mCalendarRows.get(i).getProgress4());
+        }
+        else if (mCalendarRows.get(i).getSymptomText5().equals(symptomNames.get(0))){
+            viewHolder.symptom1.setText(symptomNames.get(0));
+            viewHolder.symptomBar1.setProgress(mCalendarRows.get(i).getProgress5());
+        }
+        else {
+            viewHolder.symptom1.setText(symptomNames.get(0));
+            viewHolder.symptomBar1.setProgress(0);
+        }
+
+        if (mCalendarRows.get(i).getSymptomText1().equals(symptomNames.get(1))){
+            viewHolder.symptom2.setText(symptomNames.get(1));
+            viewHolder.symptomBar2.setProgress(mCalendarRows.get(i).getProgress1());
+        }
+        else if (mCalendarRows.get(i).getSymptomText2().equals(symptomNames.get(1))){
+            viewHolder.symptom2.setText(symptomNames.get(1));
+            viewHolder.symptomBar2.setProgress(mCalendarRows.get(i).getProgress2());
+        }
+        else if (mCalendarRows.get(i).getSymptomText3().equals(symptomNames.get(1))){
+            viewHolder.symptom2.setText(symptomNames.get(1));
+            viewHolder.symptomBar2.setProgress(mCalendarRows.get(i).getProgress3());
+        }
+        else if (mCalendarRows.get(i).getSymptomText4().equals(symptomNames.get(1))){
+            viewHolder.symptom2.setText(symptomNames.get(1));
+            viewHolder.symptomBar2.setProgress(mCalendarRows.get(i).getProgress4());
+        }
+        else if (mCalendarRows.get(i).getSymptomText5().equals(symptomNames.get(1))){
+            viewHolder.symptom2.setText(symptomNames.get(1));
+            viewHolder.symptomBar2.setProgress(mCalendarRows.get(i).getProgress5());
+        }
+        else {
+            viewHolder.symptom2.setText(symptomNames.get(1));
+            viewHolder.symptomBar2.setProgress(0);
+        }
+
+        if (mCalendarRows.get(i).getSymptomText1().equals(symptomNames.get(2))){
+            viewHolder.symptom3.setText(symptomNames.get(2));
+            viewHolder.symptomBar3.setProgress(mCalendarRows.get(i).getProgress1());
+        }
+        else if (mCalendarRows.get(i).getSymptomText2().equals(symptomNames.get(2))){
+            viewHolder.symptom3.setText(symptomNames.get(2));
+            viewHolder.symptomBar3.setProgress(mCalendarRows.get(i).getProgress2());
+        }
+        else if (mCalendarRows.get(i).getSymptomText3().equals(symptomNames.get(2))){
+            viewHolder.symptom3.setText(symptomNames.get(2));
+            viewHolder.symptomBar3.setProgress(mCalendarRows.get(i).getProgress3());
+        }
+        else if (mCalendarRows.get(i).getSymptomText4().equals(symptomNames.get(2))){
+            viewHolder.symptom3.setText(symptomNames.get(2));
+            viewHolder.symptomBar3.setProgress(mCalendarRows.get(i).getProgress4());
+        }
+        else if (mCalendarRows.get(i).getSymptomText5().equals(symptomNames.get(2))){
+            viewHolder.symptom3.setText(symptomNames.get(2));
+            viewHolder.symptomBar3.setProgress(mCalendarRows.get(i).getProgress5());
+        }
+        else {
+            viewHolder.symptom3.setText(symptomNames.get(2));
+            viewHolder.symptomBar3.setProgress(0);
+        }
         viewHolder.concentration.setText(mCalendarRows.get(i).getConcentration());
 
     }
@@ -87,7 +160,7 @@ public class DaysRecyclerAdapter extends RecyclerView.Adapter<DaysRecyclerAdapte
         void onDayClick(int position);
     }
 
-    private String getMonth (String month){
+    private String getMonthText (String month){
         String shortMonth = "";
         if (month.equals("January")){
             shortMonth = "JAN";
@@ -126,5 +199,24 @@ public class DaysRecyclerAdapter extends RecyclerView.Adapter<DaysRecyclerAdapte
             shortMonth = "DEC";
         }
         return shortMonth;
+    }
+
+    private void getSymptomTextArray (Context context){
+        symptomNames.clear();
+        if (PreferenceUtils.getSymptom1(context)){
+            symptomNames.add("Joint pain");
+        }
+        if (PreferenceUtils.getSymptom2(context)){
+            symptomNames.add("Restricted joint movement");
+        }
+        if (PreferenceUtils.getSymptom3(context)){
+            symptomNames.add("Inflammation");
+        }
+        if (PreferenceUtils.getSymptom4(context)){
+            symptomNames.add("Weakness");
+        }
+        if (PreferenceUtils.getSymptom5(context)){
+            symptomNames.add("Fatigue");
+        }
     }
 }

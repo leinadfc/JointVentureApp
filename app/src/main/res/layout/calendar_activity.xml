@@ -53,15 +53,22 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp">
-
-                        <ImageView
+                        android:gravity="right">
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_cogwheel_outline"
-                            android:id="@+id/symptombtn"/>
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:id="@+id/symptomlayout">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_cogwheel_outline"
+                                android:id="@+id/symptombtn"/>
+                        </RelativeLayout>
+
 
                     </RelativeLayout>
 

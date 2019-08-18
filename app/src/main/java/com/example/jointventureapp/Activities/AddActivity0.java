@@ -200,11 +200,11 @@ public class AddActivity0 extends AppCompatActivity {
                 mCalendarRow.setProgress5(0);
 
                 /// modify these
-                mCalendarRow.setSymptomText1("Symptom 1");
-                mCalendarRow.setSymptomText2("Symptom 2");
-                mCalendarRow.setSymptomText3("Symptom 3");
-                mCalendarRow.setSymptomText4("Symptom 4");
-                mCalendarRow.setSymptomText5("Symptom 5");
+                mCalendarRow.setSymptomText1("Joint pain");
+                mCalendarRow.setSymptomText2("Restricted joint movement");
+                mCalendarRow.setSymptomText3("Inflammation");
+                mCalendarRow.setSymptomText4("Weakness");
+                mCalendarRow.setSymptomText5("Fatigue");
 
                 if (concText.getText().toString().isEmpty()){
                     mCalendarRow.setConcentration("0");

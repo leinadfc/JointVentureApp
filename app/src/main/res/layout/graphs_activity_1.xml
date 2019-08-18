@@ -117,7 +117,8 @@
                             android:text="Symptom1"
                             android:layout_gravity="center"
                             android:gravity="right"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:id="@+id/symptom1_text"/>
 
 
                         <com.github.mikephil.charting.charts.BarChart

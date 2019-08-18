@@ -31,6 +31,7 @@ import com.example.jointventureapp.R;
 import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class AddActivity2 extends AppCompatActivity {
@@ -70,6 +71,49 @@ public class AddActivity2 extends AppCompatActivity {
 
         concText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
+        symptom1 = findViewById(R.id.symptom1text);
+        symptom2 = findViewById(R.id.symptom2text);
+
+        ArrayList<String> symptomsArray = new ArrayList<>();
+        final ArrayList<String> notUsedArray = new ArrayList<>();
+
+        if (PreferenceUtils.getSymptom1(getApplicationContext())){
+            symptomsArray.add("Joint pain");
+        }
+        else {
+            notUsedArray.add("Joint pain");
+        }
+
+        if (PreferenceUtils.getSymptom2(getApplicationContext())){
+            symptomsArray.add("Restricted joint movement");
+        }
+        else {
+            notUsedArray.add("Restricted joint movement");
+        }
+
+        if (PreferenceUtils.getSymptom3(getApplicationContext())){
+            symptomsArray.add("Inflammation");
+        }
+        else {
+            notUsedArray.add("Inflammation");
+        }
+
+        if (PreferenceUtils.getSymptom4(getApplicationContext())){
+            symptomsArray.add("Weakness");
+        }
+        else {
+            notUsedArray.add("Weakness");
+        }
+
+        if (PreferenceUtils.getSymptom5(getApplicationContext())){
+            symptomsArray.add("Fatigue");
+        }
+        else {
+            notUsedArray.add("Fatigue");
+        }
+
+        symptom1.setText(symptomsArray.get(0));
+        symptom2.setText(symptomsArray.get(1));
 
         mDayRepository = new DayRepository(this);
 
@@ -205,11 +249,11 @@ public class AddActivity2 extends AppCompatActivity {
                 ////////////////////
                 /// Modify these ///
                 ////////////////////
-                mCalendarRow.setSymptomText1("Joint pain");
-                mCalendarRow.setSymptomText2("Fatigue");
-                mCalendarRow.setSymptomText3("Symptom 3");
-                mCalendarRow.setSymptomText4("Symptom 4");
-                mCalendarRow.setSymptomText5("Symptom 5");
+                mCalendarRow.setSymptomText1(symptom1.getText().toString());
+                mCalendarRow.setSymptomText2(symptom2.getText().toString());
+                mCalendarRow.setSymptomText3(notUsedArray.get(0));
+                mCalendarRow.setSymptomText4(notUsedArray.get(1));
+                mCalendarRow.setSymptomText5(notUsedArray.get(2));
 
 
                 mCalendarRow.setMonth(mDisplayMonth.getText().toString());

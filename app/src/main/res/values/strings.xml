@@ -23,4 +23,10 @@
     <string name="Symptom3">Symptom 3</string>
     <string name="Symptom4">Symptom 4</string>
     <string name="Symptom5">Symptom 5</string>
+    <string name="JointPain">Joint pain</string>
+    <string name="RestrictedJointMovement">Restricted joint movement</string>
+    <string name="Inflammation">Inflammation</string>
+    <string name="Weakness">Weakness</string>
+    <string name="Fatigue">Fatigue</string>
+    <string name="Update">Update</string>
 </resources>

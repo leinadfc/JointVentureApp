@@ -54,7 +54,7 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.calendar_activity_0);
+        setContentView(R.layout.calendar_activity);
 
         monthSpinner = findViewById(R.id.mspinner);
         yearSpinner = findViewById(R.id.yspinner);
@@ -183,7 +183,7 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
         /// call here
         /// add listener here and call every time it changes
 
-        recyclerView = findViewById(R.id.calendarlist_0);
+        recyclerView = findViewById(R.id.calendarlist);
 
         /// Status bar transparent
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

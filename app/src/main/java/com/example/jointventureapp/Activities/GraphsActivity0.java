@@ -378,7 +378,7 @@ public class GraphsActivity0 extends AppCompatActivity implements AdapterView.On
     }
 
     public void openDialog2(){
-        DialogPage dialogPage = new DialogPage();
+        DialogPageGraphs dialogPage = new DialogPageGraphs();
         dialogPage.show(getSupportFragmentManager(), "Symptoms");
     }
 

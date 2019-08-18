@@ -87,7 +87,7 @@
                     android:textAlignment="center"
                     android:textColor="@color/MainBlue"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@id/symptom1text"
+                    app:layout_constraintBottom_toTopOf="@id/AddButton"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/units"
@@ -102,143 +102,28 @@
                     android:textAlignment="center"
                     android:textColor="@color/colorGrey"
                     android:textSize="16sp"
-                    app:layout_constraintBottom_toTopOf="@id/symptom1text"
+                    app:layout_constraintBottom_toTopOf="@id/AddButton"
                     app:layout_constraintLeft_toRightOf="@id/concentrationtext"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/yeartext"
                     app:layout_constraintVertical_bias="0.25" />
 
-                <TextView
-                    android:id="@+id/symptom1text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Symptom1"
-                    android:textColor="@color/MainBlue"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@id/seekbar_1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/concentrationtext"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    android:layout_marginTop="30dp" />
-
-                <SeekBar
-                    android:id="@+id/seekbar_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-                    android:max="4"
-                    android:progress="0"
-                    android:progressDrawable="@drawable/seekbar_progress"
-                    android:thumb="@drawable/thumb"
-                    app:layout_constraintBottom_toTopOf="@id/symptom2text"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/symptom1text" />
-
-                <TextView
-                    android:id="@+id/symptom2text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/Symptom2"
-                    android:textColor="@color/MainBlue"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@id/seekbar_2"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/seekbar_1" />
-
-                <SeekBar
-                    android:id="@+id/seekbar_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-                    android:max="4"
-                    android:progress="0"
-                    android:progressDrawable="@drawable/seekbar_progress"
-                    android:thumb="@drawable/thumb"
-                    app:layout_constraintBottom_toTopOf="@id/symptom3text"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/symptom2text" />
-
-                <TextView
-                    android:id="@+id/symptom3text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/Symptom3"
-                    android:textColor="@color/MainBlue"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@id/seekbar_3"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/seekbar_2" />
-
-                <SeekBar
-                    android:id="@+id/seekbar_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-                    android:max="4"
-                    android:progress="0"
-                    android:progressDrawable="@drawable/seekbar_progress"
-                    android:thumb="@drawable/thumb"
-                    app:layout_constraintBottom_toTopOf="@id/symptom4text"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/symptom3text" />
-
-                <TextView
-                    android:id="@+id/symptom4text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/Symptom4"
-                    android:textColor="@color/MainBlue"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@id/seekbar_4"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/seekbar_3" />
-
-                <SeekBar
-                    android:id="@+id/seekbar_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="10dp"
-                    android:max="4"
-                    android:progress="0"
-                    android:progressDrawable="@drawable/seekbar_progress"
-                    android:thumb="@drawable/thumb"
-                    app:layout_constraintBottom_toTopOf="@id/AddButton"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/symptom3text" />
 
                 <Button
                     android:id="@+id/AddButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/big_addbtn"
                     android:gravity="center"
-                    android:text="@string/Add"
+                    android:text="@string/Update"
                     android:textColor="@color/MainBlue"
                     android:textColorHint="@color/MainBlue"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/seekbar_4" />
+                    app:layout_constraintTop_toBottomOf="@id/concentrationtext" />
 
 
             </android.support.constraint.ConstraintLayout>
@@ -267,9 +152,3 @@
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>
-
-
-
-
-
-

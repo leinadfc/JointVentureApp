@@ -4,6 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.content.Context;
 
 import com.example.jointventureapp.Asynk.InsertAsynkTask;
+import com.example.jointventureapp.Asynk.UpdateAsynkTask;
 import com.example.jointventureapp.Models.CalendarRow;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class DayRepository {
     }
 
     public void updateDay (CalendarRow calendarRow){
-
+        new UpdateAsynkTask(mDayDatabase.getDayDao()).execute(calendarRow);
     }
 
     public LiveData<List<CalendarRow>> retrieveDaysTask(String month, String year) {

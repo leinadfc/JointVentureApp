@@ -34,7 +34,7 @@ import com.example.jointventureapp.persistence.DayRepository;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AddActivity4 extends AppCompatActivity {
+public class UpdateActivity4 extends AppCompatActivity {
 
     private TextView mDisplayDay;
     private TextView mDisplayMonth;
@@ -61,15 +61,21 @@ public class AddActivity4 extends AppCompatActivity {
     private DayRepository mDayRepository;
     private CalendarRow mCalendarRow;
 
+    private ArrayList<String> symptomNames = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_activity_4_symptoms);
+        setContentView(R.layout.update_activity_4);
 
         mDisplayDay = findViewById(R.id.daytext);
         mDisplayMonth = findViewById(R.id.monthtext);
         mDisplayYear = findViewById(R.id.yeartext);
-        mCalendarRow = new CalendarRow();
+
+        if (getIntent().hasExtra("selected_day")) {
+            mCalendarRow = getIntent().getParcelableExtra("selected_day");
+            getSymptomTextArray();
+        }
 
         concText = findViewById(R.id.concentrationtext);
         seekBar1 = findViewById(R.id.seekbar_1);
@@ -134,37 +140,42 @@ public class AddActivity4 extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.addpg:
+                        Intent iii = new Intent(UpdateActivity4.this, AddActivity4.class);
+                        startActivity(iii);
+                        finish();
                         break;
                     case R.id.calpg:
-                        Intent ii = new Intent(AddActivity4.this, CalendarActivity.class);
+                        Intent ii = new Intent(UpdateActivity4.this, CalendarActivity.class);
                         startActivity(ii);
+                        finish();
                         break;
 
                     case R.id.graphpg:
                         if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 5) {
-                            Intent i = new Intent(AddActivity4.this, GraphsActivity5.class);
+                            Intent i = new Intent(UpdateActivity4.this, GraphsActivity5.class);
                             startActivity(i);
                         }
                         else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 4){
-                            Intent i = new Intent(AddActivity4.this, GraphsActivity4.class);
+                            Intent i = new Intent(UpdateActivity4.this, GraphsActivity4.class);
                             startActivity(i);
                         }
                         else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 3){
-                            Intent i = new Intent(AddActivity4.this, GraphsActivity.class);
+                            Intent i = new Intent(UpdateActivity4.this, GraphsActivity.class);
                             startActivity(i);
                         }
                         else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
-                            Intent i = new Intent(AddActivity4.this, GraphsActivity2.class);
+                            Intent i = new Intent(UpdateActivity4.this, GraphsActivity2.class);
                             startActivity(i);
                         }
                         else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1){
-                            Intent i = new Intent(AddActivity4.this, GraphsActivity1.class);
+                            Intent i = new Intent(UpdateActivity4.this, GraphsActivity1.class);
                             startActivity(i);
                         }
                         else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
-                            Intent i = new Intent(AddActivity4.this, GraphsActivity0.class);
+                            Intent i = new Intent(UpdateActivity4.this, GraphsActivity0.class);
                             startActivity(i);
                         }
+                        finish();
                         break;
                 }
                 return false;
@@ -177,15 +188,115 @@ public class AddActivity4 extends AppCompatActivity {
         final String tmonth = getmonthtext(month);
         final int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        mDisplayDay.setText(Integer.toString(day));
-        mDisplayMonth.setText(tmonth);
-        mDisplayYear.setText(Integer.toString(year));
+        mDisplayDay.setText(mCalendarRow.getDay());
+        mDisplayMonth.setText(mCalendarRow.getMonth());
+        mDisplayYear.setText(mCalendarRow.getYear());
+        concText.setText(mCalendarRow.getConcentration());
+        if (mCalendarRow.getSymptomText1().equals(symptomNames.get(0))){
+            symptom1.setText(symptomNames.get(0));
+            seekBar1.setProgress(mCalendarRow.getProgress1());
+        }
+        else if (mCalendarRow.getSymptomText2().equals(symptomNames.get(0))){
+            symptom1.setText(symptomNames.get(0));
+            seekBar1.setProgress(mCalendarRow.getProgress2());
+        }
+        else if (mCalendarRow.getSymptomText3().equals(symptomNames.get(0))){
+            symptom1.setText(symptomNames.get(0));
+            seekBar1.setProgress(mCalendarRow.getProgress3());
+        }
+        else if (mCalendarRow.getSymptomText4().equals(symptomNames.get(0))){
+            symptom1.setText(symptomNames.get(0));
+            seekBar1.setProgress(mCalendarRow.getProgress4());
+        }
+        else if (mCalendarRow.getSymptomText5().equals(symptomNames.get(0))){
+            symptom1.setText(symptomNames.get(0));
+            seekBar1.setProgress(mCalendarRow.getProgress5());
+        }
+        else {
+            symptom1.setText(symptomNames.get(0));
+            seekBar1.setProgress(0);
+        }
+
+        if (mCalendarRow.getSymptomText1().equals(symptomNames.get(1))){
+            symptom2.setText(symptomNames.get(1));
+            seekBar2.setProgress(mCalendarRow.getProgress1());
+        }
+        else if (mCalendarRow.getSymptomText2().equals(symptomNames.get(1))){
+            symptom2.setText(symptomNames.get(1));
+            seekBar2.setProgress(mCalendarRow.getProgress2());
+        }
+        else if (mCalendarRow.getSymptomText3().equals(symptomNames.get(1))){
+            symptom2.setText(symptomNames.get(1));
+            seekBar2.setProgress(mCalendarRow.getProgress3());
+        }
+        else if (mCalendarRow.getSymptomText4().equals(symptomNames.get(1))){
+            symptom2.setText(symptomNames.get(1));
+            seekBar2.setProgress(mCalendarRow.getProgress4());
+        }
+        else if (mCalendarRow.getSymptomText5().equals(symptomNames.get(1))){
+            symptom2.setText(symptomNames.get(1));
+            seekBar2.setProgress(mCalendarRow.getProgress5());
+        }
+        else {
+            symptom2.setText(symptomNames.get(1));
+            seekBar2.setProgress(0);
+        }
+
+        if (mCalendarRow.getSymptomText1().equals(symptomNames.get(2))){
+            symptom3.setText(symptomNames.get(2));
+            seekBar3.setProgress(mCalendarRow.getProgress1());
+        }
+        else if (mCalendarRow.getSymptomText2().equals(symptomNames.get(2))){
+            symptom3.setText(symptomNames.get(2));
+            seekBar3.setProgress(mCalendarRow.getProgress2());
+        }
+        else if (mCalendarRow.getSymptomText3().equals(symptomNames.get(2))){
+            symptom3.setText(symptomNames.get(2));
+            seekBar3.setProgress(mCalendarRow.getProgress3());
+        }
+        else if (mCalendarRow.getSymptomText4().equals(symptomNames.get(2))){
+            symptom3.setText(symptomNames.get(2));
+            seekBar3.setProgress(mCalendarRow.getProgress4());
+        }
+        else if (mCalendarRow.getSymptomText5().equals(symptomNames.get(2))){
+            symptom3.setText(symptomNames.get(2));
+            seekBar3.setProgress(mCalendarRow.getProgress5());
+        }
+        else {
+            symptom3.setText(symptomNames.get(2));
+            seekBar3.setProgress(0);
+        }
+
+        if (mCalendarRow.getSymptomText1().equals(symptomNames.get(3))){
+            symptom4.setText(symptomNames.get(3));
+            seekBar4.setProgress(mCalendarRow.getProgress1());
+        }
+        else if (mCalendarRow.getSymptomText2().equals(symptomNames.get(3))){
+            symptom4.setText(symptomNames.get(3));
+            seekBar4.setProgress(mCalendarRow.getProgress2());
+        }
+        else if (mCalendarRow.getSymptomText3().equals(symptomNames.get(3))){
+            symptom4.setText(symptomNames.get(3));
+            seekBar4.setProgress(mCalendarRow.getProgress3());
+        }
+        else if (mCalendarRow.getSymptomText4().equals(symptomNames.get(3))){
+            symptom4.setText(symptomNames.get(3));
+            seekBar4.setProgress(mCalendarRow.getProgress4());
+        }
+        else if (mCalendarRow.getSymptomText5().equals(symptomNames.get(3))){
+            symptom4.setText(symptomNames.get(3));
+            seekBar4.setProgress(mCalendarRow.getProgress5());
+        }
+        else {
+            symptom4.setText(symptomNames.get(3));
+            seekBar4.setProgress(0);
+        }
 
         mDisplayDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog dialog = new DatePickerDialog(
-                        AddActivity4.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        UpdateActivity4.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
@@ -198,7 +309,7 @@ public class AddActivity4 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog dialog = new DatePickerDialog(
-                        AddActivity4.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        UpdateActivity4.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
@@ -210,7 +321,7 @@ public class AddActivity4 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatePickerDialog dialog = new DatePickerDialog(
-                        AddActivity4.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        UpdateActivity4.this, android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener, year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
@@ -272,7 +383,7 @@ public class AddActivity4 extends AppCompatActivity {
                     mCalendarRow.setConcentration(concText.getText().toString().trim());
                 }
                 mDayRepository.insertDayTask(mCalendarRow);
-                Intent i = new Intent(AddActivity4.this, CalendarActivity.class);
+                Intent i = new Intent(UpdateActivity4.this, CalendarActivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
@@ -330,6 +441,25 @@ public class AddActivity4 extends AppCompatActivity {
         else
             tmonth = "";
         return tmonth;
+    }
+
+    private void getSymptomTextArray (){
+        symptomNames.clear();
+        if (PreferenceUtils.getSymptom1(getApplicationContext())){
+            symptomNames.add("Joint pain");
+        }
+        if (PreferenceUtils.getSymptom2(getApplicationContext())){
+            symptomNames.add("Restricted joint movement");
+        }
+        if (PreferenceUtils.getSymptom3(getApplicationContext())){
+            symptomNames.add("Inflammation");
+        }
+        if (PreferenceUtils.getSymptom4(getApplicationContext())){
+            symptomNames.add("Weakness");
+        }
+        if (PreferenceUtils.getSymptom5(getApplicationContext())){
+            symptomNames.add("Fatigue");
+        }
     }
 
 }

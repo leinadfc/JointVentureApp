@@ -35,7 +35,7 @@ public class DaysRecyclerAdapter0 extends RecyclerView.Adapter<DaysRecyclerAdapt
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.day.setText(mCalendarRows.get(i).getDay());
-        viewHolder.month.setText(mCalendarRows.get(i).getMonth());
+        viewHolder.month.setText(getMonthText(mCalendarRows.get(i).getMonth()));
         viewHolder.concentration.setText(mCalendarRows.get(i).getConcentration());
 
     }
@@ -69,5 +69,46 @@ public class DaysRecyclerAdapter0 extends RecyclerView.Adapter<DaysRecyclerAdapt
     }
     public interface OnDayListener{
         void onDayClick(int position);
+    }
+
+    private String getMonthText (String month){
+        String shortMonth = "";
+        if (month.equals("January")){
+            shortMonth = "JAN";
+        }
+        else if (month.equals("February")){
+            shortMonth = "FEB";
+        }
+        else if (month.equals("March")){
+            shortMonth = "MAR";
+        }
+        else if (month.equals("April")){
+            shortMonth = "Apr";
+        }
+        else if (month.equals("May")){
+            shortMonth = "MAY";
+        }
+        else if (month.equals("June")){
+            shortMonth = "JUN";
+        }
+        else if (month.equals("July")){
+            shortMonth = "JUL";
+        }
+        else if (month.equals("August")){
+            shortMonth = "AUG";
+        }
+        else if (month.equals("September")){
+            shortMonth = "SEP";
+        }
+        else if (month.equals("October")){
+            shortMonth = "OCT";
+        }
+        else if (month.equals("November")){
+            shortMonth = "NOV";
+        }
+        else if (month.equals("December")){
+            shortMonth = "DEC";
+        }
+        return shortMonth;
     }
 }

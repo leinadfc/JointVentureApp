@@ -24,6 +24,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
@@ -49,6 +50,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
     private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
     private DaysRecyclerAdapter mDaysRecyclerAdapter;
     private DayRepository mDayRepository;
+    RelativeLayout symptomRelativeLayout;
 
 
     @Override
@@ -66,6 +68,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
             PreferenceUtils.saveFirstTime(false, getApplicationContext());
         }
 
+        symptomRelativeLayout = findViewById(R.id.symptomlayout);
         /// Bottom Navigation View section
         botNavView = findViewById(R.id.bottomNavCal);
         Menu menu = botNavView.getMenu();
@@ -194,7 +197,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
         }
 
         dialogbtn = findViewById(R.id.symptombtn);
-        dialogbtn.setOnClickListener(new View.OnClickListener() {
+        symptomRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

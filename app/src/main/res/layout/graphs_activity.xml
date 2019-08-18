@@ -117,7 +117,8 @@
                             android:text="Joint pain"
                             android:layout_gravity="center"
                             android:gravity="right"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:id="@+id/symptom_1_text"/>
 
 
                         <com.github.mikephil.charting.charts.BarChart
@@ -146,7 +147,8 @@
                             android:text="Fatigue"
                             android:layout_gravity="center"
                             android:gravity="right"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:id="@+id/symptom_2_text"/>
 
 
                         <com.github.mikephil.charting.charts.BarChart
@@ -173,7 +175,8 @@
                             android:text="Weakness"
                             android:layout_gravity="center"
                             android:gravity="right"
-                            android:textSize="12sp"/>
+                            android:textSize="12sp"
+                            android:id="@+id/symptom_3_text"/>
 
 
                         <com.github.mikephil.charting.charts.BarChart

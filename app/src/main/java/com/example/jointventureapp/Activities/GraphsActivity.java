@@ -23,6 +23,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
 import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
@@ -63,6 +64,11 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
     private ArrayList<BarEntry> symptoms2 = new ArrayList<>();
     private ArrayList<BarEntry> symptoms3 = new ArrayList<>();
 
+    private TextView symptomText1;
+    private TextView symptomText2;
+    private TextView symptomText3;
+
+    private ArrayList<String> symptomNames = new ArrayList<>();
 
 
     @Override
@@ -70,7 +76,15 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.graphs_activity);
 
+        symptomText1 = findViewById(R.id.symptom_1_text);
+        symptomText2 = findViewById(R.id.symptom_2_text);
+        symptomText3 = findViewById(R.id.symptom_3_text);
 
+        getSymptomTextArray();
+
+        symptomText1.setText(symptomNames.get(0));
+        symptomText2.setText(symptomNames.get(1));
+        symptomText3.setText(symptomNames.get(2));
 
         monthSpinner = findViewById(R.id.graphsMonthSpinner);
         yearSpinner = findViewById(R.id.graphsYearSpinner);
@@ -517,7 +531,7 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     public void openDialog2(){
-        DialogPage dialogPage = new DialogPage();
+        DialogPageGraphs dialogPage = new DialogPageGraphs();
         dialogPage.show(getSupportFragmentManager(), "Symptoms");
     }
 
@@ -575,11 +589,26 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     private ArrayList<BarEntry> getSymptom1Entries (){
+        getSymptomTextArray();
         symptoms1.clear();
         for (int j = 1; j<32; j++) {
             for (int i = 0; i < mCalendarRows.size(); i++) {
                 if (Integer.parseInt(mCalendarRows.get(i).getDay()) == j){
-                    symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress1()));
+                    if (symptomNames.get(0).equals(mCalendarRows.get(i).getSymptomText1())){
+                        symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress1()));
+                    }
+                    if (symptomNames.get(0).equals(mCalendarRows.get(i).getSymptomText2())){
+                        symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress2()));
+                    }
+                    if (symptomNames.get(0).equals(mCalendarRows.get(i).getSymptomText3())){
+                        symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress3()));
+                    }
+                    if (symptomNames.get(0).equals(mCalendarRows.get(i).getSymptomText4())){
+                        symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress4()));
+                    }
+                    if (symptomNames.get(0).equals(mCalendarRows.get(i).getSymptomText5())){
+                        symptoms1.add(new BarEntry(j, mCalendarRows.get(i).getProgress5()));
+                    }
                 }
                 else {
                     symptoms1.add(new BarEntry(j, 0));
@@ -590,12 +619,27 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
         return symptoms1;
     }
 
+
     private ArrayList<BarEntry> getSymptom2Entries (){
         symptoms2.clear();
         for (int j = 1; j<32; j++) {
             for (int i = 0; i < mCalendarRows.size(); i++) {
                 if (Integer.parseInt(mCalendarRows.get(i).getDay()) == j){
-                    symptoms2.add(new BarEntry(j, mCalendarRows.get(i).getProgress2()));
+                    if (symptomNames.get(1).equals(mCalendarRows.get(i).getSymptomText1())){
+                        symptoms2.add(new BarEntry(j, mCalendarRows.get(i).getProgress1()));
+                    }
+                    if (symptomNames.get(1).equals(mCalendarRows.get(i).getSymptomText2())){
+                        symptoms2.add(new BarEntry(j, mCalendarRows.get(i).getProgress2()));
+                    }
+                    if (symptomNames.get(1).equals(mCalendarRows.get(i).getSymptomText3())){
+                        symptoms2.add(new BarEntry(j, mCalendarRows.get(i).getProgress3()));
+                    }
+                    if (symptomNames.get(1).equals(mCalendarRows.get(i).getSymptomText4())){
+                        symptoms2.add(new BarEntry(j, mCalendarRows.get(i).getProgress4()));
+                    }
+                    if (symptomNames.get(1).equals(mCalendarRows.get(i).getSymptomText5())){
+                        symptoms2.add(new BarEntry(j, mCalendarRows.get(i).getProgress5()));
+                    }
                 }
                 else {
                     symptoms2.add(new BarEntry(j, 0));
@@ -611,7 +655,21 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
         for (int j = 1; j<32; j++) {
             for (int i = 0; i < mCalendarRows.size(); i++) {
                 if (Integer.parseInt(mCalendarRows.get(i).getDay()) == j){
-                    symptoms3.add(new BarEntry(j, mCalendarRows.get(i).getProgress3()));
+                    if (symptomNames.get(2).equals(mCalendarRows.get(i).getSymptomText1())){
+                        symptoms3.add(new BarEntry(j, mCalendarRows.get(i).getProgress1()));
+                    }
+                    if (symptomNames.get(2).equals(mCalendarRows.get(i).getSymptomText2())){
+                        symptoms3.add(new BarEntry(j, mCalendarRows.get(i).getProgress2()));
+                    }
+                    if (symptomNames.get(2).equals(mCalendarRows.get(i).getSymptomText3())){
+                        symptoms3.add(new BarEntry(j, mCalendarRows.get(i).getProgress3()));
+                    }
+                    if (symptomNames.get(2).equals(mCalendarRows.get(i).getSymptomText4())){
+                        symptoms3.add(new BarEntry(j, mCalendarRows.get(i).getProgress4()));
+                    }
+                    if (symptomNames.get(2).equals(mCalendarRows.get(i).getSymptomText5())){
+                        symptoms3.add(new BarEntry(j, mCalendarRows.get(i).getProgress5()));
+                    }
                 }
                 else {
                     symptoms3.add(new BarEntry(j, 0));
@@ -621,6 +679,7 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
 
         return symptoms3;
     }
+
     private String getSpinnerMonth (int month){
         String spinnerMonth;
         if (month == 0)
@@ -663,6 +722,25 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
             spinnerYear = "2020";
 
         return spinnerYear;
+    }
+
+    private void getSymptomTextArray (){
+        symptomNames.clear();
+        if (PreferenceUtils.getSymptom1(getApplicationContext())){
+            symptomNames.add("Joint pain");
+        }
+        if (PreferenceUtils.getSymptom2(getApplicationContext())){
+            symptomNames.add("Restricted joint movement");
+        }
+        if (PreferenceUtils.getSymptom3(getApplicationContext())){
+            symptomNames.add("Inflammation");
+        }
+        if (PreferenceUtils.getSymptom4(getApplicationContext())){
+            symptomNames.add("Weakness");
+        }
+        if (PreferenceUtils.getSymptom5(getApplicationContext())){
+            symptomNames.add("Fatigue");
+        }
     }
 
 

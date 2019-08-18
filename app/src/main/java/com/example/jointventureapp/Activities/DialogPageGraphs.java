@@ -2,27 +2,20 @@ package com.example.jointventureapp.Activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
-import android.widget.EditText;
 
 import com.example.jointventureapp.R;
 import com.example.jointventureapp.Utils.PreferenceUtils;
 
-public class DialogPage extends DialogFragment {
+public class DialogPageGraphs extends DialogFragment {
 
     CheckBox jointPain;
     CheckBox movementJoints;
@@ -88,20 +81,29 @@ public class DialogPage extends DialogFragment {
                         PreferenceUtils.saveSymptom4(weakness.isChecked(), getContext());
                         PreferenceUtils.saveSymptom5(fatigue.isChecked(), getContext());
                         PreferenceUtils.saveSymptomCount(getCount(), getContext());
-                        if (PreferenceUtils.getSymptomCount(getContext()) > 2) {
-                            Intent i = new Intent(getActivity(), CalendarActivity.class);
+
+                        if (PreferenceUtils.getSymptomCount(getContext()) == 5) {
+                            Intent i = new Intent(getActivity(), GraphsActivity5.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getContext()) == 4){
+                            Intent i = new Intent(getActivity(), GraphsActivity4.class);
+                            startActivity(i);
+                        }
+                        else if (PreferenceUtils.getSymptomCount(getContext()) == 3){
+                            Intent i = new Intent(getActivity(), GraphsActivity.class);
                             startActivity(i);
                         }
                         else if (PreferenceUtils.getSymptomCount(getContext()) == 2){
-                            Intent i = new Intent(getActivity(), CalendarActivity2.class);
+                            Intent i = new Intent(getActivity(), GraphsActivity2.class);
                             startActivity(i);
                         }
                         else if (PreferenceUtils.getSymptomCount(getContext()) == 1){
-                            Intent i = new Intent(getActivity(), CalendarActivity1.class);
+                            Intent i = new Intent(getActivity(), GraphsActivity1.class);
                             startActivity(i);
                         }
                         else if (PreferenceUtils.getSymptomCount(getContext()) == 0){
-                            Intent i = new Intent(getActivity(), CalendarActivity0.class);
+                            Intent i = new Intent(getActivity(), GraphsActivity0.class);
                             startActivity(i);
                         }
                         getActivity().finish();
