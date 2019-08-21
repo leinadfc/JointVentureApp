@@ -112,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
 
                 Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
 
         });
@@ -127,16 +126,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        /// About us icon working ///
-        TextView infoicon = findViewById(R.id.aboutusicon);
-        infoicon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, AboutUs.class);
-                // set the new task and clear flags
-                startActivity(i);
-            }
-        });
 
         /// Instagram icon workin ///
         TextView instagramtext = findViewById(R.id.instagramicon);
@@ -234,9 +223,22 @@ public class LoginActivity extends AppCompatActivity {
                             PreferenceUtils.saveSymptom5(true , getApplicationContext());
                             PreferenceUtils.saveFirstTime(true, getApplicationContext());
                             PreferenceUtils.saveSymptomCount(5, getApplicationContext());
-                            Intent i = new Intent(LoginActivity.this, CalendarActivity.class);
-                            startActivity(i);
-                            overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
+                            if (PreferenceUtils.getSymptomCount(getApplicationContext()) > 2) {
+                                Intent i = new Intent(LoginActivity.this, CalendarActivity.class);
+                                startActivity(i);
+                            }
+                            else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 2){
+                                Intent i = new Intent(LoginActivity.this, CalendarActivity2.class);
+                                startActivity(i);
+                            }
+                            else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 1) {
+                                Intent i = new Intent(LoginActivity.this, CalendarActivity1.class);
+                                startActivity(i);
+                            }
+                            else if (PreferenceUtils.getSymptomCount(getApplicationContext()) == 0){
+                                Intent i = new Intent(LoginActivity.this, CalendarActivity0.class);
+                                startActivity(i);
+                            }
                             finish();
                         }
 

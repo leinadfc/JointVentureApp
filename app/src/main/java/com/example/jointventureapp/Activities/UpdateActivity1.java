@@ -52,6 +52,8 @@ public class UpdateActivity1 extends AppCompatActivity {
 
     private ArrayList<String> symptomNames = new ArrayList<>();
 
+    private EditText comments;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,7 @@ public class UpdateActivity1 extends AppCompatActivity {
         mDisplayDay = findViewById(R.id.daytext);
         mDisplayMonth = findViewById(R.id.monthtext);
         mDisplayYear = findViewById(R.id.yeartext);
+        comments = findViewById(R.id.comments_text);
 
         if (getIntent().hasExtra("selected_day")) {
             mCalendarRow = getIntent().getParcelableExtra("selected_day");
@@ -113,6 +116,9 @@ public class UpdateActivity1 extends AppCompatActivity {
         }
 
         symptom1.setText(symptomsArray.get(0));
+        if (mCalendarRow.getComments() != null){
+            comments.setText(mCalendarRow.getComments());
+        }
 
         mDayRepository = new DayRepository(this);
 
@@ -281,6 +287,8 @@ public class UpdateActivity1 extends AppCompatActivity {
                 mCalendarRow.setProgress4(0);
                 mCalendarRow.setProgress5(0);
 
+                mCalendarRow.setComments(comments.getText().toString());
+
                 mCalendarRow.setSymptomText1(symptom1.getText().toString());
                 mCalendarRow.setSymptomText2(notUsedArray.get(0));
                 mCalendarRow.setSymptomText3(notUsedArray.get(1));
@@ -297,7 +305,6 @@ public class UpdateActivity1 extends AppCompatActivity {
                 mDayRepository.updateDay(mCalendarRow);
                 Intent i = new Intent(UpdateActivity1.this, CalendarActivity1.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 

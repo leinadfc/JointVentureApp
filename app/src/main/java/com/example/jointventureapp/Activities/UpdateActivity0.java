@@ -43,7 +43,7 @@ public class UpdateActivity0 extends AppCompatActivity {
     private EditText concText;
 
 
-
+    private EditText comments;
     private DayRepository mDayRepository;
     private CalendarRow mCalendarRow;
 
@@ -55,6 +55,7 @@ public class UpdateActivity0 extends AppCompatActivity {
         mDisplayDay = findViewById(R.id.daytext);
         mDisplayMonth = findViewById(R.id.monthtext);
         mDisplayYear = findViewById(R.id.yeartext);
+        comments = findViewById(R.id.comments_text);
         if (getIntent().hasExtra("selected_day")) {
             mCalendarRow = getIntent().getParcelableExtra("selected_day");
         }
@@ -128,6 +129,9 @@ public class UpdateActivity0 extends AppCompatActivity {
         mDisplayDay.setText(mCalendarRow.getDay());
         mDisplayMonth.setText(mCalendarRow.getMonth());
         mDisplayYear.setText(mCalendarRow.getYear());
+        if (mCalendarRow.getComments() != null){
+            comments.setText(mCalendarRow.getComments());
+        }
 
         concText.setText(mCalendarRow.getConcentration());
 
@@ -215,6 +219,8 @@ public class UpdateActivity0 extends AppCompatActivity {
                 mCalendarRow.setSymptomText4("Weakness");
                 mCalendarRow.setSymptomText5("Fatigue");
 
+                mCalendarRow.setComments(comments.getText().toString());
+
                 if (concText.getText().toString().isEmpty()){
                     mCalendarRow.setConcentration("0");
                 }
@@ -225,7 +231,6 @@ public class UpdateActivity0 extends AppCompatActivity {
                 mDayRepository.updateDay(mCalendarRow);
                 Intent i = new Intent(UpdateActivity0.this, CalendarActivity0.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 

@@ -54,6 +54,7 @@ public class AddActivity2 extends AppCompatActivity {
 
     private DayRepository mDayRepository;
     private CalendarRow mCalendarRow;
+    private EditText comments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,8 @@ public class AddActivity2 extends AppCompatActivity {
 
         symptom1 = findViewById(R.id.symptom1text);
         symptom2 = findViewById(R.id.symptom2text);
+
+        comments = findViewById(R.id.comments_text);
 
         ArrayList<String> symptomsArray = new ArrayList<>();
         final ArrayList<String> notUsedArray = new ArrayList<>();
@@ -259,6 +262,7 @@ public class AddActivity2 extends AppCompatActivity {
                 mCalendarRow.setMonth(mDisplayMonth.getText().toString());
                 mCalendarRow.setYear(mDisplayYear.getText().toString());
                 mCalendarRow.setDay(mDisplayDay.getText().toString().trim());
+                mCalendarRow.setComments(comments.getText().toString());
                 if (concText.getText().toString().isEmpty()){
                     mCalendarRow.setConcentration("0");
                 }
@@ -268,7 +272,6 @@ public class AddActivity2 extends AppCompatActivity {
                 mDayRepository.insertDayTask(mCalendarRow);
                 Intent i = new Intent(AddActivity2.this, CalendarActivity2.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 

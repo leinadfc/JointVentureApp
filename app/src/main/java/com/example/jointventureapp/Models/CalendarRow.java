@@ -57,11 +57,14 @@ public class CalendarRow implements Parcelable {
     @ColumnInfo (name = "progress5")
     private int progress5;
 
+    @ColumnInfo (name = "comments")
+    private String comments;
+
 
     public CalendarRow(String day, String month, String concentration, String symptomText1,
                        String symptomText2, String symptomText3, int progress1,
                        int progress2, int progress3, int progress4, int progress5, String symptomText4,
-                       String symptomText5, String year) {
+                       String symptomText5, String year, String comments) {
         this.day = day;
         this.month = month;
         this.concentration = concentration;
@@ -76,6 +79,7 @@ public class CalendarRow implements Parcelable {
         this.progress4 = progress4;
         this.progress5 = progress5;
         this.year = year;
+        this.comments = comments;
     }
 
     @Ignore
@@ -99,6 +103,7 @@ public class CalendarRow implements Parcelable {
         progress4 = in.readInt();
         progress5 = in.readInt();
         year = in.readString();
+        comments = in.readString();
     }
 
     public static final Creator<CalendarRow> CREATOR = new Creator<CalendarRow>() {
@@ -233,19 +238,12 @@ public class CalendarRow implements Parcelable {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return "CalendarRow{" +
-                "day='" + day + '\'' +
-                ", month='" + month + '\'' +
-                ", concentration='" + concentration + '\'' +
-                ", symptomText1='" + symptomText1 + '\'' +
-                ", symptomText2='" + symptomText2 + '\'' +
-                ", symptomText3='" + symptomText3 + '\'' +
-                ", progress1=" + progress1 +
-                ", progress2=" + progress2 +
-                ", progress3=" + progress3 +
-                '}';
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
     @Override
@@ -270,5 +268,6 @@ public class CalendarRow implements Parcelable {
         dest.writeInt(progress4);
         dest.writeInt(progress5);
         dest.writeString(year);
+        dest.writeString(comments);
     }
 }

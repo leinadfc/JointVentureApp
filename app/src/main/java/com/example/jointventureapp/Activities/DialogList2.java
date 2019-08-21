@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,6 +33,8 @@ public class DialogList2 extends DialogFragment {
 
     private ArrayList<String> symptomNames = new ArrayList<>();
 
+    private EditText comments;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -43,7 +46,7 @@ public class DialogList2 extends DialogFragment {
 
         mProgressBar1 = view.findViewById(R.id.progress_bar_1_dialog);
         mProgressBar2 = view.findViewById(R.id.progress_bar_2_dialog);
-
+        comments = view.findViewById(R.id.comments_text);
 
         symptom1 = view.findViewById(R.id.dialog_symptom_1);
         symptom2 = view.findViewById(R.id.dialog_symptom_2);
@@ -117,6 +120,12 @@ public class DialogList2 extends DialogFragment {
             day = calendarRow.getDay();
             month = calendarRow.getMonth();
             year = calendarRow.getYear();
+            if (calendarRow.getComments() != null) {
+                comments.setText(calendarRow.getComments());
+            }
+            else {
+                comments.setText("");
+            }
 
 
         }

@@ -108,7 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent i = new Intent(RegisterActivity.this, CalendarActivity.class);
                     startActivity(i);
 
-                    overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
+
 
                 } catch (JSONException e) {
                     Log.e("MYAPP", "unexpected JSON exception", e);
@@ -119,7 +119,6 @@ public class RegisterActivity extends AppCompatActivity {
 
         /// Instagram Facebook About us buttons
         TextView facebookreg = findViewById(R.id.facebookiconreg);
-        TextView aboutusreg = findViewById(R.id.aboutusiconreg);
         TextView instagramreg = findViewById(R.id.instagramiconreg);
 
         /// Facebook button listener
@@ -135,13 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         /// About us button listener
-        aboutusreg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(RegisterActivity.this, AboutUs.class);
-                startActivity(i);
-            }
-        });
+
         /// Instagram button listener
         instagramreg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,7 +156,6 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         finish();
-        overridePendingTransition(R.anim.slideindown, R.anim.slideoutdown);
     }
 
     /// Facebook intent ///
@@ -246,7 +238,6 @@ public class RegisterActivity extends AppCompatActivity {
                             /// Page navigation
                             Intent i = new Intent(RegisterActivity.this, MainActivity.class);
                             startActivity(i);
-                            overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
 
                         }
 

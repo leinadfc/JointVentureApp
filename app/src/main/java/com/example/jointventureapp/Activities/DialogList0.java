@@ -20,6 +20,7 @@ public class DialogList0 extends DialogFragment {
 
     private TextView concentration;
     private CalendarRow calendarRow;
+    private TextView comments;
 
     @NonNull
     @Override
@@ -29,6 +30,7 @@ public class DialogList0 extends DialogFragment {
         View view = inflater.inflate(R.layout.list_dialog0, null);
 
         concentration = view.findViewById(R.id.dialog_concentration_item);
+        comments = view.findViewById(R.id.comments_text);
         Bundle arguments = getArguments();
         String day;
         String month;
@@ -42,7 +44,12 @@ public class DialogList0 extends DialogFragment {
             day = calendarRow.getDay();
             month = calendarRow.getMonth();
             year = calendarRow.getYear();
-
+            if (calendarRow.getComments() != null) {
+                comments.setText(calendarRow.getComments());
+            }
+            else {
+                comments.setText("");
+            }
 
         }
 

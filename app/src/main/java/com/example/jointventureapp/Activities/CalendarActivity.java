@@ -26,14 +26,23 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
 import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
 import com.example.jointventureapp.Adapters.DaysRecyclerAdapter;
+import com.example.jointventureapp.Application.AnaApplication;
 import com.example.jointventureapp.Models.CalendarRow;
 import com.example.jointventureapp.R;
 import com.example.jointventureapp.Utils.PreferenceUtils;
 import com.example.jointventureapp.persistence.DayRepository;
+
+import com.github.nkzawa.socketio.client.Socket;
+import com.github.nkzawa.emitter.Emitter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -47,16 +56,46 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
     private BottomNavigationView botNavView;
     private ImageView dialogbtn;
 
+    private RelativeLayout refreshRelativeLayout;
+
+    private Socket mSocket;
+
+
+
     private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
     private DaysRecyclerAdapter mDaysRecyclerAdapter;
     private DayRepository mDayRepository;
     RelativeLayout symptomRelativeLayout;
+
+    private CalendarRow serverCalendarRow;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
+
+        AnaApplication app = (AnaApplication) getApplication();
+
+        refreshRelativeLayout = findViewById(R.id.refreshlayout);
+
+        mSocket = app.getSocket();
+        mSocket.on("patientData", onNewDays );
+        mSocket.connect();
+        serverCalendarRow = new CalendarRow();
+
+        try {
+            JSONObject request = new JSONObject();
+            request.put("email", PreferenceUtils.getEmail(getApplicationContext()));
+            Log.d("EMAAAAAAAIL", PreferenceUtils.getEmail(getApplicationContext()));
+            mSocket.emit("database2app", request);
+
+
+        } catch (JSONException e) {
+            Log.e("MYAPP", "unexpected JSON exception", e);
+            throw new RuntimeException(e);
+        }
+        mSocket.emit("database2app", PreferenceUtils.getEmail(getApplicationContext()));
 
         monthSpinner = findViewById(R.id.mspinner);
         yearSpinner = findViewById(R.id.yspinner);
@@ -158,6 +197,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
         ArrayList<CustomSpinnerItems> customYearList = new ArrayList<>();
         customYearList.add(new CustomSpinnerItems("2018"));
         customYearList.add(new CustomSpinnerItems("2019"));
+        /// delete this
         customYearList.add(new CustomSpinnerItems("2020"));
 
         CustomSpinnerAdapter customSpinnerAdapter = new CustomSpinnerAdapter(this, customMonthList);
@@ -240,7 +280,74 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
 
             }
         });
+
+        refreshRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    JSONObject request = new JSONObject();
+                    request.put("email", PreferenceUtils.getEmail(getApplicationContext()));
+                    mSocket.emit("database2app", request);
+
+
+                } catch (JSONException e) {
+                    Log.e("MYAPP", "unexpected JSON exception", e);
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
+
+    Emitter.Listener onNewDays = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("ENTERED", "ENTEREEEEEED");
+                    JSONArray newDaysArray = (JSONArray) args[0];
+
+                    try {
+                        Log.d("ENTERED JSON SHIT", "HEEEEEEY");
+                        for (int i = 0; i<args.length; i++) {
+                            String concentration = newDaysArray.getJSONObject(i).getString("concentration");
+                            String day = newDaysArray.getJSONObject(i).getString("day");
+                            Log.d("DATAAAAAAAAA", day);
+                            String month = newDaysArray.getJSONObject(i).getString("month");
+                            String year = newDaysArray.getJSONObject(i).getString("year");
+
+
+                            serverCalendarRow.setConcentration(concentration);
+                            serverCalendarRow.setDay(day);
+                            serverCalendarRow.setMonth(month);
+                            serverCalendarRow.setYear(year);
+                            serverCalendarRow.setProgress1(0);
+                            serverCalendarRow.setProgress2(0);
+                            serverCalendarRow.setProgress3(0);
+                            serverCalendarRow.setProgress4(0);
+                            serverCalendarRow.setProgress5(0);
+                            serverCalendarRow.setSymptomText1("Joint pain");
+                            serverCalendarRow.setSymptomText2("Restricted joint movement");
+                            serverCalendarRow.setSymptomText3("Inflammation");
+                            serverCalendarRow.setSymptomText4("Weakness");
+                            serverCalendarRow.setSymptomText5("Fatigue");
+                            serverCalendarRow.setComments("");
+
+                            mDayRepository.insertDayTask(serverCalendarRow);
+                        }
+                        mDaysRecyclerAdapter.notifyDataSetChanged();
+
+                    }
+
+                    catch (JSONException e){
+                        Log.d("NOT JSON SHIT", "HEEEEEEY");
+                        Toast noserver = Toast.makeText(getApplicationContext(), "No server connection", Toast.LENGTH_LONG);
+                        noserver.show();
+                    }
+                }
+            });
+        }
+    };
 
 
     /// Clicking outside edit text removes focus from edit text ///
@@ -336,36 +443,6 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
         recyclerView.setAdapter(mDaysRecyclerAdapter);
     }
 
-    private void insertFakeRows(){
-        /// Just dummy data for the RecyclerView///
-        String mDay[] = {"19", "20", "21", "22", "23", "24", "24", "24", "24", "24", "24", "24", "24", "24"};
-        String mMonth[] = {"JUL", "AUG", "SEP", "OCT", "NOV", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC", "DEC"};
-        String mConc[] = {"20", "30", "40", "50", "60", "70", "70", "70", "70", "70", "70", "70", "70", "70"};
-        String mSym1[] = {"Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1", "Symptom 1"};
-        int mProg1[] = {0, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3 };
-        int mProg2[] = {5, 1, 2, 3, 0, 2, 1, 2, 3, 4, 5, 1, 2, 3};
-        int mProg3[] = {5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3 };
-        int mProg4[] = {1, 3, 5, 1, 2, 4, 1, 0, 2, 5, 3, 2, 1, 5 };
-        for (int i = 0; i<mDay.length; i++) {
-            CalendarRow calendarRow = new CalendarRow();
-            calendarRow.setDay(mDay[i]);
-            calendarRow.setMonth(mMonth[i]);
-            calendarRow.setConcentration(mConc[i]);
-            calendarRow.setSymptomText1("Joint pain");
-            calendarRow.setSymptomText2("Restricted joint movement");
-            calendarRow.setSymptomText3("Inflammation");
-            calendarRow.setProgress1(mProg1[i]);
-            calendarRow.setProgress2(mProg1[i]);
-            calendarRow.setProgress3(mProg1[i]);
-            calendarRow.setProgress4(mProg4[i]);
-            calendarRow.setProgress5(mProg4[i]);
-            calendarRow.setSymptomText4("Weakness");
-            calendarRow.setSymptomText5("Fatigue");
-            calendarRow.setYear("2019");
-            mCalendarRows.add(calendarRow);
-        }
-        mDaysRecyclerAdapter.notifyDataSetChanged();
-    }
 
     @Override
     public void onDayClick(int position) {
@@ -386,6 +463,13 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
                 mDaysRecyclerAdapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSocket.off("auth_login", onNewDays);
+        //mSocket.disconnect();
     }
 
     private String getSpinnerMonth (int month){

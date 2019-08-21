@@ -457,7 +457,6 @@ public class GraphsActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     public void onBackPressed() {
         finish();
-        overridePendingTransition(R.anim.slideindown, R.anim.slideoutdown);
     }
 
     /// Clicking outside edit text removes focus from edit text ///

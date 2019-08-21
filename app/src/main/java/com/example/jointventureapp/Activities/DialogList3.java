@@ -33,6 +33,7 @@ public class DialogList3 extends DialogFragment {
     private CalendarRow calendarRow;
 
     private ArrayList<String> symptomNames = new ArrayList<>();
+    private TextView comments;
 
     @NonNull
     @Override
@@ -47,7 +48,7 @@ public class DialogList3 extends DialogFragment {
         ProgressBar1 = view.findViewById(R.id.progress_bar_1_dialog);
         mProgressBar2 = view.findViewById(R.id.progress_bar_2_dialog);
         mProgressBar3 = view.findViewById(R.id.progress_bar_3_dialog);
-
+        comments = view.findViewById(R.id.comments_text);
 
         symptom1 = view.findViewById(R.id.dialog_symptom_1);
         symptom2 = view.findViewById(R.id.dialog_symptom_2);
@@ -149,6 +150,12 @@ public class DialogList3 extends DialogFragment {
             day = calendarRow.getDay();
             month = calendarRow.getMonth();
             year = calendarRow.getYear();
+            if (calendarRow.getComments() != null) {
+                comments.setText(calendarRow.getComments());
+            }
+            else {
+                comments.setText("");
+            }
 
 
         }

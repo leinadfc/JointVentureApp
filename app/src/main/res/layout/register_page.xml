@@ -80,7 +80,7 @@
                 android:backgroundTint="@android:color/transparent"
                 android:gravity="left"
                 android:hint="@string/Name"
-                />
+                android:textCursorDrawable="@color/White"/>
         </LinearLayout>
 
         <!-- Separation Line between Username and Password -->
@@ -124,7 +124,7 @@
                 android:backgroundTint="@android:color/transparent"
                 android:gravity="left"
                 android:hint="@string/CreateUsername"
-                />
+                android:textCursorDrawable="@color/White"/>
         </LinearLayout>
 
         <!-- Separation Line between Username and Password -->
@@ -168,7 +168,8 @@
                 android:backgroundTint="@android:color/transparent"
                 android:hint="@string/CreatePassword"
                 android:textColorHint="@color/White"
-                android:gravity="left"/>
+                android:gravity="left"
+                android:textCursorDrawable="@color/White"/>
         </LinearLayout>
 
         <!-- Separation Line between Username and Password -->
@@ -213,8 +214,7 @@
                 android:hint="@string/RepeatPassword"
                 android:textColorHint="@color/White"
                 android:gravity="left"
-
-                />
+                android:textCursorDrawable="@color/White"/>
         </LinearLayout>
 
         <!-- Separation Line between Username and Password -->
@@ -258,7 +258,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_marginTop="35dp">
+        android:layout_marginTop="50dp">
         <!-- Facebook icon -->
         <TextView
             android:id="@+id/facebookiconreg"
@@ -267,8 +267,13 @@
             android:text="&#xf09a;"
             android:textSize="35sp"
             app:fontFamily="@font/fontawesome"
-            android:textColor="@color/White"
-            android:layout_marginRight="25dp"/>
+            android:textColor="@color/White" />
+
+        <RelativeLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
 
         <!-- Instagram Icon -->
         <TextView
@@ -278,21 +283,10 @@
             android:text="&#xf16d;"
             android:textSize="35sp"
             app:fontFamily="@font/fontawesome"
-            android:textColor="@color/White"
-            android:layout_marginRight="25dp"
-            />
+            android:textColor="@color/White" />
 
-        <!-- Information Icon -->
-        <TextView
-            android:id="@+id/aboutusiconreg"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="&#xf129;"
-            android:textSize="35sp"
-            app:fontFamily="@font/fontawesome"
-            android:textColor="@color/White"
 
-            />
+
     </LinearLayout>
 
 

@@ -23,11 +23,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
 import com.example.jointventureapp.Adapters.CustomSpinnerYearAdapter;
 import com.example.jointventureapp.Adapters.DaysRecyclerAdapter1;
+import com.example.jointventureapp.Application.AnaApplication;
 import com.example.jointventureapp.Models.CalendarRow;
 import com.example.jointventureapp.R;
 import com.example.jointventureapp.Utils.PreferenceUtils;
@@ -36,6 +39,12 @@ import com.example.jointventureapp.persistence.DayRepository;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import com.github.nkzawa.socketio.client.Socket;
+import com.github.nkzawa.emitter.Emitter;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class CalendarActivity1 extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DaysRecyclerAdapter1.OnDayListener {
 
@@ -49,11 +58,38 @@ public class CalendarActivity1 extends AppCompatActivity implements AdapterView.
     private DaysRecyclerAdapter1 mDaysRecyclerAdapter1;
     private DayRepository mDayRepository1;
 
+    private Socket mSocket;
+    private RelativeLayout refreshRelativeLayout;
+    private CalendarRow serverCalendarRow;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
+
+
+        AnaApplication app = (AnaApplication) getApplication();
+
+        refreshRelativeLayout = findViewById(R.id.refreshlayout);
+
+        mSocket = app.getSocket();
+        mSocket.on("patientData", onNewDays );
+        mSocket.connect();
+        serverCalendarRow = new CalendarRow();
+
+        try {
+            JSONObject request = new JSONObject();
+            request.put("email", PreferenceUtils.getEmail(getApplicationContext()));
+            Log.d("EMAAAAAAAIL", PreferenceUtils.getEmail(getApplicationContext()));
+            mSocket.emit("database2app", request);
+
+
+        } catch (JSONException e) {
+            Log.e("MYAPP", "unexpected JSON exception", e);
+            throw new RuntimeException(e);
+        }
+        mSocket.emit("database2app", PreferenceUtils.getEmail(getApplicationContext()));
 
         monthSpinner = findViewById(R.id.mspinner);
         yearSpinner = findViewById(R.id.yspinner);
@@ -226,7 +262,74 @@ public class CalendarActivity1 extends AppCompatActivity implements AdapterView.
 
             }
         });
+
+        refreshRelativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    JSONObject request = new JSONObject();
+                    request.put("email", PreferenceUtils.getEmail(getApplicationContext()));
+                    mSocket.emit("database2app", request);
+
+
+                } catch (JSONException e) {
+                    Log.e("MYAPP", "unexpected JSON exception", e);
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
+
+    Emitter.Listener onNewDays = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d("ENTERED", "ENTEREEEEEED");
+                    JSONArray newDaysArray = (JSONArray) args[0];
+
+                    try {
+                        Log.d("ENTERED JSON SHIT", "HEEEEEEY");
+                        for (int i = 0; i<args.length; i++) {
+                            String concentration = newDaysArray.getJSONObject(i).getString("concentration");
+                            String day = newDaysArray.getJSONObject(i).getString("day");
+                            Log.d("DATAAAAAAAAA", day);
+                            String month = newDaysArray.getJSONObject(i).getString("month");
+                            String year = newDaysArray.getJSONObject(i).getString("year");
+
+
+                            serverCalendarRow.setConcentration(concentration);
+                            serverCalendarRow.setDay(day);
+                            serverCalendarRow.setMonth(month);
+                            serverCalendarRow.setYear(year);
+                            serverCalendarRow.setProgress1(0);
+                            serverCalendarRow.setProgress2(0);
+                            serverCalendarRow.setProgress3(0);
+                            serverCalendarRow.setProgress4(0);
+                            serverCalendarRow.setProgress5(0);
+                            serverCalendarRow.setSymptomText1("Joint pain");
+                            serverCalendarRow.setSymptomText2("Restricted joint movement");
+                            serverCalendarRow.setSymptomText3("Inflammation");
+                            serverCalendarRow.setSymptomText4("Weakness");
+                            serverCalendarRow.setSymptomText5("Fatigue");
+                            serverCalendarRow.setComments("");
+
+                            mDayRepository1.insertDayTask(serverCalendarRow);
+                        }
+                        mDaysRecyclerAdapter1.notifyDataSetChanged();
+
+                    }
+
+                    catch (JSONException e){
+                        Log.d("NOT JSON SHIT", "HEEEEEEY");
+                        Toast noserver = Toast.makeText(getApplicationContext(), "No server connection", Toast.LENGTH_LONG);
+                        noserver.show();
+                    }
+                }
+            });
+        }
+    };
 
 
     /// Clicking outside edit text removes focus from edit text ///
@@ -384,4 +487,12 @@ public class CalendarActivity1 extends AppCompatActivity implements AdapterView.
 
         return spinnerYear;
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSocket.off("auth_login", onNewDays);
+        //mSocket.disconnect();
+    }
+
 }

@@ -50,6 +50,8 @@ public class AddActivity1 extends AppCompatActivity {
     private DayRepository mDayRepository;
     private CalendarRow mCalendarRow;
 
+    private EditText comments;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,7 @@ public class AddActivity1 extends AppCompatActivity {
 
         concText = findViewById(R.id.concentrationtext);
         seekBar1 = findViewById(R.id.seekbar_1);
+        comments = findViewById(R.id.comments_text);
 
 
         concText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
@@ -249,6 +252,7 @@ public class AddActivity1 extends AppCompatActivity {
                 mCalendarRow.setSymptomText3(notUsedArray.get(1));
                 mCalendarRow.setSymptomText4(notUsedArray.get(2));
                 mCalendarRow.setSymptomText5(notUsedArray.get(3));
+                mCalendarRow.setComments(comments.getText().toString());
 
 
                 if (concText.getText().toString().isEmpty()){
@@ -260,7 +264,6 @@ public class AddActivity1 extends AppCompatActivity {
                 mDayRepository.insertDayTask(mCalendarRow);
                 Intent i = new Intent(AddActivity1.this, CalendarActivity1.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 

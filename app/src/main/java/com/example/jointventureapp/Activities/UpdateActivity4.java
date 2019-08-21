@@ -61,6 +61,8 @@ public class UpdateActivity4 extends AppCompatActivity {
     private DayRepository mDayRepository;
     private CalendarRow mCalendarRow;
 
+    private EditText comments;
+
     private ArrayList<String> symptomNames = new ArrayList<>();
 
     @Override
@@ -71,6 +73,7 @@ public class UpdateActivity4 extends AppCompatActivity {
         mDisplayDay = findViewById(R.id.daytext);
         mDisplayMonth = findViewById(R.id.monthtext);
         mDisplayYear = findViewById(R.id.yeartext);
+        comments = findViewById(R.id.comments_text);
 
         if (getIntent().hasExtra("selected_day")) {
             mCalendarRow = getIntent().getParcelableExtra("selected_day");
@@ -125,6 +128,10 @@ public class UpdateActivity4 extends AppCompatActivity {
         symptom2.setText(symptomArray.get(1));
         symptom3.setText(symptomArray.get(2));
         symptom4.setText(symptomArray.get(3));
+
+        if (mCalendarRow.getComments() != null){
+            comments.setText(mCalendarRow.getComments());
+        }
 
         concText.setRawInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
 
@@ -371,6 +378,8 @@ public class UpdateActivity4 extends AppCompatActivity {
                 mCalendarRow.setSymptomText4(symptom4.getText().toString());
                 mCalendarRow.setSymptomText5(notUsed);
 
+                mCalendarRow.setComments(comments.getText().toString());
+
                 mCalendarRow.setMonth(mDisplayMonth.getText().toString());
                 Log.d("month", mDisplayMonth.getText().toString());
                 mCalendarRow.setYear(mDisplayYear.getText().toString());
@@ -385,7 +394,6 @@ public class UpdateActivity4 extends AppCompatActivity {
                 mDayRepository.insertDayTask(mCalendarRow);
                 Intent i = new Intent(UpdateActivity4.this, CalendarActivity.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 

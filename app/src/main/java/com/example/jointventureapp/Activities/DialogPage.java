@@ -73,7 +73,7 @@ public class DialogPage extends DialogFragment {
             fatigue.setChecked(false);
         }
 
-        builder.setView(view).setTitle("Customise your symptoms").setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+        builder.setView(view).setTitle("Customise your symptoms").setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -106,7 +106,13 @@ public class DialogPage extends DialogFragment {
                         }
                         getActivity().finish();
                     }
-                });
+                }).setNegativeButton("Logout", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ConfirmationFragment confirmationFragment = new ConfirmationFragment();
+                confirmationFragment.show(getFragmentManager(), "LogOut");
+            }
+        });
 
         return builder.create();
     }

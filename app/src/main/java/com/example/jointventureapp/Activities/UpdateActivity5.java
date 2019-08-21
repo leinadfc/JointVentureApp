@@ -57,6 +57,7 @@ public class UpdateActivity5 extends AppCompatActivity {
     private TextView symptom3;
     private TextView symptom4;
     private TextView symptom5;
+    private EditText comments;
 
     private DayRepository mDayRepository;
     private CalendarRow mCalendarRow;
@@ -71,6 +72,7 @@ public class UpdateActivity5 extends AppCompatActivity {
         mDisplayDay = findViewById(R.id.daytext);
         mDisplayMonth = findViewById(R.id.monthtext);
         mDisplayYear = findViewById(R.id.yeartext);
+        comments = findViewById(R.id.comments_text);
 
         if (getIntent().hasExtra("selected_day")) {
             mCalendarRow = getIntent().getParcelableExtra("selected_day");
@@ -161,6 +163,9 @@ public class UpdateActivity5 extends AppCompatActivity {
         mDisplayDay.setText(mCalendarRow.getDay());
         mDisplayMonth.setText(mCalendarRow.getMonth());
         mDisplayYear.setText(mCalendarRow.getYear());
+        if (mCalendarRow.getComments() != null){
+            comments.setText(mCalendarRow.getComments());
+        }
         concText.setText(mCalendarRow.getConcentration());
         if (mCalendarRow.getSymptomText1().equals(symptomNames.get(0))){
             symptom1.setText(symptomNames.get(0));
@@ -367,6 +372,8 @@ public class UpdateActivity5 extends AppCompatActivity {
                 mCalendarRow.setSymptomText4("Weakness");
                 mCalendarRow.setSymptomText5("Fatigue");
 
+                mCalendarRow.setComments(comments.getText().toString());
+
                 mCalendarRow.setMonth(mDisplayMonth.getText().toString());
                 mCalendarRow.setYear(mDisplayYear.getText().toString());
                 mCalendarRow.setDay(mDisplayDay.getText().toString().trim());
@@ -394,8 +401,6 @@ public class UpdateActivity5 extends AppCompatActivity {
                     Intent i = new Intent(UpdateActivity5.this, CalendarActivity0.class);
                     startActivity(i);
                 }
-
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 

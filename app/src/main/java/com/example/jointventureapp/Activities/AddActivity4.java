@@ -58,6 +58,8 @@ public class AddActivity4 extends AppCompatActivity {
     private TextView symptom3;
     private TextView symptom4;
 
+    private EditText comments;
+
     private DayRepository mDayRepository;
     private CalendarRow mCalendarRow;
 
@@ -76,6 +78,8 @@ public class AddActivity4 extends AppCompatActivity {
         seekBar2 = findViewById(R.id.seekbar_2);
         seekBar3 = findViewById(R.id.seekbar_3);
         seekBar4 = findViewById(R.id.seekbar_4);
+
+        comments = findViewById(R.id.comments_text);
 
         symptom1 = findViewById(R.id.symptom1text);
         symptom2 = findViewById(R.id.symptom2text);
@@ -260,6 +264,8 @@ public class AddActivity4 extends AppCompatActivity {
                 mCalendarRow.setSymptomText4(symptom4.getText().toString());
                 mCalendarRow.setSymptomText5(notUsed);
 
+                mCalendarRow.setComments(comments.getText().toString());
+
                 mCalendarRow.setMonth(mDisplayMonth.getText().toString());
                 Log.d("month", mDisplayMonth.getText().toString());
                 mCalendarRow.setYear(mDisplayYear.getText().toString());
@@ -274,7 +280,6 @@ public class AddActivity4 extends AppCompatActivity {
                 mDayRepository.insertDayTask(mCalendarRow);
                 Intent i = new Intent(AddActivity4.this, CalendarActivity.class);
                 startActivity(i);
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 

@@ -100,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent in = new Intent(MainActivity.this, AddActivity.class);
                 startActivity(in);
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 
@@ -110,7 +109,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent in = new Intent(MainActivity.this, CalendarActivity.class);
                 startActivity(in);
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 
@@ -120,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent in = new Intent(MainActivity.this, GraphsActivity.class);
                 startActivity(in);
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 

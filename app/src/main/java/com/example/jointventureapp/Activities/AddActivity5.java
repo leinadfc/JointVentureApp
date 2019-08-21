@@ -57,6 +57,8 @@ public class AddActivity5 extends AppCompatActivity {
     private TextView symptom4;
     private TextView symptom5;
 
+    private EditText comments;
+
     private DayRepository mDayRepository;
     private CalendarRow mCalendarRow;
 
@@ -76,6 +78,8 @@ public class AddActivity5 extends AppCompatActivity {
         seekBar3 = findViewById(R.id.seekbar_3);
         seekBar4 = findViewById(R.id.seekbar_4);
         seekBar5 = findViewById(R.id.seekbar_5);
+
+        comments = findViewById(R.id.comments_text);
 
         symptom1 = findViewById(R.id.symptom1text);
         symptom2 = findViewById(R.id.symptom2text);
@@ -230,6 +234,8 @@ public class AddActivity5 extends AppCompatActivity {
                 mCalendarRow.setSymptomText4("Weakness");
                 mCalendarRow.setSymptomText5("Fatigue");
 
+                mCalendarRow.setComments(comments.getText().toString());
+
                 mCalendarRow.setMonth(mDisplayMonth.getText().toString());
                 mCalendarRow.setYear(mDisplayYear.getText().toString());
                 mCalendarRow.setDay(mDisplayDay.getText().toString().trim());
@@ -258,7 +264,6 @@ public class AddActivity5 extends AppCompatActivity {
                     startActivity(i);
                 }
 
-                overridePendingTransition(R.anim.slideinup, R.anim.slideoutup);
             }
         });
 
