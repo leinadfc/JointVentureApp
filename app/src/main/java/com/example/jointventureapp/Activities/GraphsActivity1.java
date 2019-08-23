@@ -22,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -60,6 +61,7 @@ public class GraphsActivity1 extends AppCompatActivity implements AdapterView.On
 
     private ArrayList<BarEntry> concentrations = new ArrayList<>();
     private ArrayList<BarEntry> symptoms1 = new ArrayList<>();
+    private RelativeLayout symptomsRelativeLayout;
 
     private TextView symptom1Text;
 
@@ -73,6 +75,7 @@ public class GraphsActivity1 extends AppCompatActivity implements AdapterView.On
         symptom1Text.setText(getSymptom());
         monthSpinner = findViewById(R.id.graphsMonthSpinner);
         yearSpinner = findViewById(R.id.graphsYearSpinner);
+        symptomsRelativeLayout = findViewById(R.id.cog_relative_layout);
 
         mDayRepository = new DayRepository(this);
 
@@ -261,14 +264,10 @@ public class GraphsActivity1 extends AppCompatActivity implements AdapterView.On
 
 
 
-        /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
+
 
         dialogbtn2 = findViewById(R.id.graphSymptombtn);
-        dialogbtn2.setOnClickListener(new View.OnClickListener() {
+       symptomsRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

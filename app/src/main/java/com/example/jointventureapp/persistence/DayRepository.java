@@ -1,17 +1,20 @@
 package com.example.jointventureapp.persistence;
 
+import android.app.Activity;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
 
 import com.example.jointventureapp.Asynk.InsertAsynkTask;
+import com.example.jointventureapp.Asynk.RetrieveFastAsyncTask;
 import com.example.jointventureapp.Asynk.UpdateAsynkTask;
 import com.example.jointventureapp.Models.CalendarRow;
 
 import java.util.List;
 
-public class DayRepository {
+public class DayRepository implements AsyncResponse{
 
     private DayDatabase mDayDatabase;
+    private List<CalendarRow> mCalendarRows;
 
     public DayRepository(Context context) {
         mDayDatabase = DayDatabase.getInstance(context);
@@ -30,14 +33,12 @@ public class DayRepository {
         return mDayDatabase.getDayDao().getDays(month, year);
     }
 
-    public LiveData<List<CalendarRow>> retrieveDaysDefaultTask() {
-
-        return mDayDatabase.getDayDao().getDefaultData();
-    }
-
     public void deleteDay (CalendarRow calendarRow){
 
     }
 
-
+    @Override
+    public void processFinish(List<CalendarRow> calendarRows) {
+        mCalendarRows = calendarRows;
+    }
 }

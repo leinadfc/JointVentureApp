@@ -39,6 +39,7 @@ public class ConfirmationFragment extends DialogFragment {
                         PreferenceUtils.saveEmail("", getContext());
                         PreferenceUtils.savePassword("", getContext());
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     }
                 }).setTitle("Logout");

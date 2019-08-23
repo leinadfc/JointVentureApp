@@ -1,6 +1,7 @@
 package com.example.jointventureapp.Activities;
 
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -73,6 +74,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -98,6 +100,8 @@ public class AddActivity extends AppCompatActivity {
     private CalendarRow mCalendarRow;
 
     private EditText comments;
+
+    private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -261,11 +265,6 @@ public class AddActivity extends AppCompatActivity {
 
 
 
-        /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
 
 
 
@@ -312,12 +311,40 @@ public class AddActivity extends AppCompatActivity {
                 else{
                     mCalendarRow.setConcentration(concText.getText().toString().trim());
                 }
-                mDayRepository.insertDayTask(mCalendarRow);
+                retrieveDays(mDisplayMonth.getText().toString(), mDisplayYear.getText().toString());
                 Intent i = new Intent(AddActivity.this, CalendarActivity.class);
                 startActivity(i);
             }
         });
 
+    }
+
+    private void retrieveDays(String month, String year){
+        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow>>() {
+            @Override
+            public void onChanged(@Nullable List<CalendarRow> calendarRows) {
+                if (mCalendarRows.size()>0){
+                    mCalendarRows.clear();
+                }
+                if (calendarRows != null){
+                    mCalendarRows.addAll(calendarRows);
+                }
+                boolean repeated = false;
+                for (int i = 0; i<mCalendarRows.size(); i++){
+                    if (mCalendarRows.get(i).getDay().equals(mCalendarRow.getDay())){
+                        mCalendarRow.setId(mCalendarRows.get(i).getId());
+                        repeated = true;
+                    }
+                }
+
+                if (repeated){
+                    mDayRepository.updateDay(mCalendarRow);
+                }
+                else {
+                    mDayRepository.insertDayTask(mCalendarRow);
+                }
+            }
+        });
     }
 
 

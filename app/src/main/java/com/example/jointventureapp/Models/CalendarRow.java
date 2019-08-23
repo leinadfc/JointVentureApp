@@ -8,7 +8,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 @Entity(tableName = "CalendarRows")
-public class CalendarRow implements Parcelable {
+public class CalendarRow implements Parcelable, Comparable {
     /// progressbar object
 
     @PrimaryKey(autoGenerate = true)
@@ -269,5 +269,12 @@ public class CalendarRow implements Parcelable {
         dest.writeInt(progress5);
         dest.writeString(year);
         dest.writeString(comments);
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        int compareDay = Integer.parseInt(((CalendarRow)o).getDay());
+
+        return Integer.parseInt(this.day)-compareDay;
     }
 }

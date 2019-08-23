@@ -58,6 +58,7 @@ public class UpdateActivity0 extends AppCompatActivity {
         comments = findViewById(R.id.comments_text);
         if (getIntent().hasExtra("selected_day")) {
             mCalendarRow = getIntent().getParcelableExtra("selected_day");
+            Log.d("AAAAAAAAAAAA", "BBBBBBBBBBBBBBB");
         }
 
         concText = findViewById(R.id.concentrationtext);
@@ -174,12 +175,6 @@ public class UpdateActivity0 extends AppCompatActivity {
 
 
 
-
-        /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
 
 
 

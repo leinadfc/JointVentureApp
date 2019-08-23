@@ -76,6 +76,7 @@ public class UpdateActivity5 extends AppCompatActivity {
 
         if (getIntent().hasExtra("selected_day")) {
             mCalendarRow = getIntent().getParcelableExtra("selected_day");
+            Log.d("AAAAAAAAAAAA", "BBBBBBBBBBBBBBB");
             getSymptomTextArray();
         }
 
@@ -332,11 +333,6 @@ public class UpdateActivity5 extends AppCompatActivity {
 
 
 
-        /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
 
 
 
@@ -384,7 +380,7 @@ public class UpdateActivity5 extends AppCompatActivity {
                 else{
                     mCalendarRow.setConcentration(concText.getText().toString().trim());
                 }
-                mDayRepository.insertDayTask(mCalendarRow);
+                mDayRepository.updateDay(mCalendarRow);
                 if (PreferenceUtils.getSymptomCount(getApplicationContext()) > 2) {
                     Intent i = new Intent(UpdateActivity5.this, CalendarActivity.class);
                     startActivity(i);

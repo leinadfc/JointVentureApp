@@ -46,6 +46,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class CalendarActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DaysRecyclerAdapter.OnDayListener {
@@ -230,11 +231,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
 
 
 
-        /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
+
 
         dialogbtn = findViewById(R.id.symptombtn);
         symptomRelativeLayout.setOnClickListener(new View.OnClickListener() {
@@ -300,16 +297,19 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
 
     Emitter.Listener onNewDays = new Emitter.Listener() {
         @Override
-        public void call(final Object... args) {
+        public void call(final Object[] args) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Log.d("ENTERED", "ENTEREEEEEED");
-                    JSONArray newDaysArray = (JSONArray) args[0];
+                    /*Log.d("ENTERED", "ENTEREEEEEED");
+                    JSONObject newDaysObject = (JSONObject) args[0];
+                    //JSONArray newDaysArray = newDaysObject.getJSONArray("everything");
+
+
 
                     try {
-                        Log.d("ENTERED JSON SHIT", "HEEEEEEY");
-                        for (int i = 0; i<args.length; i++) {
+                        Log.d("ENTERED JSON SHIT", "lolaso");
+                            for (int i = 0; i<newDaysArray.length(); i++) {
                             String concentration = newDaysArray.getJSONObject(i).getString("concentration");
                             String day = newDaysArray.getJSONObject(i).getString("day");
                             Log.d("DATAAAAAAAAA", day);
@@ -343,7 +343,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
                         Log.d("NOT JSON SHIT", "HEEEEEEY");
                         Toast noserver = Toast.makeText(getApplicationContext(), "No server connection", Toast.LENGTH_LONG);
                         noserver.show();
-                    }
+                    }*/
                 }
             });
         }
@@ -460,6 +460,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
                 if (calendarRows != null){
                     mCalendarRows.addAll(calendarRows);
                 }
+                Collections.sort(mCalendarRows);
                 mDaysRecyclerAdapter.notifyDataSetChanged();
             }
         });

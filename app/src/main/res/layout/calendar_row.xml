@@ -23,7 +23,7 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:background="@drawable/layoutcal"
-            android:gravity="left"
+            android:gravity="center"
             android:orientation="vertical"
             android:padding="10dp">
 

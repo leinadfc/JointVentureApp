@@ -308,11 +308,6 @@ public class UpdateActivity3 extends AppCompatActivity {
 
 
 
-        /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
 
 
 
@@ -359,7 +354,7 @@ public class UpdateActivity3 extends AppCompatActivity {
                 else{
                     mCalendarRow.setConcentration(concText.getText().toString().trim());
                 }
-                mDayRepository.insertDayTask(mCalendarRow);
+                mDayRepository.updateDay(mCalendarRow);
                 Intent i = new Intent(UpdateActivity3.this, CalendarActivity.class);
                 startActivity(i);
             }

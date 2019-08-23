@@ -1,6 +1,8 @@
 package com.example.jointventureapp.Activities;
 
 import android.app.DatePickerDialog;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
@@ -26,12 +29,18 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.jointventureapp.Application.AnaApplication;
+import com.example.jointventureapp.Asynk.RetrieveFastAsyncTask;
 import com.example.jointventureapp.Models.CalendarRow;
 import com.example.jointventureapp.R;
 import com.example.jointventureapp.Utils.PreferenceUtils;
+import com.example.jointventureapp.persistence.DayDao;
 import com.example.jointventureapp.persistence.DayRepository;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AddActivity5 extends AppCompatActivity {
 
@@ -61,11 +70,15 @@ public class AddActivity5 extends AppCompatActivity {
 
     private DayRepository mDayRepository;
     private CalendarRow mCalendarRow;
+    private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_activity_5_symptoms);
+
+
+        Log.d("Holaaaaaa", "Putoooo");
 
         mDisplayDay = findViewById(R.id.daytext);
         mDisplayMonth = findViewById(R.id.monthtext);
@@ -195,10 +208,10 @@ public class AddActivity5 extends AppCompatActivity {
 
 
         /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+       /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
+        }*/
 
 
 
@@ -221,10 +234,10 @@ public class AddActivity5 extends AppCompatActivity {
         adbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 mCalendarRow.setProgress1(seekBar1.getProgress());
                 mCalendarRow.setProgress2(seekBar2.getProgress());
                 mCalendarRow.setProgress3(seekBar3.getProgress());
-                Log.d("lolaso",Integer.toString(seekBar4.getProgress()) );
                 mCalendarRow.setProgress4(seekBar4.getProgress());
                 mCalendarRow.setProgress5(seekBar5.getProgress());
 
@@ -246,7 +259,8 @@ public class AddActivity5 extends AppCompatActivity {
                 else{
                     mCalendarRow.setConcentration(concText.getText().toString().trim());
                 }
-                mDayRepository.insertDayTask(mCalendarRow);
+                retrieveDays(mDisplayMonth.getText().toString(), mDisplayYear.getText().toString());
+                Log.d("Live dataaaaaa", "live dataaaa");
                 if (PreferenceUtils.getSymptomCount(getApplicationContext()) > 2) {
                     Intent i = new Intent(AddActivity5.this, CalendarActivity.class);
                     startActivity(i);
@@ -263,10 +277,36 @@ public class AddActivity5 extends AppCompatActivity {
                     Intent i = new Intent(AddActivity5.this, CalendarActivity0.class);
                     startActivity(i);
                 }
-
             }
         });
+    }
 
+    private void retrieveDays(String month, String year){
+        mDayRepository.retrieveDaysTask(month, year).observe(this, new Observer<List<CalendarRow>>() {
+            @Override
+            public void onChanged(@Nullable List<CalendarRow> calendarRows) {
+                if (mCalendarRows.size()>0){
+                    mCalendarRows.clear();
+                }
+                if (calendarRows != null){
+                    mCalendarRows.addAll(calendarRows);
+                }
+                boolean repeated = false;
+                for (int i = 0; i<mCalendarRows.size(); i++){
+                    if (mCalendarRows.get(i).getDay().equals(mCalendarRow.getDay())){
+                        mCalendarRow.setId(mCalendarRows.get(i).getId());
+                        repeated = true;
+                    }
+                }
+
+                if (repeated){
+                    mDayRepository.updateDay(mCalendarRow);
+                }
+                else {
+                    mDayRepository.insertDayTask(mCalendarRow);
+                }
+            }
+        });
     }
 
 
@@ -320,5 +360,4 @@ public class AddActivity5 extends AppCompatActivity {
             tmonth = "";
         return tmonth;
     }
-
 }

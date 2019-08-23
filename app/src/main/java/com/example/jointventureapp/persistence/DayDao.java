@@ -23,6 +23,9 @@ public interface DayDao {
     @Query("SELECT * FROM calendarrows WHERE month LIKE:selectedMonth AND year LIKE:selectedYear")
     LiveData<List<CalendarRow>> getDays(String selectedMonth, String selectedYear);
 
+    @Query("SELECT * FROM calendarrows WHERE month LIKE:selectedMonth AND year LIKE:selectedYear")
+    List<CalendarRow> getDaysFast(String selectedMonth, String selectedYear);
+
     @Delete
     int delete (CalendarRow[] days);
 

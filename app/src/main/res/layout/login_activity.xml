@@ -40,18 +40,17 @@
         android:layout_marginTop="20dp"
 
         android:orientation="vertical"
-        >
+        android:gravity="left">
         <!-- Username container -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="left"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:paddingBottom="5dp"
             android:orientation="horizontal"
-            android:layout_marginLeft="100dp"
-            android:layout_marginRight="100dp">
+>
 
             <!-- User Icon -->
             <TextView
@@ -88,8 +87,7 @@
             android:layout_height="1dp"
             android:background="@color/White"
             android:layout_marginTop="-15dp"
-            android:layout_marginRight="100dp"
-            android:layout_marginLeft="100dp"/>
+/>
 
         <!-- Password container -->
         <LinearLayout

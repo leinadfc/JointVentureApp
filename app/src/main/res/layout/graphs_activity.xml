@@ -31,12 +31,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:background="@drawable/dtrial2"
-                    android:paddingLeft="10dp">
+                    android:paddingLeft="10dp"
+                    android:paddingRight="20dp">
 
                     <Spinner
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/graphsMonthSpinner">
+                        android:id="@+id/graphsMonthSpinner"
+                        android:layout_marginRight="20dp">
 
                     </Spinner>
 
@@ -52,15 +54,24 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginTop="10dp">
+                        android:gravity="right">
 
-                        <ImageView
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_cogwheel_outline"
-                            android:id="@+id/graphSymptombtn"/>
+                            android:id="@+id/cog_relative_layout"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_cogwheel_outline"
+                                android:id="@+id/graphSymptombtn"/>
+
+                        </RelativeLayout>
+
 
                     </RelativeLayout>
 
@@ -68,129 +79,130 @@
                 </LinearLayout>
 
                 <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="100"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/VLightGrey">
-
-
-                    <com.example.jointventureapp.Activities.VerticalTextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:text="ADL Concentration"
-                        android:layout_gravity="center"
-                        android:gravity="bottom"
-                        android:textSize="12sp"
-                        android:layout_marginLeft="10dp"/>
-
-                        <com.github.mikephil.charting.charts.BarChart
-                            android:layout_width="0dp"
-                            android:layout_weight="95"
-                            android:layout_height="200dp"
-                            android:id="@+id/concchart">
-                        </com.github.mikephil.charting.charts.BarChart>
-
-                </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="100"
-                        android:layout_marginTop="50dp">
-
-                        <TextView
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="20"
-                            android:text="Joint pain"
-                            android:layout_gravity="center"
-                            android:gravity="right"
-                            android:textSize="12sp"
-                            android:id="@+id/symptom_1_text"/>
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginTop="20dp"
+                            android:background="@color/VLightGrey">
 
 
-                        <com.github.mikephil.charting.charts.BarChart
-                            android:layout_width="0dp"
-                            android:layout_height="80dp"
-                            android:id="@+id/symptom1chart"
-                            android:background="@color/White"
-                            android:layout_weight="80">
-                        </com.github.mikephil.charting.charts.BarChart>
+                            <com.example.jointventureapp.Activities.VerticalTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="5"
+                                android:text="ADL Concentration"
+                                android:layout_gravity="center"
+                                android:gravity="bottom"
+                                android:textSize="12sp"
+                                android:layout_marginLeft="10dp"/>
 
-                    </LinearLayout>
+                            <com.github.mikephil.charting.charts.BarChart
+                                android:layout_width="0dp"
+                                android:layout_weight="95"
+                                android:layout_height="300dp"
+                                android:id="@+id/concchart">
+                            </com.github.mikephil.charting.charts.BarChart>
 
+                        </LinearLayout>
 
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="100"
-                        android:layout_marginTop="20dp">
-
-                        <TextView
-                            android:layout_width="0dp"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="20"
-                            android:text="Fatigue"
-                            android:layout_gravity="center"
-                            android:gravity="right"
-                            android:textSize="12sp"
-                            android:id="@+id/symptom_2_text"/>
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginTop="50dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="20"
+                                android:text="Symptom1"
+                                android:layout_gravity="center"
+                                android:gravity="right"
+                                android:textSize="12sp"
+                                android:id="@+id/symptom_1_text"/>
 
 
-                        <com.github.mikephil.charting.charts.BarChart
-                            android:layout_width="0dp"
-                            android:layout_height="80dp"
-                            android:id="@+id/symptom2chart"
-                            android:background="@color/White"
-                            android:layout_weight="80">
-                        </com.github.mikephil.charting.charts.BarChart>
+                            <com.github.mikephil.charting.charts.BarChart
+                                android:layout_width="0dp"
+                                android:layout_height="160dp"
+                                android:id="@+id/symptom1chart"
+                                android:background="@color/White"
+                                android:layout_weight="80">
+                            </com.github.mikephil.charting.charts.BarChart>
 
-                    </LinearLayout>
+                        </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="100"
-                        android:layout_marginTop="20dp">
 
-                        <TextView
-                            android:layout_width="0dp"
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="160dp"
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginTop="20dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="20"
+                                android:text="Symptom2"
+                                android:layout_gravity="center"
+                                android:gravity="right"
+                                android:textSize="12sp"
+                                android:id="@+id/symptom_2_text"/>
+
+
+                            <com.github.mikephil.charting.charts.BarChart
+                                android:layout_width="0dp"
+                                android:layout_height="80dp"
+                                android:id="@+id/symptom2chart"
+                                android:background="@color/White"
+                                android:layout_weight="80">
+                            </com.github.mikephil.charting.charts.BarChart>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="20"
-                            android:text="Weakness"
-                            android:layout_gravity="center"
-                            android:gravity="right"
-                            android:textSize="12sp"
-                            android:id="@+id/symptom_3_text"/>
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginTop="20dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="20"
+                                android:text="Symptom3"
+                                android:layout_gravity="center"
+                                android:gravity="right"
+                                android:textSize="12sp"
+                                android:id="@+id/symptom_3_text"/>
 
 
-                        <com.github.mikephil.charting.charts.BarChart
-                            android:layout_width="0dp"
-                            android:layout_height="80dp"
-                            android:id="@+id/symptom3chart"
-                            android:background="@color/White"
-                            android:layout_weight="80">
-                        </com.github.mikephil.charting.charts.BarChart>
+                            <com.github.mikephil.charting.charts.BarChart
+                                android:layout_width="0dp"
+                                android:layout_height="160dp"
+                                android:id="@+id/symptom3chart"
+                                android:background="@color/White"
+                                android:layout_weight="80">
+                            </com.github.mikephil.charting.charts.BarChart>
+                        </LinearLayout>
+
                     </LinearLayout>
-                    </LinearLayout>
-                    </ScrollView>
+                </ScrollView>
 
-                </LinearLayout>
+            </LinearLayout>
 
         </RelativeLayout>
 

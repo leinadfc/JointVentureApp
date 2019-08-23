@@ -41,6 +41,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 public class CalendarActivity0 extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DaysRecyclerAdapter0.OnDayListener {
@@ -215,11 +216,7 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
 
         recyclerView = findViewById(R.id.calendarlist);
 
-        /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
+
 
         dialogbtn = findViewById(R.id.symptombtn);
         dialogbtn.setOnClickListener(new View.OnClickListener() {
@@ -445,6 +442,7 @@ public class CalendarActivity0 extends AppCompatActivity implements AdapterView.
                 if (calendarRows != null){
                     mCalendarRows.addAll(calendarRows);
                 }
+                Collections.sort(mCalendarRows);
                 mDaysRecyclerAdapter.notifyDataSetChanged();
             }
         });

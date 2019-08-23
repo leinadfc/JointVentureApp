@@ -14,12 +14,13 @@ import com.example.jointventureapp.R;
 import com.example.jointventureapp.Utils.PreferenceUtils;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class DaysRecyclerAdapter extends RecyclerView.Adapter<DaysRecyclerAdapter.ViewHolder>  {
 
     private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
     private OnDayListener mOnDayListener;
-
     private ArrayList<String> symptomNames = new ArrayList<>();
 
     public DaysRecyclerAdapter(ArrayList<CalendarRow> calendarRows, OnDayListener onDayListener) {

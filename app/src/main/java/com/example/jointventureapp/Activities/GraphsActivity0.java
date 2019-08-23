@@ -21,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.example.jointventureapp.Adapters.CustomSpinnerAdapter;
@@ -52,6 +53,7 @@ public class GraphsActivity0 extends AppCompatActivity implements AdapterView.On
     private DayRepository mDayRepository;
 
     private ArrayList<BarEntry> concentrations = new ArrayList<>();
+    private RelativeLayout symptomsRelativeLayout;
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class GraphsActivity0 extends AppCompatActivity implements AdapterView.On
         yearSpinner = findViewById(R.id.graphsYearSpinner);
 
         mDayRepository = new DayRepository(this);
+        symptomsRelativeLayout = findViewById(R.id.cog_relative_layout);
 
         botNavView = findViewById(R.id.bottomNavGraph);
         Menu menu = botNavView.getMenu();
@@ -252,14 +255,10 @@ public class GraphsActivity0 extends AppCompatActivity implements AdapterView.On
 
 
 
-        /// Status bar transparent
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window w = getWindow();
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }
+
 
         dialogbtn2 = findViewById(R.id.graphSymptombtn);
-        dialogbtn2.setOnClickListener(new View.OnClickListener() {
+        symptomsRelativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

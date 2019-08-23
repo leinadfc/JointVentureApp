@@ -24,19 +24,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="20dp">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:background="@drawable/dtrial2"
-                    android:paddingLeft="5dp">
+                    android:paddingLeft="10dp"
+                    android:paddingRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp">
+
 
                     <Spinner
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
                         android:id="@+id/mspinner">
 
                     </Spinner>
@@ -53,7 +57,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="left"
+                        android:gravity="right"
                         android:orientation="horizontal">
                         <RelativeLayout
                             android:layout_width="wrap_content"
@@ -61,11 +65,12 @@
                             android:paddingLeft="5dp"
                             android:paddingTop="10dp"
                             android:paddingRight="8dp"
-                            android:id="@+id/refreshlayout">
+                            android:id="@+id/refreshlayout"
+                            android:layout_marginRight="20dp">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:src="@drawable/ic_loading"
                                 android:id="@+id/refreshbtn"/>
                         </RelativeLayout>
@@ -98,6 +103,7 @@
                     android:layout_height="match_parent"
                     android:id="@+id/calendarlist"
                     android:orientation="vertical">
+
                 </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
