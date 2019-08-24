@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="20dp"
     android:paddingBottom="16dp"
     tools:context=".Activities.RegisterActivity"
     android:orientation="vertical"
@@ -20,14 +19,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_height="500dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/logo1"/>
+            android:background="@drawable/logo_ada"/>
     </RelativeLayout>
 
     <!-- Username+Password+Icons container -->
@@ -36,11 +33,10 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
 
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="100dp"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        >
+        android:layout_marginBottom="10dp" >
 
         <!-- Name Container -->
         <LinearLayout

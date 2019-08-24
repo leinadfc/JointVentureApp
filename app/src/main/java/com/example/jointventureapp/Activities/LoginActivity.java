@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         ////////////////////////////////////////////////////////////////
         if (PreferenceUtils.getEmail(getApplicationContext()) != null && PreferenceUtils.getEmail(getApplicationContext()) != ""){
             if (PreferenceUtils.getPassword(getApplicationContext()) != null && PreferenceUtils.getPassword(getApplicationContext()) != ""){
-                if (PreferenceUtils.getSymptomCount(getApplicationContext()) > 2) {
+                /*if (PreferenceUtils.getSymptomCount(getApplicationContext()) > 2) {
                     Intent i = new Intent(LoginActivity.this, CalendarActivity.class);
                     startActivity(i);
                 }
@@ -74,11 +74,11 @@ public class LoginActivity extends AppCompatActivity {
                     startActivity(i);
                 }
 
-                finish();
+                finish();*/
 
 
-                /*Toast wrong = Toast.makeText(getApplicationContext(), "It would login automatically" , Toast.LENGTH_LONG);
-                wrong.show();*/
+                Toast wrong = Toast.makeText(getApplicationContext(), "It would login automatically" , Toast.LENGTH_LONG);
+                wrong.show();
             }
         }
 

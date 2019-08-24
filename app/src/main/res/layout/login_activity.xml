@@ -16,13 +16,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        >
+        android:layout_height="500dp">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/logo1"/>
+            android:background="@drawable/logo_ada"/>
     </RelativeLayout>
 
 
@@ -35,8 +34,8 @@
 
 
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="20dp"
 
         android:orientation="vertical"
@@ -97,7 +96,8 @@
 
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
 
             <!-- Password icon -->
             <TextView
