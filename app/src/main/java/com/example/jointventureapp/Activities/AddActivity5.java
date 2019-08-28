@@ -14,7 +14,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -277,6 +279,28 @@ public class AddActivity5 extends AppCompatActivity {
                     Intent i = new Intent(AddActivity5.this, CalendarActivity0.class);
                     startActivity(i);
                 }
+            }
+        });
+
+        concText.addTextChangedListener(new TextWatcher() {
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            public void afterTextChanged(Editable s) {
+
+                for(int i = s.length(); i > 0; i--) {
+
+                    if(s.subSequence(i-1, i).toString().equals("\n"))
+                        s.replace(i-1, i, "");
+                }
+
+                String myTextString = s.toString();
             }
         });
     }

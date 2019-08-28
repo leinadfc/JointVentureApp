@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
 
+import com.example.jointventureapp.Asynk.DeleteAsynkTask;
 import com.example.jointventureapp.Asynk.InsertAsynkTask;
 import com.example.jointventureapp.Asynk.RetrieveFastAsyncTask;
 import com.example.jointventureapp.Asynk.UpdateAsynkTask;
@@ -34,7 +35,7 @@ public class DayRepository implements AsyncResponse{
     }
 
     public void deleteDay (CalendarRow calendarRow){
-
+        new DeleteAsynkTask(mDayDatabase.getDayDao()).execute(calendarRow);
     }
 
     @Override

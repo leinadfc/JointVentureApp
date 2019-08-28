@@ -64,6 +64,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
 
 
     private ArrayList<CalendarRow> mCalendarRows = new ArrayList<>();
+    private ArrayList<CalendarRow> mServerCalendarRows = new ArrayList<>();
     private DaysRecyclerAdapter mDaysRecyclerAdapter;
     private DayRepository mDayRepository;
     RelativeLayout symptomRelativeLayout;
@@ -301,26 +302,30 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    /*Log.d("ENTERED", "ENTEREEEEEED");
+
                     JSONObject newDaysObject = (JSONObject) args[0];
-                    //JSONArray newDaysArray = newDaysObject.getJSONArray("everything");
-
-
-
                     try {
-                        Log.d("ENTERED JSON SHIT", "lolaso");
-                            for (int i = 0; i<newDaysArray.length(); i++) {
-                            String concentration = newDaysArray.getJSONObject(i).getString("concentration");
-                            String day = newDaysArray.getJSONObject(i).getString("day");
-                            Log.d("DATAAAAAAAAA", day);
-                            String month = newDaysArray.getJSONObject(i).getString("month");
-                            String year = newDaysArray.getJSONObject(i).getString("year");
+
+                        JSONArray newDaysArray = newDaysObject.getJSONArray("everything");
+                        JSONArray concentrations = new JSONArray();
+                        JSONArray days = new JSONArray();
+                        JSONArray months = new JSONArray();
+                        JSONArray years = new JSONArray();
 
 
-                            serverCalendarRow.setConcentration(concentration);
-                            serverCalendarRow.setDay(day);
-                            serverCalendarRow.setMonth(month);
-                            serverCalendarRow.setYear(year);
+                        concentrations = newDaysArray.getJSONObject(0).getJSONArray("concentration");
+                        days = newDaysArray.getJSONObject(3).getJSONArray("day");
+                        months = newDaysArray.getJSONObject(2).getJSONArray("month");
+                        years = newDaysArray.getJSONObject(1).getJSONArray("year");
+
+
+                        Log.d("concentrations size", Integer.toString(concentrations.length()));
+                        for (int i = 0; i<concentrations.length(); i++) {
+                            serverCalendarRow = new CalendarRow();
+                            serverCalendarRow.setConcentration(Integer.toString(concentrations.getInt(i)));
+                            serverCalendarRow.setDay(Integer.toString(days.getInt(i)));
+                            serverCalendarRow.setMonth(getServerMonth(months.getString(i)));
+                            serverCalendarRow.setYear(Integer.toString(years.getInt(i)));
                             serverCalendarRow.setProgress1(0);
                             serverCalendarRow.setProgress2(0);
                             serverCalendarRow.setProgress3(0);
@@ -333,17 +338,17 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
                             serverCalendarRow.setSymptomText5("Fatigue");
                             serverCalendarRow.setComments("");
 
+                            // insert or update
                             mDayRepository.insertDayTask(serverCalendarRow);
-                        }
-                        mDaysRecyclerAdapter.notifyDataSetChanged();
 
+                        }
                     }
 
                     catch (JSONException e){
-                        Log.d("NOT JSON SHIT", "HEEEEEEY");
+
                         Toast noserver = Toast.makeText(getApplicationContext(), "No server connection", Toast.LENGTH_LONG);
                         noserver.show();
-                    }*/
+                    }
                 }
             });
         }
@@ -432,6 +437,7 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
             dialogList.setArguments(bundle);
             dialogList.show(getSupportFragmentManager(), "Extended list item");
         }
+        //mDayRepository.deleteDay(mCalendarRows.get(position));
     }
 
     private void initRecyclerView (){
@@ -503,6 +509,48 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
         return spinnerMonth;
     }
 
+    private String getServerMonth (String serverMonth){
+        String month;
+        if (serverMonth.equals("1")){
+            month = "January";
+        }
+        else if (serverMonth.equals("2")){
+            month = "February";
+        }
+        else if (serverMonth.equals("3")){
+            month = "March";
+        }
+        else if (serverMonth.equals("4")){
+            month = "April";
+        }
+        else if (serverMonth.equals("5")){
+            month = "May";
+        }
+        else if (serverMonth.equals("6")){
+            month = "June";
+        }
+        else if (serverMonth.equals("7")){
+            month = "July";
+        }
+        else if (serverMonth.equals("8")){
+            month = "August";
+        }
+        else if (serverMonth.equals("9")){
+            month = "September";
+        }
+        else if (serverMonth.equals("10")){
+            month = "October";
+        }
+        else if (serverMonth.equals("11")){
+            month = "November";
+        }
+        else {
+            month = "December";
+        }
+
+        return month;
+    }
+
     private String getSpinnerYear (int year){
         String spinnerYear;
         if (year == 0)
@@ -516,4 +564,6 @@ public class CalendarActivity extends AppCompatActivity implements AdapterView.O
 
         return spinnerYear;
     }
+
+
 }
