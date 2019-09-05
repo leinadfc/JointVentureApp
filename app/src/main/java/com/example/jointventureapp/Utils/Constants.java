@@ -1,7 +1,7 @@
 package com.example.jointventureapp.Utils;
 
 public class Constants {
-    public static final String CHAT_SERVER_URL = "http://1f0bf274.ngrok.io";
+    public static final String CHAT_SERVER_URL = "http://19a23f80.ngrok.io";
     public static final String KEY_EMAIL = "email";
     public static final String KEY_PASSWORD = "password";
     public static final String SYMPTOM_1 = "symptom1";
